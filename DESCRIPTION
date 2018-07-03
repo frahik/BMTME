@@ -1,0 +1,28 @@
+Package: BMTME
+Title: Bayesian Multi-Trait Multi-Environment for genomic selection analysis
+Version: 0.0.1
+Date: 2018-07-03
+Authors@R: c(person("Francisco Javier", "Luna-Vazquez", email = "frahik@gmail.com", role = c("aut", "cre")),
+             person("Osval Antonio", "Montesinos-Lopez", email= "oamontes1@ucol.mx", role = "aut"),
+             person("Abelardo", "Montesinos-Lopez", role = "aut"),
+             person("Jose", "Crossa", role = "aut"),
+             person("Fernando", "Tolero", role = "aut"))
+Maintainer: Francisco Javier Luna-Vazquez <frahik@gmail.com>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+Depends: 
+  R (>= 3.0.0)
+License: LGPL-3
+Encoding: UTF-8
+LazyData: true
+Type: Package
+RoxygenNote: 6.0.1
+URL: https://github.com/frahik/BMTME
+BugReports: https://github.com/frahik/BMTME/issues/new
+NeedsCompilation: yes
+Collate:
+  BME_Function_by_Blocks.R
+  BMTME_Function_by_Blocks_2018_Correcto_Final.R
+  RcppExports.R
+Imports: Rcpp (>= 0.12.16)
+LinkingTo: Rcpp
