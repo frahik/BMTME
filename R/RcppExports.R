@@ -2,26 +2,26 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 wishart <- function(df, S) {
-    .Call(`_BMTME_wishart`, df, S)
+    .Call('_BMTME_wishart', PACKAGE = 'BMTME', df, S)
 }
 
 inv_wishart <- function(df, S) {
-    .Call(`_BMTME_inv_wishart`, df, S)
+    .Call('_BMTME_inv_wishart', PACKAGE = 'BMTME', df, S)
 }
 
 MVnorm <- function(n, mean, S) {
-    .Call(`_BMTME_MVnorm`, n, mean, S)
+    .Call('_BMTME_MVnorm', PACKAGE = 'BMTME', n, mean, S)
 }
 
 MVnormvv <- function(mean, S) {
-    .Call(`_BMTME_MVnormvv`, mean, S)
+    .Call('_BMTME_MVnormvv', PACKAGE = 'BMTME', mean, S)
 }
 
 MatMul <- function(X, Y) {
-    .Call(`_BMTME_MatMul`, X, Y)
+    .Call('_BMTME_MatMul', PACKAGE = 'BMTME', X, Y)
 }
 
 Krone <- function(A, B) {
-    .Call(`_BMTME_Krone`, A, B)
+    .Call('_BMTME_Krone', PACKAGE = 'BMTME', A, B)
 }
 
