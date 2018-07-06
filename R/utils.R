@@ -4,7 +4,8 @@
 #'
 #' @param object \code{BMTME object} Objeto BMTME, resultado de ejecutar BMTME
 #' @param ... Further arguments passed to or from other methods.
-#' @information compact, extended, complete
+#' @param information compact, extended, complete
+#'
 #' @importFrom stats cor
 #' @importFrom dplyr summarise group_by select '%>%'
 #'

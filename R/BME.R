@@ -7,13 +7,19 @@
 #' @param thin no definition available.
 #' @param bs no definition available.
 #' @param progressBar (Logical) Show the progress bar.
-#' @return
+#' @param testingLine (numeric) Crossvalidation object or vector with the positions to use like testing in a cross-validation test.
+#'
+#' @return If the testingLine is NULL, the function returns the predictions.
+#'
+#' Else, if the testingLine is not NULL, the function returns the correlation of the predictions of the cross-validation test.
 #'
 #' @importFrom stats lm rnorm var vcov
 #'
 #' @export
 #'
-#' @examples
+#' @examples Not example provided
+#'
+#'
 #' @useDynLib BMTME
 BME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL) {
   if (is.null(testingLine)) {

@@ -16,7 +16,9 @@
 #' @importFrom tidyr gather
 #' @export
 #'
-#' @examples
+#' @examples Not example provided
+#'
+#'
 #' @useDynLib BMTME
 BMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL) {
   if (is.null(testingLine)) {
