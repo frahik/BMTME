@@ -8,25 +8,64 @@
 #' @param burnIn no definition available.
 #' @param thin no definition available.
 #' @param bs no definition available.
+#' @param progressBar (Logical) Show the progress bar.
 #'
 #' @return
 #'
 #' @importFrom stats lm rnorm var vcov
-#'
+#' @importFrom tidyr gather
 #' @export
 #'
 #' @examples
 #' @useDynLib BMTME
-BMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs) {
+BMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL) {
+  if (is.null(testingLine)) {
+    results <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, progressBar)
+  } else if (inherits(testingLine, 'CrossValidation')) {
+    results <- data.frame()
+    nCV <- length(testingLine)
+    pb <- progress::progress_bar$new(format = 'Fitting the :what  [:bar] Time elapsed: :elapsed', total = nCV, clear = FALSE, show_after = 0)
+
+    for (actual_CV in seq_len(nCV)) {
+      if (progressBar) {
+        pb$tick(tokens = list(what = paste0(actual_CV, ' Cross-Validation of ', nCV)))
+      }
+
+      positionTST <- testingLine$CrossValidation_list[[actual_CV]]
+
+      fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, progressBar = FALSE, positionTST)
+      observed <- gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
+      predicted <- gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
+      results <- rbind(results, data.frame(Environment = testingLine$Environments[positionTST],
+                                           Trait = observed$Trait,
+                                           Partition = actual_CV,
+                                           Observed = observed$Observed,
+                                           Predicted = predicted$Predicted))
+
+    }
+  } else {
+    fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, progressBar, positionTST)
+    results <- data.frame(predicted = fm$yHat, observed = testingLine$Response[positionTST])
+  }
+  out <- list(results = results)
+  class(out) <- 'BMTME'
+  return(out)
+}
+
+coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL) {
+  Y[testingLine, ] <- NA
+
   if ((nIter - burnIn - thin) < 0) {
     stop("nIter must be greater than thin+burnIn")
   }
 
+  pb <- progress::progress_bar$new(format = "Fitting the model [:bar]; Time remaining: :eta",
+                                   total = nIter/20L, clear = FALSE, show_after = 0)
+
   dMVNorm_i <- function(x_i, SigmaInv, mu, log = TRUE) {
     ## works for a single random draw and requires SigmaInv
     e <- as.matrix(x_i - mu)
-    out <- -(length(e)/2 * log(2 * pi)) + log(det(SigmaInv))/2 - (crossprod(e, SigmaInv) %*%
-                                                                    e)/2
+    out <- -(length(e)/2 * log(2 * pi)) + log(det(SigmaInv))/2 - (crossprod(e, SigmaInv) %*% e)/2
     if (!log) {
       out <- exp(out)
     }
@@ -57,7 +96,6 @@ BMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs) {
       } else {
         pos_A <- pos_A1
       }
-
       d_A_Star <- d_A[pos_A]
       V_A_Star <- V_A[, pos_A]
 
@@ -103,11 +141,9 @@ BMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs) {
         }
         mu_i     <- c(A_ii_inv %*% (c[Pos_i] - A[Pos_i, -Pos_i] %*% x[-Pos_i]))
         x[Pos_i] <- c(mvtnorm::rmvnorm(1, mu_i, A_ii_inv))
-
       }
     }
-
-    x
+    return(x)
   }
 
   ##########Sample of Y values that are missing#####################
@@ -311,9 +347,10 @@ BMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs) {
         e[subject,] <- W[subject,] - yHat[subject, ]
       }
     }
+
     ##### Saving output ###################################################
-    if (t %% 10 == 0) {
-      cat('Iter', t, 'Sigmae=', c(Re), '\n')
+    if (progressBar && t %% 20L == 0L) {
+      pb$tick()
     }
 
     if ((t > burnIn) & (t %% thin == 0)) {
@@ -323,16 +360,12 @@ BMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs) {
       post_beta_2 <- post_beta_2 * k + (betav ^ 2) / nSums
       post_b1 <- post_b1 * k + b1 / nSums
       post_b2 <- post_b2 * k + b2 / nSums
-
       post_var_b1 <- post_var_b1 * k + sigmaT / nSums
       post_var_b1_2 <- post_var_b1_2 * k + (sigmaT ^ 2) / nSums
-
       post_var_b2 <- post_var_b2 * k + sigmaEnv / nSums
       post_var_b2_2 <- post_var_b2_2 * k + (sigmaEnv ^ 2) / nSums
-
       post_var_e <- post_var_e * k + Re / nSums
       post_var_e_2 <- post_var_e_2 * k + (Re ^ 2) / nSums
-
       post_yHat <- post_yHat * k + yHat / nSums
       post_yHat_2 <- post_yHat_2 * k + (yHat ^ 2) / nSums
 
@@ -357,6 +390,7 @@ BMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs) {
       )
     }
   }
+  # class(out) <- 'BMTME'
   return(out)
 }
 
