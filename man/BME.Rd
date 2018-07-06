@@ -4,7 +4,8 @@
 \alias{BME}
 \title{BME}
 \usage{
-BME(Y, Z1, nIter, burnIn, thin, bs)
+BME(Y, Z1, nIter = 1000, burnIn = 300, thin = 2,
+  bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE)
 }
 \arguments{
 \item{Y}{no definition available.}
@@ -18,6 +19,8 @@ BME(Y, Z1, nIter, burnIn, thin, bs)
 \item{thin}{no definition available.}
 
 \item{bs}{no definition available.}
+
+\item{progressBar}{(Logical) Show the progress bar.}
 }
 \value{
 
