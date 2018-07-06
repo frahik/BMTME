@@ -6,7 +6,7 @@
 #' @param burnIn no definition available.
 #' @param thin no definition available.
 #' @param bs no definition available.
-#'
+#' @param progressBar (Logical) Show the progress bar.
 #' @return
 #'
 #' @importFrom stats lm rnorm var vcov
@@ -15,11 +15,47 @@
 #'
 #' @examples
 #' @useDynLib BMTME
-BME <- function(Y, Z1, nIter, burnIn, thin, bs) {
+BME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL) {
+  if (is.null(testingLine)) {
+    results <- coreME(Y, Z1, nIter, burnIn, thin, bs, progressBar)
+  } else if (inherits(testingLine, 'CrossValidation')) {
+    results <- data.frame()
+    nCV <- length(testingLine)
+    pb <- progress::progress_bar$new(format = 'Fitting the :what  [:bar] Time elapsed: :elapsed', total = nCV, clear = FALSE, show_after = 0)
+
+    for (actual_CV in seq_len(nCV)) {
+      if (progressBar) {
+        pb$tick(tokens = list(what = paste0(actual_CV, ' Cross-Validation of ', nCV)))
+      }
+
+      positionTST <- testingLine$CrossValidation_list[[actual_CV]]
+
+      fm <- coreME(Y, Z1, nIter, burnIn, thin, bs, progressBar = FALSE, positionTST)
+      observed <- gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
+      predicted <- gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
+      results <- rbind(results, data.frame(Environment = testingLine$Environments[positionTST],
+                                           Trait = observed$Trait,
+                                           Partition = actual_CV,
+                                           Observed = observed$Observed,
+                                           Predicted = predicted$Predicted))
+
+    }
+  } else {
+    fm <- coreME(Y, Z1, nIter, burnIn, thin, bs, progressBar, positionTST)
+    results <- data.frame(predicted = fm$yHat, observed = testingLine$Response[positionTST])
+  }
+  out <- list(results = results)
+  class(out) <- 'BMTME'
+  return(out)
+}
+
+coreME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL){
   if ((nIter - burnIn - thin) < 0) {
     stop("nIter must be greater than thin+burnIn")
   }
 
+  pb <- progress::progress_bar$new(format = "Fitting the model [:bar]; Time remaining: :eta",
+                                   total = nIter/20L, clear = FALSE, show_after = 0)
   # ps: blocks size
   rmv_f <- function(ps, c, A, x) {
     p    <- dim(A)[1]
@@ -212,8 +248,8 @@ BME <- function(Y, Z1, nIter, burnIn, thin, bs) {
     }
 
     ##### Saving output #########################################
-    if (t %% 10 == 0) {
-      cat('Iter', t, 'Sigmae=', c(Re), '\n')
+    if (progressBar && t %% 20L == 0L) {
+      pb$tick()
     }
 
     if ((t > burnIn) & (t %% thin == 0)) {
@@ -233,26 +269,22 @@ BME <- function(Y, Z1, nIter, burnIn, thin, bs) {
       post_yHat = post_yHat * k + yHat / nSums
       post_yHat_2 = post_yHat_2 * k + (yHat ^ 2) / nSums
 
-      out = list(
-        nIter = nIter,
-        burnIn = burnIn,
-        thin = thin,
-        dfe = ve,
-        Se = Se
-      )
-      out$yHat = post_yHat
-      out$SD.yHat = sqrt(post_yHat_2 - (post_yHat ^ 2))
-      out$beta = post_beta
-      out$SD.beta = sqrt(post_beta_2 - post_beta ^ 2)
-      out$b1 = post_b1
-      out$SD.b1 = sqrt(post_b1_2 - post_b1 ^ 2)
+      out <- list(nIter = nIter,
+                  burnIn = burnIn,
+                  thin = thin,
+                  dfe = ve,
+                  Se = Se,
+                  yHat = post_yHat,
+                  SD.yHat = sqrt(post_yHat_2 - (post_yHat ^ 2)),
+                  beta = post_beta, SD.beta = sqrt(post_beta_2 - post_beta ^ 2),
+                  b1 = post_b1,
+                  SD.b1 = sqrt(post_b1_2 - post_b1 ^ 2),
+                  vare = post_var_e,
+                  SD.vare = sqrt(post_var_e_2 - post_var_e ^ 2),
+                  varTrait = post_var_b1,
+                  SD.varTrait = sqrt(post_var_b1_2 - post_var_b1 ^ 2))
 
-      out$vare = post_var_e
-      out$SD.vare = sqrt(post_var_e_2 - post_var_e ^ 2)
-
-      out$varTrait = post_var_b1
-      out$SD.varTrait = sqrt(post_var_b1_2 - post_var_b1 ^ 2)
     }
   }
-  out
+  return(out)
 }
