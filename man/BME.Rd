@@ -5,7 +5,7 @@
 \title{BME}
 \usage{
 BME(Y, Z1, nIter = 1000, burnIn = 300, thin = 2,
-  bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE)
+  bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL)
 }
 \arguments{
 \item{Y}{no definition available.}
@@ -21,10 +21,19 @@ BME(Y, Z1, nIter = 1000, burnIn = 300, thin = 2,
 \item{bs}{no definition available.}
 
 \item{progressBar}{(Logical) Show the progress bar.}
+
+\item{testingLine}{(numeric) Crossvalidation object or vector with the positions to use like testing in a cross-validation test.}
 }
 \value{
+If the testingLine is NULL, the function returns the predictions.
 
+Else, if the testingLine is not NULL, the function returns the correlation of the predictions of the cross-validation test.
 }
 \description{
 BME
+}
+\examples{
+Not example provided
+
+
 }

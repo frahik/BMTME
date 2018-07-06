@@ -9,6 +9,8 @@
 \arguments{
 \item{object}{\code{BMTME object} Objeto BMTME, resultado de ejecutar BMTME}
 
+\item{information}{compact, extended, complete}
+
 \item{...}{Further arguments passed to or from other methods.}
 }
 \description{

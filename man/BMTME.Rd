@@ -32,3 +32,8 @@ BMTME(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2,
 \description{
 BMTME
 }
+\examples{
+Not example provided
+
+
+}
