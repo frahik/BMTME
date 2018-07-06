@@ -23,11 +23,17 @@ NeedsCompilation: yes
 Collate:
   BME.R
   BMTME.R
+  RandomPartition.R
   RcppExports.R
+  utils.R
 Imports:
   Rcpp (>= 0.12.16),
   matrixcalc, 
-  mvtnorm
+  mvtnorm,
+  progress,
+  IBCF.MTME,
+  dplyr,
+  tidyr
 LinkingTo: Rcpp, RcppArmadillo
 SystemRequirements: C++11
 Suggests: testthat
