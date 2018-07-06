@@ -44,12 +44,14 @@ summary.BMTME <- function(object, information = 'compact', ...){
     group_by(Environment, Trait, Partition) %>%
     summarise(Cor = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
               MSEP = mean((Predicted - Observed)**2, na.rm = T)) %>%
-    select(Environment, Trait, Partition, Cor, MSEP) -> presum
+    select(Environment, Trait, Partition, Cor, MSEP) %>%
+    as.data.frame() -> presum
 
   presum %>%  group_by(Environment, Trait) %>%
     summarise(SE_MSEP = sd(MSEP, na.rm = T), MSEP = mean(MSEP, na.rm = T),
               Cor = mean(Cor, na.rm = T), SE_Cor = sqrt((Cor*(1 - Cor))/n())) %>%
-    select(Environment, Trait, Cor, SE_Cor, MSEP, SE_MSEP) -> finalSum
+    select(Environment, Trait, Cor, SE_Cor, MSEP, SE_MSEP) %>%
+    as.data.frame() -> finalSum
 
   out <- switch(information,
     compact = finalSum,
