@@ -20,7 +20,7 @@
 #'
 #'
 #' @useDynLib BMTME
-BMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL) {
+BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL) {
   if (is.null(testingLine)) {
     results <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, progressBar)
   } else if (inherits(testingLine, 'CrossValidation')) {
@@ -54,10 +54,10 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ceili
   return(out)
 }
 
-coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL) {
+coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, progressBar, testingLine) {
   Y[testingLine, ] <- NA
 
-  if ((nIter - burnIn - thin) < 0) {
+  if ((nIter - burnIn - thin) < 0L) {
     stop("nIter must be greater than thin+burnIn")
   }
 
@@ -76,17 +76,17 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
 
   #######Function for block sampling of norma-multivariate data#######
   rmv_f <- function(ps, c, A, x) {
-    p    <- dim(A)[1]
+    p    <- dim(A)[1L]
     k    <- floor(p / ps) # Numbers of blocks
     r1   <- p - k * ps
     ps_1 <- ps + r1 %/% k
     r2   <- p - k * ps_1
-    ps_2 <- ps_1 + 1
+    ps_2 <- ps_1 + 1L
     k1   <- k - r2
-    tmp  <- 0
-    for (i in 1:k1) {
+    tmp  <- 0L
+    for (i in seq_len(k1)) {
       tmp1   <- tmp + ps_1
-      Pos_i  <- (tmp + 1):tmp1
+      Pos_i  <- (tmp + 1L):tmp1
       tmp    <- tmp1
       A_ii   <- A[Pos_i, Pos_i]
       EigenA <- eigen(A_ii)
@@ -94,14 +94,14 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
       V_A    <- EigenA$vectors
       pos_A1 <- which(d_A > 1e-10)
       if (identical(pos_A1, integer(0))) {
-        pos_A <- 1
+        pos_A <- 1L
       } else {
         pos_A <- pos_A1
       }
       d_A_Star <- d_A[pos_A]
       V_A_Star <- V_A[, pos_A]
 
-      if (length(pos_A) == 1) {
+      if (length(pos_A) == 1L) {
         d_A_Star_Inv <- 1 / d_A_Star
         V_A_Star_t <- d_A_Star_Inv * t(V_A_Star)
         A_ii_inv <- V_A_Star %*% V_A_Star_t
@@ -114,10 +114,10 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
       x[Pos_i] <- c(mvtnorm::rmvnorm(1, mu_i, A_ii_inv))
     }
 
-    if (r2 != 0) {
-      for (i in (k1 + 1):k) {
+    if (r2 != 0L) {
+      for (i in (k1 + 1L):k) {
         tmp1 <- tmp + ps_2
-        Pos_i <- (tmp + 1):tmp1
+        Pos_i <- (tmp + 1L):tmp1
         tmp <- tmp1
         A_ii  <- A[Pos_i, Pos_i]
         EigenA <- eigen(A_ii)
@@ -125,7 +125,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
         V_A <- EigenA$vectors
         pos_A1 <- which(d_A > 1e-10)
         if (identical(pos_A1, integer(0))) {
-          pos_A <- 1
+          pos_A <- 1L
         } else {
           pos_A <- pos_A1
         }
@@ -133,7 +133,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
         d_A_Star <- d_A[pos_A]
         V_A_Star <- V_A[, pos_A]
 
-        if (length(pos_A) == 1) {
+        if (length(pos_A) == 1L) {
           d_A_Star_Inv <- 1 / d_A_Star
           V_A_Star_t <- d_A_Star_Inv * t(V_A_Star)
           A_ii_inv <- V_A_Star %*% V_A_Star_t
@@ -153,7 +153,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
     if (length(missing) == traits) {
       e <- crossprod(chol(R), rnorm(traits))
       y <- yHat + e
-      logLik <- 0
+      logLik <- 0L
     } else {
       Roo <- matrix(R[observed, observed], nrow = length(observed), ncol = length(observed))
       RooInv <- chol2inv(chol(Roo))
@@ -167,7 +167,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
       e <- crossprod(L, rnorm(length(missing)))
       y[missing] <- yHat[missing] + yHat2 + e
       tmp <- (y - yHat)[observed]
-      logLik <- dMVNorm_i(x_i = tmp, SigmaInv = RooInv, mu = rep(0, length(observed)), log = TRUE)
+      logLik <- dMVNorm_i(x_i = tmp, SigmaInv = RooInv, mu = rep(0L, length(observed)), log = TRUE)
     }
 
     out <- list(y = y, logLik = logLik)
@@ -180,41 +180,41 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
   nJ <- ncol(Z1)
   nI <- n / nJ
   b1 <- matrix(0.1, nrow = nJ, ncol = nt)
-  b2 <- matrix(0, nrow = nJ * nI, ncol = nt)
+  b2 <- matrix(0L, nrow = nJ * nI, ncol = nt)
   G_invg <- diag(nJ)
 
   ############For saving the full posteriors#######################
-  post_beta <- matrix(nrow = nI, ncol = nt, 0)
-  post_beta_2 <- matrix(nrow = nI, ncol = nt, 0)
-  post_b1 <- matrix(nrow = nJ, ncol = nt, 0)
-  post_b1_2 <- matrix(nrow = nJ, ncol = nt, 0)
-  post_b2 <- matrix(nrow = nJ * nI, ncol = nt, 0)
-  post_b2_2 <- matrix(nrow = nJ * nI, ncol = nt, 0)
-  post_var_b1 <- matrix(nrow = nt, ncol = nt, 0)
-  post_var_b1_2 <- matrix(nrow = nt, ncol = nt, 0)
-  post_var_b2 <- matrix(nrow = nI, ncol = nI, 0)
-  post_var_b2_2 <- matrix(nrow = nI, ncol = nI, 0)
-  post_var_e <- matrix(nrow = nt, ncol = nt, 0)
-  post_var_e_2 <- matrix(nrow = nt, ncol = nt, 0)
-  post_yHat <- matrix(nrow = n, ncol = nt, 0)
-  post_yHat_2 <- matrix(nrow = n, ncol = nt, 0)
-  post_logLik <- 0
+  post_beta <- matrix(nrow = nI, ncol = nt, 0L)
+  post_beta_2 <- matrix(nrow = nI, ncol = nt, 0L)
+  post_b1 <- matrix(nrow = nJ, ncol = nt, 0L)
+  post_b1_2 <- matrix(nrow = nJ, ncol = nt, 0L)
+  post_b2 <- matrix(nrow = nJ * nI, ncol = nt, 0L)
+  post_b2_2 <- matrix(nrow = nJ * nI, ncol = nt, 0L)
+  post_var_b1 <- matrix(nrow = nt, ncol = nt, 0L)
+  post_var_b1_2 <- matrix(nrow = nt, ncol = nt, 0L)
+  post_var_b2 <- matrix(nrow = nI, ncol = nI, 0L)
+  post_var_b2_2 <- matrix(nrow = nI, ncol = nI, 0L)
+  post_var_e <- matrix(nrow = nt, ncol = nt, 0L)
+  post_var_e_2 <- matrix(nrow = nt, ncol = nt, 0L)
+  post_yHat <- matrix(nrow = n, ncol = nt, 0L)
+  post_yHat_2 <- matrix(nrow = n, ncol = nt, 0L)
+  post_logLik <- 0L
 
   YStar <- Y
-  vt <- vE <- ve <- 5
+  vt <- vE <- ve <- 5L
   R2 <- 0.25
   R2e <- 0.5
-  my.model <- lm(YStar ~ X - 1)
+  my.model <- lm(YStar ~ X - 1L)
   beta0 <- my.model$coefficient
-  m0 <- apply(beta0, 2, mean, na.rm = T)
+  m0 <- apply(beta0, 2L, mean, na.rm = T)
   #vcov(my.model)/(summary(my.model)[[1]]$sigma^2)
   Cov_Beta_Inv <- vcov(my.model)
 
   whichNa <- list()
-  whichNa$subjects <- which(apply(FUN = any, X = is.na(Y), MARGIN = 1))
+  whichNa$subjects <- which(apply(FUN = any, X = is.na(Y), MARGIN = 1L))
   nNa <- length(whichNa$subjects)
-  if (nNa > 0) {
-    for (k in 1:nNa) {
+  if (nNa > 0L) {
+    for (k in seq_len(nNa)) {
       whichNa$traits[[k]] <- which(is.na(Y[whichNa$subjects[[k]],]))
       tmpSubject <- whichNa$subject[[k]]
       tmpTraits <- whichNa$traits[[k]]
@@ -236,10 +236,10 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
 
   VarY <- var(Y, na.rm = T)
   yyy <- matrix(c(t(Y)), ncol = nI, byrow = F)
-  St <- VarY * R2 * (vt + 2)
-  SE <- var(yyy, na.rm = T) * R2 * (vE + 2)
-  Se <- VarY * (1 - R2e) * (ve + 2)
-  sigmaT <- St / (vt + 2)
+  St <- VarY * R2 * (vt + 2L)
+  SE <- var(yyy, na.rm = T) * R2 * (vE + 2L)
+  Se <- VarY * (1L - R2e) * (ve + 2L)
+  sigmaT <- St / (vt + 2L)
   EigenT <- eigen(sigmaT)
   d_T <- EigenT$values
   V_T <- EigenT$vectors
@@ -247,7 +247,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
   d_T_Star <- d_T[pos_T]
   V_T_Star <- V_T[, pos_T]
   sigmaT.Inv <- MatMul(MatMul(V_T_Star, diag(1 / d_T_Star)), t(V_T_Star))
-  sigmaEnv <- SE / (vE + 2)
+  sigmaEnv <- SE / (vE + 2L)
   EigenE <- eigen(sigmaEnv)
   d_E <- EigenE$values
   V_E <- EigenE$vectors
@@ -257,7 +257,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
   sigmaEnv.Inv <- MatMul(MatMul(V_E_Star, diag(1 / d_E_Star)), t(V_E_Star))
   yHat <- (u_b0 + u_b1 + u_b2)
   e <- (YStar - u_b0)
-  Re <- (var(e, na.rm = TRUE) * (1 - R2e)) / 2
+  Re <- (var(e, na.rm = TRUE) * (1L - R2e)) / 2
   EigenRe <- eigen(Re)
   d_Re <- EigenRe$values
   V_Re <- EigenRe$vectors
@@ -267,7 +267,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
   Re.Inv <- MatMul(MatMul(V_Re_Star, diag(1 / d_Re_Star)), t(V_Re_Star))
   W <- YStar
 
-  nSums <- 0
+  nSums <- 0L
 
   for (t in 1:nIter) {
     ##### Linear predictor #########################################################
@@ -293,7 +293,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
 
     ##### Sample of sigma_Traits#######################################
     G_invb3 <- Krone(sigmaEnv.Inv, G_invg)
-    sigmaT <- inv_wishart(vt + nJ + nt + nJ * nI - 1, MatMul(t(b1), (G_invg %*% b1)) + (t(b2) %*% MatMul(G_invb3, b2)) + St)
+    sigmaT <- inv_wishart(vt + nJ + nt + nJ * nI - 1L, MatMul(t(b1), (G_invg %*% b1)) + (t(b2) %*% MatMul(G_invb3, b2)) + St)
     EigenT <- eigen(sigmaT)
     d_T <- EigenT$values
     V_T <- EigenT$vectors
@@ -317,7 +317,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
     ME3 <- matrix(matrixcalc::vec(t(b2)), ncol = nI, byrow = F)
     G_invb1 <- Krone(G_invg, sigmaT.Inv)
     MEE <- MatMul(t(ME3), (G_invb1 %*% ME3))
-    sigmaEnv <- inv_wishart(vE + nI + nJ * nt - 1, MEE + SE)
+    sigmaEnv <- inv_wishart(vE + nI + nJ * nt - 1L, MEE + SE)
     EigenEnv <- eigen(sigmaEnv)
     d_Env <- EigenEnv$values
     V_Env <- EigenEnv$vectors
@@ -338,16 +338,14 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
     Re.Inv <- MatMul(V_Re_Star, MatMul(diag(1 / d_Re_Star), t(V_Re_Star)))
 
     #########Sample in case of missing values#################
-    if ((nNa > 0)) {
-      for (j in 1:nNa) {
-        subject <- whichNa$subject[[j]]
-        missing <- whichNa$traits[[j]]
-        observed <- (1:nt)[-missing]
-        tmp <- sampleY(R = Re, y = Y[subject,], yHat = yHat[subject,], e = e[subject,], missing = missing,
-                       observed = observed, traits = nt)
-        W[subject,] <- tmp$y
-        e[subject,] <- W[subject,] - yHat[subject, ]
-      }
+    for (j in seq_len(nNa)) {
+      subject <- whichNa$subject[[j]]
+      missing <- whichNa$traits[[j]]
+      observed <- seq_len(nt)[-missing]
+      tmp <- sampleY(R = Re, y = Y[subject,], yHat = yHat[subject,], e = e[subject,], missing = missing,
+                     observed = observed, traits = nt)
+      W[subject,] <- tmp$y
+      e[subject,] <- W[subject,] - yHat[subject, ]
     }
 
     ##### Saving output ###################################################
@@ -355,9 +353,9 @@ coreMTME <- function(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2, bs = ce
       pb$tick()
     }
 
-    if ((t > burnIn) & (t %% thin == 0)) {
-      nSums <- nSums + 1
-      k <- (nSums - 1) / (nSums)
+    if ((t > burnIn) & (t %% thin == 0L)) {
+      nSums <- nSums + 1L
+      k <- (nSums - 1L) / (nSums)
       post_beta <- post_beta * k + betav / nSums
       post_beta_2 <- post_beta_2 * k + (betav ^ 2) / nSums
       post_b1 <- post_b1 * k + b1 / nSums

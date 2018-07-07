@@ -21,7 +21,7 @@
 #'
 #'
 #' @useDynLib BMTME
-BME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL) {
+BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL) {
   if (is.null(testingLine)) {
     results <- coreME(Y, Z1, nIter, burnIn, thin, bs, progressBar)
   } else if (inherits(testingLine, 'CrossValidation')) {
@@ -55,26 +55,26 @@ BME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim(Z1
   return(out)
 }
 
-coreME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL){
-  if ((nIter - burnIn - thin) < 0) {
+coreME <- function(Y, Z1, nIter, burnIn, thin, bs, progressBar, testingLine){
+  if ((nIter - burnIn - thin) < 0L) {
     stop("nIter must be greater than thin+burnIn")
   }
 
   pb <- progress::progress_bar$new(format = "Fitting the model [:bar]; Time remaining: :eta",
-                                   total = nIter/20L, clear = FALSE, show_after = 0)
+                                   total = nIter/20L, clear = FALSE, show_after = 0L)
   # ps: blocks size
   rmv_f <- function(ps, c, A, x) {
-    p    <- dim(A)[1]
+    p    <- dim(A)[1L]
     k    <- floor(p / ps)#Numbers of blocks
     r1   <- p - k * ps
     ps_1 <- ps + r1 %/% k
     r2   <- p - k * ps_1
-    ps_2 <- ps_1 + 1
+    ps_2 <- ps_1 + 1L
     k1   <- k - r2
-    tmp  <- 0
-    for (i in 1:k1) {
+    tmp  <- 0L
+    for (i in seq_len(k1)) {
       tmp1  <- tmp + ps_1
-      Pos_i <- (tmp + 1):tmp1
+      Pos_i <- (tmp + 1L):tmp1
       tmp   <- tmp1
       A_ii  <- A[Pos_i, Pos_i]
       EigenA <- eigen(A_ii)
@@ -82,14 +82,14 @@ coreME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim
       V_A   <- EigenA$vectors
       pos_A1 <- which(d_A > 1e-10)
       if (identical(pos_A1, integer(0))) {
-        pos_A <- 1
+        pos_A <- 1L
       } else {
         pos_A <- pos_A1
       }
       d_A_Star <- d_A[pos_A]
       V_A_Star <- V_A[, pos_A]
 
-      if (length(pos_A) == 1) {
+      if (length(pos_A) == 1L) {
         d_A_Star_Inv <- 1 / d_A_Star
         V_A_Star_t <- d_A_Star_Inv * t(V_A_Star)
         A_ii_inv <- V_A_Star %*% V_A_Star_t
@@ -101,9 +101,9 @@ coreME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim
       x[Pos_i] <- c(mvtnorm::rmvnorm(1, mu_i, A_ii_inv))
     }
     if (r2 != 0) {
-      for (i in (k1 + 1):k) {
+      for (i in (k1 + 1L):k) {
         tmp1 <- tmp + ps_2
-        Pos_i <- (tmp + 1):tmp1
+        Pos_i <- (tmp + 1L):tmp1
         tmp <- tmp1
         A_ii <- A[Pos_i, Pos_i]
         EigenA <- eigen(A_ii)
@@ -111,13 +111,13 @@ coreME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim
         V_A <- EigenA$vectors
         pos_A1 <- which(d_A > 1e-10)
         if (identical(pos_A1, integer(0))) {
-          pos_A <- 1
+          pos_A <- 1L
         } else {
           pos_A <- pos_A1
         }
         d_A_Star <- d_A[pos_A]
         V_A_Star <- V_A[, pos_A]
-        if (length(pos_A) == 1) {
+        if (length(pos_A) == 1L) {
           d_A_Star_Inv <- 1 / d_A_Star
           V_A_Star_t <- d_A_Star_Inv * t(V_A_Star)
           A_ii_inv <- V_A_Star %*% V_A_Star_t
@@ -139,20 +139,20 @@ coreME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim
   b1 <- matrix(0.1, nrow = nJ, ncol = nt)
   G_invg <- diag(nJ)
 
-  post_beta <- matrix(nrow = 1, ncol = nt, 0)
-  post_beta_2 <- matrix(nrow = 1, ncol = nt, 0)
-  post_b1 <- matrix(nrow = nJ, ncol = nt, 0)
-  post_b1_2 <- matrix(nrow = nJ, ncol = nt, 0)
-  post_var_b1 <- matrix(nrow = nt, ncol = nt, 0)
-  post_var_b1_2 <- matrix(nrow = nt, ncol = nt, 0)
-  post_var_e <- matrix(nrow = nt, ncol = nt, 0)
-  post_var_e_2 <- matrix(nrow = nt, ncol = nt, 0)
-  post_yHat <- matrix(nrow = n, ncol = nt, 0)
-  post_yHat_2 <- matrix(nrow = n, ncol = nt, 0)
-  post_logLik <- 0
+  post_beta <- matrix(nrow = 1L, ncol = nt, 0L)
+  post_beta_2 <- matrix(nrow = 1L, ncol = nt, 0L)
+  post_b1 <- matrix(nrow = nJ, ncol = nt, 0L)
+  post_b1_2 <- matrix(nrow = nJ, ncol = nt, 0L)
+  post_var_b1 <- matrix(nrow = nt, ncol = nt, 0L)
+  post_var_b1_2 <- matrix(nrow = nt, ncol = nt, 0L)
+  post_var_e <- matrix(nrow = nt, ncol = nt, 0L)
+  post_var_e_2 <- matrix(nrow = nt, ncol = nt, 0L)
+  post_yHat <- matrix(nrow = n, ncol = nt, 0L)
+  post_yHat_2 <- matrix(nrow = n, ncol = nt, 0L)
+  post_logLik <- 0L
 
   YStar <- Y
-  vt <- vE <- ve <- 5
+  vt <- vE <- ve <- 5L
   R2 <- 0.25
   R2e <- 0.5
   my.model <- lm(YStar ~ 1)
@@ -160,11 +160,11 @@ coreME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim
   Cov_Beta_Inv <- vcov(my.model)
 
   whichNa <- list()
-  whichNa$subjects <- which(apply(FUN = any, X = is.na(Y), MARGIN = 1))
+  whichNa$subjects <- which(apply(FUN = any, X = is.na(Y), MARGIN = 1L))
   nNa <- length(whichNa$subjects)
   tst <- c(as.numeric(whichNa$subjects))
 
-  X <- rep(1, n)
+  X <- rep(1L, n)
   tX <- t(X)
   tZ1 <- t(Z1)
   tXX <- sum(X)
@@ -174,9 +174,9 @@ coreME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim
   betav <- beta0
 
   VarY <- var(Y, na.rm = T)
-  St <- VarY * R2 * (vt + 2)
-  Se <- VarY * (1 - R2e) * (ve + 2)
-  sigmaT <- St / (vt + 2)
+  St <- VarY * R2 * (vt + 2L)
+  Se <- VarY * (1L - R2e) * (ve + 2L)
+  sigmaT <- St / (vt + 2L)
   EigenT <- eigen(sigmaT)
   d_T <- EigenT$values
   V_T <- EigenT$vectors
@@ -187,11 +187,11 @@ coreME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim
 
   yHat <- (u_b0 + u_b1)
   YStar1 <- YStar
-  YStar1[tst, ] <- rep(0, nt)
+  YStar1[tst, ] <- rep(0L, nt)
 
   e <- (YStar1 - u_b0)
 
-  Re <- (var(e, na.rm = TRUE) * (1 - R2e)) / 2
+  Re <- (var(e, na.rm = TRUE) * (1L - R2e)) / 2
   e <- (YStar1 - u_b0)
   EigenRe <- eigen(Re)
   d_Re <- EigenRe$values
@@ -201,10 +201,10 @@ coreME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim
   V_Re_Star <- V_Re[, pos_Re]
   Re.Inv <- MatMul(MatMul(V_Re_Star, diag(1 / d_Re_Star)), t(V_Re_Star))
   W <- YStar1
-  nSums <- 0
+  nSums <- 0L
 
-  for (t in 1:nIter) {
-    logLik <- 0
+  for (t in seq_len(nIter)) {
+    logLik <- 0L
     ##### Linear predictor #####################################
     e <- e + u_b0
 
@@ -229,7 +229,7 @@ coreME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim
 
     ##### Sample of sigma_Traits#################################
     tb1b1 <- MatMul(t(b1), (G_invg %*% b1))
-    sigmaT <- inv_wishart(vt + nJ + nt - 1,  tb1b1 + St)
+    sigmaT <- inv_wishart(vt + nJ + nt - 1L,  tb1b1 + St)
     EigenT <- eigen(sigmaT)
     d_T <- EigenT$values
     V_T <- EigenT$vectors
@@ -248,7 +248,7 @@ coreME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim
     d_Re_Star <- d_Re[pos_Re]
     V_Re_Star <- V_Re[, pos_Re]
     Re.Inv <- MatMul(V_Re_Star, MatMul(diag(1 / d_Re_Star), t(V_Re_Star)))
-    if ((nNa > 0)) {
+    if ((nNa > 0L)) {
       W[tst, ] = yHat[tst, ] + mvtnorm::rmvnorm(nNa, mean = rep(0, nt), sigma = Re, method = "chol")
       e[tst, ] = W[tst, ] - yHat[tst, ]
     }
@@ -258,9 +258,9 @@ coreME <- function(Y, Z1, nIter = 1000, burnIn = 300, thin = 2, bs = ceiling(dim
       pb$tick()
     }
 
-    if ((t > burnIn) & (t %% thin == 0)) {
-      nSums = nSums + 1
-      k = (nSums - 1) / (nSums)
+    if ((t > burnIn) & (t %% thin == 0L)) {
+      nSums = nSums + 1L
+      k = (nSums - 1L) / (nSums)
       post_beta = post_beta * k + betav / nSums
       post_beta_2 = post_beta_2 * k + (betav ^ 2) / nSums
       post_b1 = post_b1 * k + b1 / nSums
