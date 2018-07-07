@@ -23,6 +23,7 @@ NeedsCompilation: yes
 Collate:
   BME.R
   BMTME.R
+  cholesky.R
   RandomPartition.R
   RcppExports.R
   utils.R
