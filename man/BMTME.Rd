@@ -4,7 +4,7 @@
 \alias{BMTME}
 \title{BMTME}
 \usage{
-BMTME(Y, X, Z1, Z2, nIter = 1000, burnIn = 300, thin = 2,
+BMTME(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L,
   bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL)
 }
 \arguments{
