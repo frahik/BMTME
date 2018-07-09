@@ -22,7 +22,8 @@
 #' @useDynLib BMTME
 BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL) {
   if (is.null(testingLine)) {
-    results <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, progressBar)
+    out <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, progressBar, testingLine)
+    class(out) <- 'BMTME'
   } else if (inherits(testingLine, 'CrossValidation')) {
     results <- data.frame()
     nCV <- length(testingLine)
@@ -43,14 +44,15 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
                                            Partition = actual_CV,
                                            Observed = observed$Observed,
                                            Predicted = predicted$Predicted))
-
     }
+    out <- list(results = results)
+    class(out) <- 'BMTMECV'
   } else {
     fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, progressBar, positionTST)
     results <- data.frame(predicted = fm$yHat, observed = testingLine$Response[positionTST])
+    out <- list(results = results)
+    class(out) <- 'BMTMECV'
   }
-  out <- list(results = results)
-  class(out) <- 'BMTME'
   return(out)
 }
 
@@ -370,6 +372,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, progressBar, testing
       post_yHat_2 <- post_yHat_2 * k + (yHat ^ 2) / nSums
 
       out <- list(
+        Y = Y,
         nIter = nIter,
         burnIn = burnIn,
         thin = thin,
@@ -386,7 +389,8 @@ coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, progressBar, testing
         varEnv = post_var_b2,
         SD.varEnv = sqrt(post_var_b2_2 - post_var_b2 ^ 2),
         varTrait = post_var_b1,
-        SD.varTrait = sqrt(post_var_b1_2 - post_var_b1 ^ 2)
+        SD.varTrait = sqrt(post_var_b1_2 - post_var_b1 ^ 2),
+        NAvalues = nNa
       )
     }
   }

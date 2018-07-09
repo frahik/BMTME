@@ -23,7 +23,8 @@
 #' @useDynLib BMTME
 BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL) {
   if (is.null(testingLine)) {
-    results <- coreME(Y, Z1, nIter, burnIn, thin, bs, progressBar)
+    out <- coreME(Y, Z1, nIter, burnIn, thin, bs, progressBar, testingLine)
+    class(out) <- 'BME'
   } else if (inherits(testingLine, 'CrossValidation')) {
     results <- data.frame()
     nCV <- length(testingLine)
@@ -46,12 +47,15 @@ BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim
                                            Predicted = predicted$Predicted))
 
     }
+    out <- list(results = results)
+    class(out) <- 'BMECV'
   } else {
     fm <- coreME(Y, Z1, nIter, burnIn, thin, bs, progressBar, positionTST)
     results <- data.frame(predicted = fm$yHat, observed = testingLine$Response[positionTST])
+    out <- list(results = results)
+    class(out) <- 'BMECV'
   }
-  out <- list(results = results)
-  class(out) <- 'BMTME'
+
   return(out)
 }
 
@@ -275,21 +279,23 @@ coreME <- function(Y, Z1, nIter, burnIn, thin, bs, progressBar, testingLine){
       post_yHat = post_yHat * k + yHat / nSums
       post_yHat_2 = post_yHat_2 * k + (yHat ^ 2) / nSums
 
-      out <- list(nIter = nIter,
-                  burnIn = burnIn,
-                  thin = thin,
-                  dfe = ve,
-                  Se = Se,
-                  yHat = post_yHat,
-                  SD.yHat = sqrt(post_yHat_2 - (post_yHat ^ 2)),
-                  beta = post_beta, SD.beta = sqrt(post_beta_2 - post_beta ^ 2),
-                  b1 = post_b1,
-                  SD.b1 = sqrt(post_b1_2 - post_b1 ^ 2),
-                  vare = post_var_e,
-                  SD.vare = sqrt(post_var_e_2 - post_var_e ^ 2),
-                  varTrait = post_var_b1,
-                  SD.varTrait = sqrt(post_var_b1_2 - post_var_b1 ^ 2))
-
+      out <- list(
+        Y = Y,
+        nIter = nIter,
+        burnIn = burnIn,
+        thin = thin,
+        dfe = ve,
+        Se = Se,
+        yHat = post_yHat,
+        SD.yHat = sqrt(post_yHat_2 - (post_yHat ^ 2)),
+        beta = post_beta, SD.beta = sqrt(post_beta_2 - post_beta ^ 2),
+        b1 = post_b1,
+        SD.b1 = sqrt(post_b1_2 - post_b1 ^ 2),
+        vare = post_var_e,
+        SD.vare = sqrt(post_var_e_2 - post_var_e ^ 2),
+        varTrait = post_var_b1,
+        SD.varTrait = sqrt(post_var_b1_2 - post_var_b1 ^ 2),
+        NAvalues = nNa)
     }
   }
   return(out)
