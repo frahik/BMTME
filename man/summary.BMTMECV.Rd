@@ -4,7 +4,7 @@
 \alias{summary.BMTMECV}
 \title{Summary.BMTMECV}
 \usage{
-\method{summary}{BMTMECV}(object, information = "compact", ...)
+\method{summary}{BMTMECV}(object, information = "compact", digits = 4, ...)
 }
 \arguments{
 \item{object}{\code{BMTMECV object} Objeto BMTMECV, resultado de ejecutar BMTME()}

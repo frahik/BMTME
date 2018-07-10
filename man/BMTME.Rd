@@ -5,7 +5,8 @@
 \title{BMTME}
 \usage{
 BMTME(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L,
-  bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL)
+  bs = ceiling(dim(Z1)[2]/6), digits = 4, progressBar = TRUE,
+  testingSet = NULL)
 }
 \arguments{
 \item{Y}{no definition available.}

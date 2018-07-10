@@ -4,7 +4,7 @@
 \alias{summary.BMECV}
 \title{Summary.BMECV}
 \usage{
-\method{summary}{BMECV}(object, information = "compact", ...)
+\method{summary}{BMECV}(object, information = "compact", digits = 4, ...)
 }
 \arguments{
 \item{object}{\code{BMECV object} Objeto BMECV, resultado de ejecutar BME()}

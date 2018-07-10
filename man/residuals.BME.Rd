@@ -4,7 +4,7 @@
 \alias{residuals.BME}
 \title{residuals.BME}
 \usage{
-\method{residuals}{BME}(object, ...)
+\method{residuals}{BME}(object, digits = 4, ...)
 }
 \arguments{
 \item{object}{\code{BME object} Objeto BME, resultado de ejecutar BME}
