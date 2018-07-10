@@ -20,44 +20,47 @@
 #'
 #'
 #' @useDynLib BMTME
-BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL) {
-  if (is.null(testingLine)) {
-    out <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, progressBar, testingLine)
+BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), digits = 4, progressBar = TRUE, testingSet = NULL) {
+  if (is.null(testingSet)) {
+    out <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
     class(out) <- 'BMTME'
-  } else if (inherits(testingLine, 'CrossValidation')) {
+  } else if (inherits(testingSet, 'CrossValidation')) {
     results <- data.frame()
-    nCV <- length(testingLine)
-    pb <- progress::progress_bar$new(format = 'Fitting the :what  [:bar] Time elapsed: :elapsed', total = nCV, clear = FALSE, show_after = 0)
+    nCV <- length(testingSet$CrossValidation_list)
+    pb <- progress::progress_bar$new(format = 'Fitting Cross-Validation :what  [:bar] Time elapsed: :elapsed', total = nCV, clear = FALSE, show_after = 0)
 
     for (actual_CV in seq_len(nCV)) {
       if (progressBar) {
-        pb$tick(tokens = list(what = paste0(actual_CV, ' Cross-Validation of ', nCV)))
+        pb$tick(tokens = list(what = paste0(actual_CV, ' out of ', nCV)))
       }
 
-      positionTST <- testingLine$CrossValidation_list[[actual_CV]]
+      positionTST <- testingSet$CrossValidation_list[[actual_CV]]
 
-      fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, progressBar = FALSE, positionTST)
+      fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar = FALSE, positionTST)
       observed <- gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
       predicted <- gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
-      results <- rbind(results, data.frame(Environment = testingLine$Environments[positionTST],
+      results <- rbind(results, data.frame(Environment = testingSet$Environments[positionTST],
                                            Trait = observed$Trait,
                                            Partition = actual_CV,
-                                           Observed = observed$Observed,
-                                           Predicted = predicted$Predicted))
+                                           Observed = round(observed$Observed, digits),
+                                           Predicted = round(predicted$Predicted)))
     }
     out <- list(results = results)
     class(out) <- 'BMTMECV'
   } else {
-    fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, progressBar, positionTST)
-    results <- data.frame(predicted = fm$yHat, observed = testingLine$Response[positionTST])
+    fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
+    observed <- gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
+    predicted <- gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
+
+    results <- data.frame(Predicted = round(predicted$Predicted), Observed = round(observed$Observed, digits))
     out <- list(results = results)
     class(out) <- 'BMTMECV'
   }
   return(out)
 }
 
-coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, progressBar, testingLine) {
-  Y[testingLine, ] <- NA
+coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar, testingSet) {
+  Y[testingSet, ] <- NA
 
   if ((nIter - burnIn - thin) < 0L) {
     stop("nIter must be greater than thin+burnIn")
@@ -372,24 +375,24 @@ coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, progressBar, testing
       post_yHat_2 <- post_yHat_2 * k + (yHat ^ 2) / nSums
 
       out <- list(
-        Y = Y,
+        Y = round(Y, digits),
         nIter = nIter,
         burnIn = burnIn,
         thin = thin,
         dfe = ve,
         Se = Se,
-        yHat = post_yHat,
-        SD.yHat = sqrt(post_yHat_2 - (post_yHat ^ 2)),
-        beta = post_beta,
-        SD.beta = sqrt(post_beta_2 - post_beta ^ 2),
-        b1 = post_b1,
-        b2 = post_b2,
-        vare = post_var_e,
-        SD.vare = sqrt(post_var_e_2 - post_var_e ^ 2),
-        varEnv = post_var_b2,
-        SD.varEnv = sqrt(post_var_b2_2 - post_var_b2 ^ 2),
-        varTrait = post_var_b1,
-        SD.varTrait = sqrt(post_var_b1_2 - post_var_b1 ^ 2),
+        yHat = round(post_yHat, digits),
+        SD.yHat = round(sqrt(post_yHat_2 - (post_yHat ^ 2)), digits),
+        beta = round(post_beta, digits),
+        SD.beta = round(sqrt(post_beta_2 - post_beta ^ 2), digits),
+        b1 = round(post_b1, digits),
+        b2 = round(post_b2, digits),
+        vare = round(post_var_e, digits),
+        SD.vare = round(sqrt(post_var_e_2 - post_var_e ^ 2), digits),
+        varEnv = round(post_var_b2, digits),
+        SD.varEnv = round(sqrt(post_var_b2_2 - post_var_b2 ^ 2), digits),
+        varTrait = round(post_var_b1, digits),
+        SD.varTrait = round(sqrt(post_var_b1_2 - post_var_b1 ^ 2), digits),
         NAvalues = nNa
       )
     }
