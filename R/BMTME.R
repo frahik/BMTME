@@ -49,10 +49,14 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
     class(out) <- 'BMTMECV'
   } else {
     fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
-    observed <- gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
-    predicted <- gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
+    observed <- gather(as.data.frame(Y[testingSet, ]), 'Trait', 'Observed')
+    predicted <- gather(as.data.frame(fm$yHat[testingSet, ]), 'Trait', 'Predicted')
 
-    results <- data.frame(Predicted = round(predicted$Predicted), Observed = round(observed$Observed, digits))
+    results <- data.frame(Position = testingSet,
+                          Trait = rep(colnames(Y), each = length(testingSet)),
+                          Observed = round(observed$Observed, digits),
+                          Predicted = round(predicted$Predicted, digits))
+
     out <- list(results = results)
     class(out) <- 'BMTMECV'
   }
