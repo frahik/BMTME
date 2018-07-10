@@ -17,7 +17,15 @@ CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
     set.seed(set_seed)
   }
 
-  if (is.null(DataSet$Env) || length(unique(DataSet$Env)) == 1) {
+  if (is.null(DataSet$Env)) {
+    DataSet$Env <- ''
+  }
+
+  if (is.null(DataSet$Trait)) {
+    DataSet$Trait <- ''
+  }
+
+  if (length(unique(DataSet$Env)) == 1) {
     pm <- sample(dim(DataSet)[1])
     grs <- cut(seq(1, length(pm)), breaks = K, labels = FALSE)
     g_list <- vector('list', K)
@@ -27,9 +35,13 @@ CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
       g_list[[paste0('partition', i)]] <- pm[grs == i]
       ng[i] <- length(g_list[[paste0('partition', i)]])
     }
-    return(list(CrossValidation_list = g_list,
-                ng = ng #Lenght in every partition
-    ))
+    out <- list(CrossValidation_list = g_list,
+                ng = ng, #Lenght in every partition
+                Environments = DataSet$Env,
+                Traits = DataSet$Trait
+    )
+    class(out) <- 'CrossValidation'
+    return(out)
   }
 
   UL <- unique(DataSet[, DataSetID])
@@ -119,10 +131,14 @@ CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
 
   n_CL <- length(Pos_1_dat_F)
 
-  return(list(CrossValidation_list = g_list,
+  out <- list(CrossValidation_list = g_list,
               ng = ng + n_CL, #Lenght in every partition
-              n_CL =  n_CL    # Number of common lines
-  ))
+              n_CL =  n_CL,   # Number of common lines
+              Environments = DataSet$Env,
+              Traits = DataSet$Trait
+  )
+  class(out) <- 'CrossValidation'
+  return(out)
 
 }
 
