@@ -7,11 +7,11 @@
 #' @param thin no definition available.
 #' @param bs no definition available.
 #' @param progressBar (Logical) Show the progress bar.
-#' @param testingLine (numeric) Crossvalidation object or vector with the positions to use like testing in a cross-validation test.
+#' @param testingSet (numeric) Crossvalidation object or vector with the positions to use like testing in a cross-validation test.
 #'
-#' @return If the testingLine is NULL, the function returns the predictions.
+#' @return If the testingSet is NULL, the function returns the predictions.
 #'
-#' Else, if the testingLine is not NULL, the function returns the correlation of the predictions of the cross-validation test.
+#' Else, if the testingSet is not NULL, the function returns the correlation of the predictions of the cross-validation test.
 #'
 #' @importFrom stats lm rnorm var vcov
 #'
@@ -21,37 +21,40 @@
 #'
 #'
 #' @useDynLib BMTME
-BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), progressBar = TRUE, testingLine = NULL) {
-  if (is.null(testingLine)) {
-    out <- coreME(Y, Z1, nIter, burnIn, thin, bs, progressBar, testingLine)
+BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), digits = 4, progressBar = TRUE, testingSet = NULL) {
+  if (is.null(testingSet)) {
+    out <- coreME(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
     class(out) <- 'BME'
-  } else if (inherits(testingLine, 'CrossValidation')) {
+  } else if (inherits(testingSet, 'CrossValidation')) {
     results <- data.frame()
-    nCV <- length(testingLine)
-    pb <- progress::progress_bar$new(format = 'Fitting the :what  [:bar] Time elapsed: :elapsed', total = nCV, clear = FALSE, show_after = 0)
+    nCV <- length(testingSet$CrossValidation_list)
+    pb <- progress::progress_bar$new(format = 'Fitting Cross-Validation :what  [:bar] Time elapsed: :elapsed', total = nCV, clear = FALSE, show_after = 0)
 
     for (actual_CV in seq_len(nCV)) {
       if (progressBar) {
-        pb$tick(tokens = list(what = paste0(actual_CV, ' Cross-Validation of ', nCV)))
+        pb$tick(tokens = list(what = paste0(actual_CV, ' out of ', nCV)))
       }
 
-      positionTST <- testingLine$CrossValidation_list[[actual_CV]]
+      positionTST <- testingSet$CrossValidation_list[[actual_CV]]
 
-      fm <- coreME(Y, Z1, nIter, burnIn, thin, bs, progressBar = FALSE, positionTST)
+      fm <- coreME(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar = FALSE, positionTST)
       observed <- gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
       predicted <- gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
-      results <- rbind(results, data.frame(Environment = testingLine$Environments[positionTST],
+      results <- rbind(results, data.frame(Environment = testingSet$Environments[positionTST],
                                            Trait = observed$Trait,
                                            Partition = actual_CV,
-                                           Observed = observed$Observed,
-                                           Predicted = predicted$Predicted))
+                                           Observed = round(observed$Observed,digits),
+                                           Predicted = round(predicted$Predicted, digits)))
 
     }
     out <- list(results = results)
     class(out) <- 'BMECV'
   } else {
-    fm <- coreME(Y, Z1, nIter, burnIn, thin, bs, progressBar, positionTST)
-    results <- data.frame(predicted = fm$yHat, observed = testingLine$Response[positionTST])
+    fm <- coreME(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
+    observed <- gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
+    predicted <- gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
+
+    results <- data.frame(Predicted = round(predicted$Predicted), Observed = round(observed$Observed, digits))
     out <- list(results = results)
     class(out) <- 'BMECV'
   }
@@ -59,7 +62,9 @@ BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim
   return(out)
 }
 
-coreME <- function(Y, Z1, nIter, burnIn, thin, bs, progressBar, testingLine){
+coreME <- function(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingSet){
+  Y[testingSet, ] <- NA
+
   if ((nIter - burnIn - thin) < 0L) {
     stop("nIter must be greater than thin+burnIn")
   }
@@ -280,21 +285,22 @@ coreME <- function(Y, Z1, nIter, burnIn, thin, bs, progressBar, testingLine){
       post_yHat_2 = post_yHat_2 * k + (yHat ^ 2) / nSums
 
       out <- list(
-        Y = Y,
+        Y = round(Y, digits),
         nIter = nIter,
         burnIn = burnIn,
         thin = thin,
         dfe = ve,
         Se = Se,
-        yHat = post_yHat,
-        SD.yHat = sqrt(post_yHat_2 - (post_yHat ^ 2)),
-        beta = post_beta, SD.beta = sqrt(post_beta_2 - post_beta ^ 2),
-        b1 = post_b1,
-        SD.b1 = sqrt(post_b1_2 - post_b1 ^ 2),
-        vare = post_var_e,
-        SD.vare = sqrt(post_var_e_2 - post_var_e ^ 2),
-        varTrait = post_var_b1,
-        SD.varTrait = sqrt(post_var_b1_2 - post_var_b1 ^ 2),
+        yHat = round(post_yHat, digits),
+        SD.yHat = round(sqrt(post_yHat_2 - (post_yHat ^ 2)), digits),
+        beta = round(post_beta, digits),
+        SD.beta = round(sqrt(post_beta_2 - post_beta ^ 2), digits),
+        b1 = round(post_b1, digits),
+        SD.b1 = round(sqrt(post_b1_2 - post_b1 ^ 2), digits),
+        vare = round(post_var_e, digits),
+        SD.vare = round(sqrt(post_var_e_2 - post_var_e ^ 2), digits),
+        varTrait = round(post_var_b1, digits),
+        SD.varTrait = round(sqrt(post_var_b1_2 - post_var_b1 ^ 2), digits),
         NAvalues = nNa)
     }
   }
