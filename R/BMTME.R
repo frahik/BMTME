@@ -13,18 +13,20 @@
 #' @return
 #'
 #' @importFrom stats lm rnorm var vcov
+#' @importFrom utils txtProgressBar setTxtProgressBar
 #' @importFrom tidyr gather
+#' @importFrom foreach %dopar%
 #' @export
 #'
 #' @examples Not example provided
 #'
 #'
 #' @useDynLib BMTME
-BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), digits = 4, progressBar = TRUE, testingSet = NULL) {
+BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), parallelCores = 1, digits = 4, progressBar = TRUE, testingSet = NULL) {
   if (is.null(testingSet)) {
     out <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
     class(out) <- 'BMTME'
-  } else if (inherits(testingSet, 'CrossValidation')) {
+  } else if (parallelCores <= 1 && inherits(testingSet, 'CrossValidation')) {
     results <- data.frame()
     nCV <- length(testingSet$CrossValidation_list)
     pb <- progress::progress_bar$new(format = 'Fitting Cross-Validation :what  [:bar] Time elapsed: :elapsed', total = nCV, clear = FALSE, show_after = 0)
@@ -39,7 +41,8 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
       fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar = FALSE, positionTST)
       observed <- gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
       predicted <- gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
-      results <- rbind(results, data.frame(Environment = testingSet$Environments[positionTST],
+      results <- rbind(results, data.frame(Position = positionTST,
+                                           Environment = testingSet$Environments[positionTST],
                                            Trait = observed$Trait,
                                            Partition = actual_CV,
                                            Observed = round(observed$Observed, digits),
@@ -47,13 +50,40 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
     }
     out <- list(results = results)
     class(out) <- 'BMTMECV'
+  } else if (parallelCores > 1 && inherits(testingSet, 'CrossValidation')) {
+    cl <- snow::makeCluster(parallelCores)
+    doSNOW::registerDoSNOW(cl)
+    nCV <- length(testingSet$CrossValidation_list)
+
+    pb <- utils::txtProgressBar(max = nCV, style = 3)
+    progress <- function(n) utils::setTxtProgressBar(pb, n)
+    opts <- list(progress = progress)
+
+    results <- foreach::foreach(actual_CV = seq_len(nCV), .combine = rbind, .packages = 'BMTME', .options.snow = opts) %dopar% {
+      positionTST <- testingSet$CrossValidation_list[[actual_CV]]
+      fm <- BMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar = FALSE, positionTST)
+      observed <- gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
+      predicted <- gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
+      data.frame(Position = positionTST,
+                 Environment = testingSet$Environments[positionTST],
+                 Trait = observed$Trait,
+                 Partition = actual_CV,
+                 Observed = round(observed$Observed, digits),
+                 Predicted = round(predicted$Predicted))
+
+    }
+    out <- list(results = results,
+                n_cores = parallelCores)
+    class(out) <- 'BMTMECV'
   } else {
     fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
     observed <- gather(as.data.frame(Y[testingSet, ]), 'Trait', 'Observed')
     predicted <- gather(as.data.frame(fm$yHat[testingSet, ]), 'Trait', 'Predicted')
 
     results <- data.frame(Position = testingSet,
+                          Environment = testingSet$Environments[positionTST],
                           Trait = rep(colnames(Y), each = length(testingSet)),
+                          Partition = 1,
                           Observed = round(observed$Observed, digits),
                           Predicted = round(predicted$Predicted, digits))
 
