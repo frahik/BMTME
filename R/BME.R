@@ -14,18 +14,20 @@
 #' Else, if the testingSet is not NULL, the function returns the correlation of the predictions of the cross-validation test.
 #'
 #' @importFrom stats lm rnorm var vcov
-#'
+#' @importFrom utils txtProgressBar setTxtProgressBar
+#' @importFrom tidyr gather
+#' @importFrom foreach %dopar%
 #' @export
 #'
 #' @examples Not example provided
 #'
 #'
 #' @useDynLib BMTME
-BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), digits = 4, progressBar = TRUE, testingSet = NULL) {
+BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), parallelCores = 1, digits = 4, progressBar = TRUE, testingSet = NULL) {
   if (is.null(testingSet)) {
     out <- coreME(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
     class(out) <- 'BME'
-  } else if (inherits(testingSet, 'CrossValidation')) {
+  } else if (parallelCores <= 1 && inherits(testingSet, 'CrossValidation')) {
     results <- data.frame()
     nCV <- length(testingSet$CrossValidation_list)
     pb <- progress::progress_bar$new(format = 'Fitting Cross-Validation :what  [:bar] Time elapsed: :elapsed', total = nCV, clear = FALSE, show_after = 0)
@@ -40,7 +42,8 @@ BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim
       fm <- coreME(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar = FALSE, positionTST)
       observed <- gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
       predicted <- gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
-      results <- rbind(results, data.frame(Environment = testingSet$Environments[positionTST],
+      results <- rbind(results, data.frame(Position = positionTST,
+                                           Environment = testingSet$Environments[positionTST],
                                            Trait = observed$Trait,
                                            Partition = actual_CV,
                                            Observed = round(observed$Observed,digits),
@@ -49,13 +52,40 @@ BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim
     }
     out <- list(results = results)
     class(out) <- 'BMECV'
+  } else if (parallelCores > 1 && inherits(testingSet, 'CrossValidation')) {
+    cl <- snow::makeCluster(parallelCores)
+    doSNOW::registerDoSNOW(cl)
+    nCV <- length(testingSet$CrossValidation_list)
+
+    pb <- utils::txtProgressBar(max = nCV, style = 3)
+    progress <- function(n) utils::setTxtProgressBar(pb, n)
+    opts <- list(progress = progress)
+
+    results <- foreach::foreach(actual_CV = seq_len(nCV), .combine = rbind, .packages = 'BMTME', .options.snow = opts) %dopar% {
+      positionTST <- testingSet$CrossValidation_list[[actual_CV]]
+      fm <- BME(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar = FALSE, positionTST)
+      observed <- gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
+      predicted <- gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
+      data.frame(Position = positionTST,
+                 Environment = testingSet$Environments[positionTST],
+                 Trait = observed$Trait,
+                 Partition = actual_CV,
+                 Observed = round(observed$Observed, digits),
+                 Predicted = round(predicted$Predicted))
+    }
+
+    out <- list(results = results,
+                n_cores = parallelCores)
+    class(out) <- 'BMTMECV'
   } else {
     fm <- coreME(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
     observed <- gather(as.data.frame(Y[testingSet, ]), 'Trait', 'Observed')
     predicted <- gather(as.data.frame(fm$yHat[testingSet, ]), 'Trait', 'Predicted')
 
     results <- data.frame(Position = testingSet,
+                          Environment = NA,
                           Trait = rep(colnames(Y), each = length(testingSet)),
+                          Partition = 1,
                           Observed = round(observed$Observed, digits),
                           Predicted = round(predicted$Predicted, digits))
     out <- list(results = results)
