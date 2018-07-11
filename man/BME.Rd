@@ -5,8 +5,8 @@
 \title{BME}
 \usage{
 BME(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L,
-  bs = ceiling(dim(Z1)[2]/6), digits = 4, progressBar = TRUE,
-  testingSet = NULL)
+  bs = ceiling(dim(Z1)[2]/6), parallelCores = 1, digits = 4,
+  progressBar = TRUE, testingSet = NULL)
 }
 \arguments{
 \item{Y}{no definition available.}
