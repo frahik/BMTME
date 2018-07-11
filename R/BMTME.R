@@ -39,8 +39,8 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
       positionTST <- testingSet$CrossValidation_list[[actual_CV]]
 
       fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar = FALSE, positionTST)
-      observed <- gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
-      predicted <- gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
+      observed <- tidyr::gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
+      predicted <- tidyr::gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
       results <- rbind(results, data.frame(Position = positionTST,
                                            Environment = testingSet$Environments[positionTST],
                                            Trait = observed$Trait,
@@ -61,9 +61,9 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
 
     results <- foreach::foreach(actual_CV = seq_len(nCV), .combine = rbind, .packages = 'BMTME', .options.snow = opts) %dopar% {
       positionTST <- testingSet$CrossValidation_list[[actual_CV]]
-      fm <- BMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar = FALSE, positionTST)
-      observed <- gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
-      predicted <- gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
+      fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar = FALSE, positionTST)
+      observed <- tidyr::gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
+      predicted <- tidyr::gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
       data.frame(Position = positionTST,
                  Environment = testingSet$Environments[positionTST],
                  Trait = observed$Trait,
@@ -72,13 +72,14 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
                  Predicted = round(predicted$Predicted))
 
     }
+    cat('\n')
     out <- list(results = results,
                 n_cores = parallelCores)
     class(out) <- 'BMTMECV'
   } else {
     fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
-    observed <- gather(as.data.frame(Y[testingSet, ]), 'Trait', 'Observed')
-    predicted <- gather(as.data.frame(fm$yHat[testingSet, ]), 'Trait', 'Predicted')
+    observed <- tidyr::gather(as.data.frame(Y[testingSet, ]), 'Trait', 'Observed')
+    predicted <- tidyr::gather(as.data.frame(fm$yHat[testingSet, ]), 'Trait', 'Predicted')
 
     results <- data.frame(Position = testingSet,
                           Environment = testingSet$Environments[positionTST],
