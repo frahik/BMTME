@@ -24,6 +24,7 @@ Collate:
   BME.R
   BMTME.R
   cholesky.R
+  detectCore.R
   RandomPartition.R
   RcppExports.R
   utils.R
