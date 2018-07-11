@@ -22,8 +22,8 @@ summary.BMTMECV <- function(object, information = 'compact', digits = 4, ...){
     as.data.frame() -> presum
 
   presum %>%  group_by(Environment, Trait) %>%
-    summarise(SE_MSEP = sd(MSEP, na.rm = T), MSEP = mean(MSEP, na.rm = T),
-              Pearson = mean(Pearson, na.rm = T), SE_Pearson = sqrt((Pearson * (1 - Pearson))/n())) %>%
+    summarise(SE_MSEP = sd(MSEP, na.rm = T)/sqrt(n()), MSEP = mean(MSEP, na.rm = T),
+              SE_Pearson = sd(Pearson, na.rm = T)/sqrt(n()), Pearson = mean(Pearson, na.rm = T))  %>%
     select(Environment, Trait, Pearson, SE_Pearson, MSEP, SE_MSEP) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> finalSum
@@ -66,8 +66,8 @@ summary.BMECV <- function(object, information = 'compact', digits = 4, ...){
     as.data.frame() -> presum
 
   presum %>%  group_by(Environment, Trait) %>%
-    summarise(SE_MSEP = sd(MSEP, na.rm = T), MSEP = mean(MSEP, na.rm = T),
-              Pearson = mean(Pearson, na.rm = T), SE_Pearson = sqrt((Pearson * (1 - Pearson))/n())) %>%
+    summarise(SE_MSEP = sd(MSEP, na.rm = T)/sqrt(n()), MSEP = mean(MSEP, na.rm = T),
+              SE_Pearson = sd(Pearson, na.rm = T)/sqrt(n()), Pearson = mean(Pearson, na.rm = T))  %>%
     select(Environment, Trait, Pearson, SE_Pearson, MSEP, SE_MSEP) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> finalSum
