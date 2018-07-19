@@ -219,25 +219,31 @@ coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar,
   nt <- ncol(Y)
   nJ <- ncol(Z1)
   nI <- n / nJ
-  b1 <- matrix(0.1, nrow = nJ, ncol = nt)
-  b2 <- matrix(0L, nrow = nJ * nI, ncol = nt)
+  b1 <- matrix(0.1, nrow = nJ, ncol = nt, dimnames = list(NULL, colnames(Y)))
+  b2 <- matrix(0L, nrow = nJ * nI, ncol = nt, dimnames = list(NULL, colnames(Y)))
   G_invg <- diag(nJ)
 
+  envNames <- tryCatch({
+    sub(".*)", "", colnames(X))
+  }, error = function(e) {
+    colnames(X)
+  })
+
   ############For saving the full posteriors#######################
-  post_beta <- matrix(nrow = nI, ncol = nt, 0L)
-  post_beta_2 <- matrix(nrow = nI, ncol = nt, 0L)
-  post_b1 <- matrix(nrow = nJ, ncol = nt, 0L)
-  post_b1_2 <- matrix(nrow = nJ, ncol = nt, 0L)
-  post_b2 <- matrix(nrow = nJ * nI, ncol = nt, 0L)
-  post_b2_2 <- matrix(nrow = nJ * nI, ncol = nt, 0L)
-  post_var_b1 <- matrix(nrow = nt, ncol = nt, 0L)
-  post_var_b1_2 <- matrix(nrow = nt, ncol = nt, 0L)
-  post_var_b2 <- matrix(nrow = nI, ncol = nI, 0L)
-  post_var_b2_2 <- matrix(nrow = nI, ncol = nI, 0L)
-  post_var_e <- matrix(nrow = nt, ncol = nt, 0L)
-  post_var_e_2 <- matrix(nrow = nt, ncol = nt, 0L)
-  post_yHat <- matrix(nrow = n, ncol = nt, 0L)
-  post_yHat_2 <- matrix(nrow = n, ncol = nt, 0L)
+  post_beta <- matrix(nrow = nI, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
+  post_beta_2 <- matrix(nrow = nI, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
+  post_b1 <- matrix(nrow = nJ, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
+  post_b1_2 <- matrix(nrow = nJ, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
+  post_b2 <- matrix(nrow = nJ * nI, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
+  post_b2_2 <- matrix(nrow = nJ * nI, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
+  post_var_b1 <- matrix(nrow = nt, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
+  post_var_b1_2 <- matrix(nrow = nt, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
+  post_var_b2 <- matrix(nrow = nI, ncol = nI, 0L, dimnames = list(NULL, envNames))
+  post_var_b2_2 <- matrix(nrow = nI, ncol = nI, 0L, dimnames = list(NULL, envNames))
+  post_var_e <- matrix(nrow = nt, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
+  post_var_e_2 <- matrix(nrow = nt, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
+  post_yHat <- matrix(nrow = n, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
+  post_yHat_2 <- matrix(nrow = n, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
   post_logLik <- 0L
 
   YStar <- Y
