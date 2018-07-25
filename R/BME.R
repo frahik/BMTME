@@ -30,7 +30,7 @@ BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim
   } else if (parallelCores <= 1 && inherits(testingSet, 'CrossValidation')) {
     results <- data.frame()
     nCV <- length(testingSet$CrossValidation_list)
-    pb <- progress::progress_bar$new(format = 'Fitting Cross-Validation :what  [:bar] Time elapsed: :elapsed', total = nCV, clear = FALSE, show_after = 0)
+    pb <- progress::progress_bar$new(format = 'Fitting Cross-Validation :what  [:bar] :percent;  Time elapsed: :elapsed', total = nCV, clear = FALSE, show_after = 0)
 
     for (actual_CV in seq_len(nCV)) {
       if (progressBar) {
