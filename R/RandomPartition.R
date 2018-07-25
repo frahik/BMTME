@@ -295,7 +295,7 @@ CV.RandomPart <- function(DataSet, NPartitions = 10, PTesting = .35, Traits.test
 #' @param replace (\code{logic}) 	should sampling be with replacement?.
 #' @param set_seed (\code{integer}) Number of seed for replicable research.
 #'
-#' @importFrom dplyr group_by sample_n '%>%'
+#' @importFrom dplyr group_by sample_frac '%>%'
 #'
 #' @return
 #' @export
