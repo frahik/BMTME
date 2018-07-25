@@ -295,6 +295,8 @@ CV.RandomPart <- function(DataSet, NPartitions = 10, PTesting = .35, Traits.test
 #' @param replace (\code{logic}) 	should sampling be with replacement?.
 #' @param set_seed (\code{integer}) Number of seed for replicable research.
 #'
+#' @importFrom dplyr group_by sample_n '%>%'
+#'
 #' @return
 #' @export
 #'
@@ -317,7 +319,9 @@ CV.StratifiedByFrac <- function(DataSet, NSamples = 10, fracTesting = 0.1, repla
   }
 
   out <- list(
-    CrossValidation_list = p_list
+    CrossValidation_list = p_list,
+    Environments = DataSet$Env,
+    Traits = DataSet$Trait
     )
 
   class(out) <- 'CrossValidation'
@@ -337,6 +341,8 @@ CV.StratifiedByFrac <- function(DataSet, NSamples = 10, fracTesting = 0.1, repla
 #' @param nTesting (\code{integer}) A non-negative integer giving the number of items to choose.
 #' @param replace (\code{logic}) 	Should sampling be with replacement?.
 #' @param set_seed (\code{integer}) Number of seed for replicable research.
+#'
+#' @importFrom dplyr group_by sample_n '%>%'
 #'
 #' @return
 #' @export
@@ -360,7 +366,9 @@ CV.Stratified <- function(DataSet, NSamples = 10, nTesting = 10, replace = FALSE
   }
 
   out <- list(
-    CrossValidation_list = p_list
+    CrossValidation_list = p_list,
+    Environments = DataSet$Env,
+    Traits = DataSet$Trait
   )
 
   class(out) <- 'CrossValidation'
