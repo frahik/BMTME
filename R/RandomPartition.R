@@ -303,10 +303,20 @@ CV.RandomPart <- function(DataSet, NPartitions = 10, PTesting = .35, Traits.test
 #' @examples
 CV.StratifiedByFrac <- function(DataSet, NSamples = 10, fracTesting = 0.1, replace = FALSE, set_seed = NULL) {
   DataSet$UniqueID <- seq_len(dim(DataSet)[1])
-  if(!is.null(set_seed)) {
+
+  if (!is.null(set_seed)) {
     set.seed(set_seed)
   }
-  p_list <- vector('list', NSamples)
+
+  if (is.null(DataSet$Env)) {
+    DataSet$Env <- ''
+  }
+
+  if (is.null(DataSet$Trait)) {
+    DataSet$Trait <- ''
+  }
+
+  p_list <- list()
 
   for (sam in seq_len(NSamples)) {
     DataSet %>%
@@ -315,7 +325,7 @@ CV.StratifiedByFrac <- function(DataSet, NSamples = 10, fracTesting = 0.1, repla
       sample_frac(fracTesting, replace = replace) %>%
       as.data.frame() -> sampleID
 
-    p_list[[paste('partition', sam, sep = '')]] = sampleID$UniqueID
+    p_list[[paste('partition', sam, sep = '')]] <- sampleID$UniqueID
   }
 
   out <- list(
@@ -350,10 +360,20 @@ CV.StratifiedByFrac <- function(DataSet, NSamples = 10, fracTesting = 0.1, repla
 #' @examples
 CV.Stratified <- function(DataSet, NSamples = 10, nTesting = 10, replace = FALSE, set_seed = NULL) {
   DataSet$UniqueID <- seq_len(dim(DataSet)[1])
-  if(!is.null(set_seed)) {
+
+  if (!is.null(set_seed)) {
     set.seed(set_seed)
   }
-  p_list <- vector('list', NSamples)
+
+  if (is.null(DataSet$Env)) {
+    DataSet$Env <- ''
+  }
+
+  if (is.null(DataSet$Trait)) {
+    DataSet$Trait <- ''
+  }
+
+  p_list <- list()
 
   for (sam in seq_len(NSamples)) {
     DataSet %>%
@@ -362,7 +382,7 @@ CV.Stratified <- function(DataSet, NSamples = 10, nTesting = 10, replace = FALSE
       sample_n(nTesting, replace = replace) %>%
       as.data.frame() -> sampleID
 
-    p_list[[paste('partition', sam, sep = '')]] = sampleID$UniqueID
+    p_list[[paste('partition', sam, sep = '')]] <- sampleID$UniqueID
   }
 
   out <- list(
