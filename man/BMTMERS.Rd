@@ -5,7 +5,7 @@
 \title{Bayesian Multi Trait Multi Environment Regressor Stacking}
 \usage{
 BMTMERS(Y = NULL, ETA = NULL, nIter = 2500, burnIn = 500, thin = 5,
-  progressBar = TRUE, CrossValidation = NULL, digits = 4)
+  progressBar = TRUE, testingSet = NULL, digits = 4)
 }
 \arguments{
 \item{Y}{phenotipes matrix, with every trait in a independent column.}
@@ -18,7 +18,7 @@ BMTMERS(Y = NULL, ETA = NULL, nIter = 2500, burnIn = 500, thin = 5,
 
 \item{thin}{number of thinning}
 
-\item{CrossValidation}{cv object}
+\item{testingSet}{cv object}
 
 \item{digits}{number of digits of accuracy in the results}
 }
@@ -30,5 +30,5 @@ Bayesian Multi Trait Multi Environment Regressor Stacking
 }
 \examples{
 ETA=list(Env=list(X=Z.E,model="BRR"),Gen = list(X = Z.G, model = 'BRR'), EnvGen=list(X=Z.EG,model="BRR"))
-CrossValidation <- BMTME::CV.RandomPart(pheno, NPartitions = 10, PTesting = 0.2, set_seed = 123)
+testingSet <- BMTME::CV.RandomPart(pheno, NPartitions = 10, PTesting = 0.2, set_seed = 123)
 }
