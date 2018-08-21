@@ -24,6 +24,7 @@
 #'
 #' @useDynLib BMTME
 BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), parallelCores = 1, digits = 4, progressBar = TRUE, testingSet = NULL) {
+  time.init <- proc.time()[3]
   if (is.null(testingSet)) {
     out <- coreME(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
     class(out) <- 'BME'
@@ -51,7 +52,7 @@ BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim
 
     }
     cat('\n')
-    out <- list(results = results)
+    out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMECV'
   } else if (parallelCores > 1 && inherits(testingSet, 'CrossValidation')) {
     cl <- snow::makeCluster(parallelCores)
@@ -76,7 +77,7 @@ BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim
     }
 
     out <- list(results = results,
-                n_cores = parallelCores)
+                n_cores = parallelCores, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMTMECV'
   } else {
     fm <- coreME(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
@@ -89,7 +90,7 @@ BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim
                           Partition = 1,
                           Observed = round(observed$Observed, digits),
                           Predicted = round(predicted$Predicted, digits))
-    out <- list(results = results)
+    out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMECV'
   }
 
