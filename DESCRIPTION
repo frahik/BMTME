@@ -23,22 +23,24 @@ NeedsCompilation: yes
 Collate:
   BME.R
   BMTME.R
+  BMTMERS.R
   cholesky.R
   detectCore.R
   RandomPartition.R
   RcppExports.R
   utils.R
 Imports:
-  Rcpp (>= 0.12.16),
+  BGLR,
+  doParallel,
+  doSNOW,
+  dplyr,
+  foreach,
   matrixcalc, 
   mvtnorm,
   progress,
-  dplyr,
-  tidyr,
-  doParallel,
-  foreach,
-  doSNOW,
+  Rcpp (>= 0.12.16),
   snow,
+  tidyr
 LinkingTo: Rcpp, RcppArmadillo
 SystemRequirements: C++11
 Suggests: testthat
