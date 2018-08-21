@@ -23,6 +23,8 @@
 #'
 #' @useDynLib BMTME
 BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), parallelCores = 1, digits = 4, progressBar = TRUE, testingSet = NULL) {
+  time.init <- proc.time()[3]
+
   if (is.null(testingSet)) {
     out <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
     class(out) <- 'BMTME'
@@ -48,7 +50,7 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
                                            Observed = round(observed$Observed, digits),
                                            Predicted = round(predicted$Predicted, digits)))
     }
-    out <- list(results = results)
+    out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMTMECV'
   } else if (parallelCores > 1 && inherits(testingSet, 'CrossValidation')) {
     cl <- snow::makeCluster(parallelCores)
@@ -59,6 +61,9 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
     progress <- function(n) utils::setTxtProgressBar(pb, n)
     opts <- list(progress = progress)
 
+    #pb <- progress::progress_bar$new(format = 'Fitting Cross-Validation :what  [:bar] :percent;  Time elapsed: :elapsed', total = nCV, clear = FALSE, show_after = 0)
+    #progress <- function(actual_CV nCV) pb$tick(tokens = list(what = paste0(actual_CV, ' out of ', nCV)))
+    #opts <- list(progress = progress)
     results <- foreach::foreach(actual_CV = seq_len(nCV), .combine = rbind, .packages = 'BMTME', .options.snow = opts) %dopar% {
       positionTST <- testingSet$CrossValidation_list[[actual_CV]]
       fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar = FALSE, positionTST)
@@ -74,7 +79,7 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
     }
     cat('\n')
     out <- list(results = results,
-                n_cores = parallelCores)
+                n_cores = parallelCores, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMTMECV'
   } else {
     fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
@@ -88,7 +93,7 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
                           Observed = round(observed$Observed, digits),
                           Predicted = round(predicted$Predicted, digits))
 
-    out <- list(results = results)
+    out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMTMECV'
   }
   return(out)
