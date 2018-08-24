@@ -11,7 +11,6 @@
 #' @param set_seed (\code{integer}) Number of seed for replicable research.
 #'
 #' @export
-#'
 CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
   if (!is.null(set_seed)) {
     set.seed(set_seed)
