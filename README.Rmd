@@ -35,6 +35,7 @@ output: github_document
   - [NEWS](#news)
   - [Instructions](#instructions)
     - [Installation](#install)
+    - [Dataset](#data)
   - [How to cite this package](#cite)
   - [Contributions](#contributions)
   - [Authors](#authors)
@@ -43,7 +44,7 @@ output: github_document
   News of this version (`r packageVersion('BMTME')`)
 </h2>
 
-Revision 1
+Revision 12
 
  - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public; this is a pre-release, be careful.
 
@@ -63,6 +64,22 @@ install.packages('devtools')
 devtools::install_github('frahik/BMTME')
 ```
 
+<h3 id="data">
+  Datasets
+</h3>
+
+The package include 6 sample datasets
+
+|Name         |Lines|Environment|Traits|Total of observations| ME models | MTME models |
+|-------------|-----|-----------|------|---------------------|-----------|-------------|
+|MaizeToy     | 30  | 3         | 3    | 270                 | *         | *           |
+|WheatIranian | 30  | 2         | 2    | 120                 | *         | *           |
+|WheatJapa30  | 30  | 1         | 6    | 180                 | *         |             |
+|WheatJapa50  | 50  | 1         | 3    | 150                 | *         |             |
+|WheatMadaToy | 50  | 1         | 6    | 300                 | *         |             |
+|WheatToy     | 30  | 3         | 2    | 180                 | *         | *           |
+
+To load one dataset, use the function `data(datasetName)`
 <h2 id="cite">
   How to cite this package
 </h2>
