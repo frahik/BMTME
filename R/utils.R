@@ -131,6 +131,31 @@ summary.BMTMERSCV <- function(object, information = 'compact', digits = 4, ...){
   return(out)
 }
 
+#' @title Summary.BMTMERSENV
+#'
+#' @description Solo es una prueba
+#'
+#' @param object \code{BMTMERSENV object} Objeto BMTMERSENV, resultado de ejecutar MTME()
+#' @param ... Further arguments passed to or from other methods.
+#' @param information compact, extended, complete
+#'
+#' @importFrom stats cor
+#' @importFrom dplyr summarise group_by select '%>%' mutate_if funs
+#'
+#' @export
+summary.BMTMERSENV <- function(object, digits = 4, ...){
+  if (!inherits(object, "BMTMERSENV")) stop("This function only works for objects of class 'BMTMERSENV'")
+
+  object$results %>%
+    group_by(Environment, Trait) %>%
+    summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
+              MSEP = mean((Predicted - Observed)^2, na.rm = T)) %>%
+    select(Environment, Trait, Pearson, MSEP) %>%
+    mutate_if(is.numeric, funs(round(., digits))) %>%
+    as.data.frame() -> out
+
+  return(out)
+}
 
 #' Print BMTME information object
 #'
@@ -246,6 +271,31 @@ print.BMTMERSCV <- function(x, ...){
   invisible(x)
 }
 
+#' Print BMTMERSENV information object
+#'
+#' @param x object a
+#' @param ...  more objects
+#'
+#' @return test
+#' @export
+#'
+print.BMTMERSENV <- function(x, ...){
+  cat('Fitted Bayesian Multi Trait Multi Environment Regressor Stacking model for n environments with: \n',
+      x$nIter, ' Iterations, burning the first ', x$burnIn, ' and thining every ', x$thin, '\n',
+      'Runtime: ', x$executionTime ,' seconds \n\n',
+      'Some predicted values: \n')
+
+  print.default(format(head(x$results$Predicted, 20), digits = 3), print.gap = 2L, quote = FALSE)
+
+  cat('\nPredictive capacity of the model: \n')
+
+  print.data.frame(summary(x, digits = 3), print.gap = 2L, quote = FALSE)
+
+  cat('\n Use str() function to found more datailed information.')
+  invisible(x)
+}
+
+
 #' @title residuals.BME
 #'
 #' @description Solo es una prueba
@@ -309,6 +359,7 @@ plot.BMTME <- function(x, ...){
   plot(response, predictions, main = "BMTME fitted model", xlim = limits, ylim = limits, xlab = 'Response', ylab = 'Prediction', ...);
   abline(a = 0, b = 1, lty = 3)
 }
+
 #' @title Plot BMTMERSCV graph
 #'
 #' @description Plot from BMTMERSCV object
@@ -321,7 +372,7 @@ plot.BMTME <- function(x, ...){
 #' @export
 plot.BMTMERSCV <- function(x, select = 'Pearson', ...){
   ### Check that object is compatible
-  if (!inherits(x, "BMTMERSCV")) Error("This function only works for objects of class 'BMTMERSCV'")
+  if (!inherits(x, "BMTMERSCV")) stop("This function only works for objects of class 'BMTMERSCV'", call. = FALSE)
 
   results <- summary(x)
   results <- results[order(results[, select]),]
@@ -342,6 +393,26 @@ plot.BMTMERSCV <- function(x, select = 'Pearson', ...){
   arrows(plot.x, results[, select] - results$SE, plot.x, results[, select] + results$SE, code = 3, length = 0.02, angle = 90)
 }
 
+
+#' @title barplot BMTMERSENV graph
+#'
+#' @description Plot from BMTMERSENV object
+#'
+#' @param x \code{BMTMERSENV object} BMTMERSENV object, result of use the MTME() function
+#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MSEP'), plot the MSEP of the BMTMERSENV Object.
+#' @param ... Further arguments passed to or from other methods.
+#'
+#' @importFrom graphics arrows axis plot
+#' @export
+barplot.BMTMERSENV <- function(x, select = 'Pearson', ...){
+  ### Check that object is compatible
+  if (!inherits(x, "BMTMERSENV")) stop("This function only works for objects of class 'BMTMERSENV'", call. = FALSE)
+
+  results <- summary(x)
+  results <- results[order(results[, select]),]
+  results$TxE <- paste(results$Trait, results$Environment, sep = '_')
+  barplot(results[, select], xlab = "Trait x Environment", names.arg = results$TxE)
+}
 
 
 #' @title boxplot.BMECV
@@ -437,11 +508,11 @@ boxplot.BMTMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
 #' @export
 boxplot.BMTMERSCV <- function(x, select = 'Pearson', ordered = TRUE, ...){
   ### Check that object is compatible
-  if (!inherits(x, "BMTMERSCV")) Error("This function only works for objects of class 'BMTMERSCV'")
+  if (!inherits(x, "BMTMERSCV")) stop("This function only works for objects of class 'BMTMERSCV'", call. = FALSE)
 
   results <- summary(x, 'complete')
 
-  switch (select,
+  switch(select,
           Pearson = {
             plot.y <- results$Pearson
             ylab <- "Pearson's Correlation"
@@ -452,7 +523,7 @@ boxplot.BMTMERSCV <- function(x, select = 'Pearson', ordered = TRUE, ...){
             plot.y <- results$CC
             ylab <- "Classification correct average"
           },
-          Error('Error in select parameter.')
+          stop('Error in select parameter.', call. = )
   )
 
   if (length(unique(results$Env)) > 1) {
