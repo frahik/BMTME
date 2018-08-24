@@ -16,45 +16,40 @@
 #' @examples
 #' ETA=list(Env=list(X=Z.E,model="BRR"),Gen = list(X = Z.G, model = 'BRR'), EnvGen=list(X=Z.EG,model="BRR"))
 #' testingSet <- BMTME::CV.RandomPart(pheno, NPartitions = 10, PTesting = 0.2, set_seed = 123)
-BMTMERS <- function(Y = NULL, ETA = NULL, nIter = 2500, burnIn = 500,
-                 thin = 5, progressBar = TRUE, testingSet = NULL, digits = 4){
+BMTMERS <- function(Y = NULL, ETA = NULL, nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE, testingSet = NULL, digits = 4) {
+  validate.Y(Y)
   time.init <- proc.time()[3]
-  YwithCov <- Y # to include covariance data
   nCV <- length(testingSet$CrossValidation_list) #Number of cross-validations
-  Yhat_post <- matrix(NA, ncol = nCV, nrow = nrow(Y)) # save predictions
+  # Yhat_post <- matrix(NA, ncol = nCV, nrow = nrow(Y)) # save predictions
   nTraits <- dim(Y)[2L]
+  YwithCov <- matrix(Y, ncol = 2 * nTraits, nrow = nrow(Y)) # to include covariance data
   results <- data.frame() # save cross-validation results
-  pb <- progress::progress_bar$new(format = ':what  [:bar]:percent;  Time elapsed: :elapsed',
+  pb <- progress::progress_bar$new(format = ':what  [:bar]:percent;  Time elapsed: :elapsed - time left: :eta',
                                    total = 2L*(nCV*nTraits), clear = FALSE, show_after = 0)
   # Covariance
-  for (t in seq_len(nTraits)) {
-    y2 <- Y[, t] #Loop each trait
-    for (actual_CV in seq_len(nCV)) {
+  for (actual_CV in seq_len(nCV)) {
+    #########First stage analysis#################################
+    for (t in seq_len(nTraits)) {
       if (progressBar) {
         pb$tick(tokens = list(what = paste0('Estimating covariance of trait ', colnames(Y)[t], ' in CV ', actual_CV, ' out of ', nCV)))
       }
-      y1 <- y2
+      y <- Y[, t]
       positionTST <- testingSet$CrossValidation_list[[actual_CV]]
-      y1[positionTST] <- NA
+      y[positionTST] <- NA
 
-      fm <- BGLR(y1, ETA = ETA, nIter = nIter, burnIn = burnIn, thin = thin, verbose = F)
-      Yhat_post[, actual_CV] <- fm$yHat
+      fm <- BGLR(y, ETA = ETA, nIter = nIter, burnIn = burnIn, thin = thin, verbose = F)
+      YwithCov[, nTraits + t] <- fm$yHat
     }
 
-    YwithCov[, nTraits + t] <- apply(Yhat_post, 1L, mean)
-  }
+    XPV <- scale(YwithCov[, (1L + nTraits):(2L*nTraits)])
+    ETA1 <- ETA
+    ETA1$Cov_PreVal <- list(X = XPV, model = "BRR")
 
-  XPV <- scale(YwithCov[, (1L+nTraits):(2L*nTraits)])
-  ETA1 <- ETA
-  ETA1$Cov_PreVal <- list(X = XPV, model = "BRR")
-
-  for (t in seq_len(nTraits)) {
-    y2 <- Y[, t]
-    for (actual_CV in seq_len(nCV)) {
+    for (t in seq_len(nTraits)) {
       if (progressBar) {
         pb$tick(tokens = list(what = paste0('Fitting Cross-Validation of trait ', colnames(Y)[t], ' in CV ', actual_CV, ' out of ', nCV)))
       }
-      y1 <- y2
+      y1 <- Y[, t]
       positionTST <- testingSet$CrossValidation_list[[actual_CV]]
       y1[positionTST] <- NA
 
@@ -64,11 +59,19 @@ BMTMERS <- function(Y = NULL, ETA = NULL, nIter = 2500, burnIn = 500,
                                            Environment = testingSet$Environments[positionTST],
                                            Trait = colnames(Y)[t],
                                            Partition = actual_CV,
-                                           Observed = round(y2[positionTST], digits), #$response, digits),
+                                           Observed = round(Y[positionTST, t], digits), #$response, digits),
                                            Predicted = round(fm$yHat[positionTST], digits)))
     }
+
   }
-  out <- list(results = results, covariance = Yhat_post, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
+  out <- list(results = results, covariance = XPV, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
   class(out) <- 'BMTMERSCV'
   return(out)
+}
+
+validate.Y <- function(matrix){
+  if (!is.matrix(matrix) || !is.numeric(matrix)) {
+    message('Y must be a phenotypic matrix with numeric data')
+    stop(call. = FALSE)
+  }
 }
