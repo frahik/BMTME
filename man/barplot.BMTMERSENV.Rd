@@ -4,10 +4,10 @@
 \alias{barplot.BMTMERSENV}
 \title{barplot BMTMERSENV graph}
 \usage{
-\method{barplot}{BMTMERSENV}(x, select = "Pearson", ...)
+\method{barplot}{BMTMERSENV}(height, select = "Pearson", ...)
 }
 \arguments{
-\item{x}{\code{BMTMERSENV object} BMTMERSENV object, result of use the MTME() function}
+\item{height}{\code{BMTMERSENV object} BMTMERSENV object, result of use the MTME() function}
 
 \item{select}{\code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MSEP'), plot the MSEP of the BMTMERSENV Object.}
 

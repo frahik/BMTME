@@ -21,6 +21,9 @@ CV.StratifiedByFrac(DataSet, NSamples = 10, fracTesting = 0.1,
 
 \item{set_seed}{(\code{integer}) Number of seed for replicable research.}
 }
+\value{
+Returns a nested list, with a positions to use as testing.
+}
 \description{
 Sample a fraction of observations to do a cross-validation, this method is similar like random partitions, but is stratified,
 and could be used like bootstrapping sampling with the \code{replace} parameter as \code{TRUE}.

@@ -25,16 +25,17 @@ BMTME(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L,
 
 \item{bs}{no definition available.}
 
+\item{parallelCores}{number of cores to use}
+
+\item{digits}{number of digits of accuracy in the results}
+
 \item{progressBar}{(Logical) Show the progress bar.}
+
+\item{testingSet}{cv object}
 }
 \value{
 
 }
 \description{
 BMTME
-}
-\examples{
-Not example provided
-
-
 }

@@ -4,13 +4,15 @@
 \alias{summary.BMTMERSCV}
 \title{Summary.BMTMERSCV}
 \usage{
-\method{summary}{BMTMERSCV}(object, information = "compact", digits = 4,
-  ...)
+\method{summary}{BMTMERSCV}(object, information = "compact",
+  digits = 4, ...)
 }
 \arguments{
 \item{object}{\code{BMTMERSCV object} Objeto BMTMERSCV, resultado de ejecutar MTME()}
 
 \item{information}{compact, extended, complete}
+
+\item{digits}{number of digits.}
 
 \item{...}{Further arguments passed to or from other methods.}
 }

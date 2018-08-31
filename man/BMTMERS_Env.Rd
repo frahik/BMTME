@@ -4,14 +4,18 @@
 \alias{BMTMERS_Env}
 \title{Bayesian Multi Trait Multi Environment Regressor Stacking for specific environment estimations}
 \usage{
-BMTMERS_Env(data = NULL, testingEnv = "", ETA = NULL, covModel = "BRR",
-  nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE,
-  digits = 4)
+BMTMERS_Env(data = NULL, testingEnv = "", ETA = NULL,
+  covModel = "BRR", nIter = 2500, burnIn = 500, thin = 5,
+  progressBar = TRUE, digits = 4)
 }
 \arguments{
+\item{data}{phenotipes matrix, with every trait in a independent column.}
+
 \item{testingEnv}{environment to test.}
 
 \item{ETA}{eta}
+
+\item{covModel}{covariate model}
 
 \item{nIter}{number of iterations}
 
@@ -22,16 +26,10 @@ BMTMERS_Env(data = NULL, testingEnv = "", ETA = NULL, covModel = "BRR",
 \item{progressBar}{show the progress bar?}
 
 \item{digits}{number of digits of accuracy in the results}
-
-\item{Y}{phenotipes matrix, with every trait in a independent column.}
 }
 \value{
 Something cool
 }
 \description{
 Bayesian Multi Trait Multi Environment Regressor Stacking for specific environment estimations
-}
-\examples{
-ETA=list(Env=list(X=Z.E,model="BRR"),Gen = list(X = Z.G, model = 'BRR'), EnvGen=list(X=Z.EG,model="BRR"))
-testingSet <- BMTME::CV.RandomPart(pheno, NPartitions = 10, PTesting = 0.2, set_seed = 123)
 }

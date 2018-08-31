@@ -9,9 +9,9 @@
 \arguments{
 \item{object}{\code{BMTMERSENV object} Objeto BMTMERSENV, resultado de ejecutar MTME()}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{digits}{number of digits.}
 
-\item{information}{compact, extended, complete}
+\item{...}{Further arguments passed to or from other methods.}
 }
 \description{
 Solo es una prueba

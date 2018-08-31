@@ -18,6 +18,9 @@ CV.KFold(DataSet, DataSetID = "Line", K = 5, set_seed = NULL)
 
 \item{set_seed}{(\code{integer}) Number of seed for replicable research.}
 }
+\value{
+Returns a nested list, with a positions to use as testing.
+}
 \description{
 This method consists of randomly dividing the training data set and the test data set.
 }

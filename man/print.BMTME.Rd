@@ -12,7 +12,7 @@
 \item{...}{more objects}
 }
 \value{
-test
+test of package
 }
 \description{
 Print BMTME information object

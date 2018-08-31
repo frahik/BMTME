@@ -9,6 +9,8 @@
 \arguments{
 \item{object}{\code{BME object} Objeto BME, resultado de ejecutar BME}
 
+\item{digits}{number of digits.}
+
 \item{...}{Further arguments passed to or from other methods.}
 }
 \description{

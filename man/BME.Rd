@@ -21,6 +21,10 @@ BME(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L,
 
 \item{bs}{no definition available.}
 
+\item{parallelCores}{number of cores to use}
+
+\item{digits}{number of digits of accuracy in the results}
+
 \item{progressBar}{(Logical) Show the progress bar.}
 
 \item{testingSet}{(numeric) Crossvalidation object or vector with the positions to use like testing in a cross-validation test.}
@@ -32,9 +36,4 @@ Else, if the testingSet is not NULL, the function returns the correlation of the
 }
 \description{
 BME
-}
-\examples{
-Not example provided
-
-
 }

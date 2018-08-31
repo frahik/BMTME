@@ -6,12 +6,14 @@
 \usage{
 BMTMERS(Y = NULL, ETA = NULL, covModel = "BRR", nIter = 2500,
   burnIn = 500, thin = 5, progressBar = TRUE, testingSet = NULL,
-  digits = 4)
+  parallelCores = 1, digits = 4)
 }
 \arguments{
 \item{Y}{phenotipes matrix, with every trait in a independent column.}
 
 \item{ETA}{eta}
+
+\item{covModel}{covariates model}
 
 \item{nIter}{number of iterations}
 
@@ -19,7 +21,11 @@ BMTMERS(Y = NULL, ETA = NULL, covModel = "BRR", nIter = 2500,
 
 \item{thin}{number of thinning}
 
+\item{progressBar}{The progress bar}
+
 \item{testingSet}{cv object}
+
+\item{parallelCores}{number of cores to use}
 
 \item{digits}{number of digits of accuracy in the results}
 }
@@ -30,6 +36,8 @@ Something cool
 Bayesian Multi Trait Multi Environment Regressor Stacking
 }
 \examples{
-ETA=list(Env=list(X=Z.E,model="BRR"),Gen = list(X = Z.G, model = 'BRR'), EnvGen=list(X=Z.EG,model="BRR"))
-testingSet <- BMTME::CV.RandomPart(pheno, NPartitions = 10, PTesting = 0.2, set_seed = 123)
+\dontrun{
+data('wheat')
+CV.RandomPart(phenoWheat, NPartitions = 10, PTesting = 0.2, set_seed = 123)
+}
 }
