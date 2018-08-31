@@ -16,7 +16,7 @@
 #' @examples
 #' ETA=list(Env=list(X=Z.E,model="BRR"),Gen = list(X = Z.G, model = 'BRR'), EnvGen=list(X=Z.EG,model="BRR"))
 #' testingSet <- BMTME::CV.RandomPart(pheno, NPartitions = 10, PTesting = 0.2, set_seed = 123)
-BMTMERS <- function(Y = NULL, ETA = NULL, nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE, testingSet = NULL, digits = 4) {
+BMTMERS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE, testingSet = NULL, digits = 4) {
   validate.Y(Y)
   time.init <- proc.time()[3]
   nCV <- length(testingSet$CrossValidation_list) #Number of cross-validations
@@ -31,7 +31,7 @@ BMTMERS <- function(Y = NULL, ETA = NULL, nIter = 2500, burnIn = 500, thin = 5, 
     #########First stage analysis#################################
     for (t in seq_len(nTraits)) {
       if (progressBar) {
-        pb$tick(tokens = list(what = paste0('Estimating covariance of trait ', colnames(Y)[t], ' in CV ', actual_CV, ' out of ', nCV)))
+        pb$tick(tokens = list(what = paste0('Estimating covariates')))
       }
       y <- Y[, t]
       positionTST <- testingSet$CrossValidation_list[[actual_CV]]
@@ -43,11 +43,11 @@ BMTMERS <- function(Y = NULL, ETA = NULL, nIter = 2500, burnIn = 500, thin = 5, 
 
     XPV <- scale(YwithCov[, (1L + nTraits):(2L*nTraits)])
     ETA1 <- ETA
-    ETA1$Cov_PreVal <- list(X = XPV, model = "BRR")
+    ETA1$Cov_PreVal <- list(X = XPV, model = covModel)
 
     for (t in seq_len(nTraits)) {
       if (progressBar) {
-        pb$tick(tokens = list(what = paste0('Fitting Cross-Validation of trait ', colnames(Y)[t], ' in CV ', actual_CV, ' out of ', nCV)))
+        pb$tick(tokens = list(what = paste0('Fitting the model')))
       }
       y1 <- Y[, t]
       positionTST <- testingSet$CrossValidation_list[[actual_CV]]
@@ -64,7 +64,7 @@ BMTMERS <- function(Y = NULL, ETA = NULL, nIter = 2500, burnIn = 500, thin = 5, 
     }
 
   }
-  out <- list(results = results, covariance = XPV, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
+  out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
   class(out) <- 'BMTMERSCV'
   return(out)
 }
