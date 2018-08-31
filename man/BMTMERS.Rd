@@ -4,8 +4,9 @@
 \alias{BMTMERS}
 \title{Bayesian Multi Trait Multi Environment Regressor Stacking}
 \usage{
-BMTMERS(Y = NULL, ETA = NULL, nIter = 2500, burnIn = 500, thin = 5,
-  progressBar = TRUE, testingSet = NULL, digits = 4)
+BMTMERS(Y = NULL, ETA = NULL, covModel = "BRR", nIter = 2500,
+  burnIn = 500, thin = 5, progressBar = TRUE, testingSet = NULL,
+  digits = 4)
 }
 \arguments{
 \item{Y}{phenotipes matrix, with every trait in a independent column.}

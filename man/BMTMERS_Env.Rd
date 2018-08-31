@@ -4,8 +4,9 @@
 \alias{BMTMERS_Env}
 \title{Bayesian Multi Trait Multi Environment Regressor Stacking for specific environment estimations}
 \usage{
-BMTMERS_Env(data = NULL, testingEnv = "", ETA = NULL, nIter = 2500,
-  burnIn = 500, thin = 5, progressBar = TRUE, digits = 4)
+BMTMERS_Env(data = NULL, testingEnv = "", ETA = NULL, covModel = "BRR",
+  nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE,
+  digits = 4)
 }
 \arguments{
 \item{testingEnv}{environment to test.}
