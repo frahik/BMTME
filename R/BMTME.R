@@ -24,6 +24,7 @@
 #' @useDynLib BMTME
 BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), parallelCores = 1, digits = 4, progressBar = TRUE, testingSet = NULL) {
   time.init <- proc.time()[3]
+  parallelCores <- validate.parallelCores(parallelCores)
 
   if (is.null(testingSet)) {
     out <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
@@ -50,7 +51,8 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
                                            Observed = round(observed$Observed, digits),
                                            Predicted = round(predicted$Predicted, digits)))
     }
-    out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
+    out <- list(results = results,
+                n_cores = parallelCores, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMTMECV'
   } else if (parallelCores > 1 && inherits(testingSet, 'CrossValidation')) {
     cl <- snow::makeCluster(parallelCores)
