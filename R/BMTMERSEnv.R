@@ -1,9 +1,10 @@
 #' Bayesian Multi Trait Multi Environment Regressor Stacking for specific environment estimations
 #'
-#' @param Y phenotipes matrix, with every trait in a independent column.
+#' @param data phenotipes matrix, with every trait in a independent column.
 #' @param ETA eta
 #' @param testingEnv environment to test.
 #' @param nIter number of iterations
+#' @param covModel covariate model
 #' @param burnIn number of burning
 #' @param thin number of thinning
 #' @param progressBar show the progress bar?
@@ -12,11 +13,7 @@
 #' @return Something cool
 #' @export
 #'
-#' @importFrom IBCF.MTME getMatrixForm
 #' @importFrom BGLR BGLR
-#' @examples
-#' ETA=list(Env=list(X=Z.E,model="BRR"),Gen = list(X = Z.G, model = 'BRR'), EnvGen=list(X=Z.EG,model="BRR"))
-#' testingSet <- BMTME::CV.RandomPart(pheno, NPartitions = 10, PTesting = 0.2, set_seed = 123)
 BMTMERS_Env <- function(data = NULL, testingEnv = '', ETA = NULL, covModel = 'BRR', nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE, digits = 4) {
   time.init <- proc.time()[3]
   Y <- data[, -1]

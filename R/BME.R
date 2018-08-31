@@ -6,6 +6,8 @@
 #' @param burnIn no definition available.
 #' @param thin no definition available.
 #' @param bs no definition available.
+#' @param parallelCores number of cores to use
+#' @param digits number of digits of accuracy in the results
 #' @param progressBar (Logical) Show the progress bar.
 #' @param testingSet (numeric) Crossvalidation object or vector with the positions to use like testing in a cross-validation test.
 #'
@@ -18,9 +20,6 @@
 #' @importFrom tidyr gather
 #' @importFrom foreach %dopar%
 #' @export
-#'
-#' @examples Not example provided
-#'
 #'
 #' @useDynLib BMTME
 BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), parallelCores = 1, digits = 4, progressBar = TRUE, testingSet = NULL) {

@@ -2,20 +2,24 @@
 #'
 #' @param Y phenotipes matrix, with every trait in a independent column.
 #' @param ETA eta
+#' @param covModel covariates model
 #' @param nIter number of iterations
 #' @param burnIn number of burning
 #' @param thin number of thinning
+#' @param progressBar The progress bar
 #' @param testingSet cv object
+#' @param parallelCores number of cores to use
 #' @param digits number of digits of accuracy in the results
 #'
 #' @return Something cool
 #' @export
 #'
-#' @importFrom IBCF.MTME getMatrixForm
 #' @importFrom BGLR BGLR
 #' @examples
-#' ETA=list(Env=list(X=Z.E,model="BRR"),Gen = list(X = Z.G, model = 'BRR'), EnvGen=list(X=Z.EG,model="BRR"))
-#' testingSet <- BMTME::CV.RandomPart(pheno, NPartitions = 10, PTesting = 0.2, set_seed = 123)
+#' \dontrun{
+#' data('wheat')
+#' CV.RandomPart(phenoWheat, NPartitions = 10, PTesting = 0.2, set_seed = 123)
+#' }
 BMTMERS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE, testingSet = NULL, parallelCores = 1, digits = 4) {
   validate.Y(Y)
   parallelCores <- validate.parallelCores(parallelCores)

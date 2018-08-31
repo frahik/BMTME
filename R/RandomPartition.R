@@ -10,6 +10,9 @@
 #' @param K (\code{integer}) Number of groups to the cross-validation.
 #' @param set_seed (\code{integer}) Number of seed for replicable research.
 #'
+#' @importFrom stats na.omit
+#' @return
+#' Returns a nested list, with a positions to use as testing.
 #' @export
 CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
   if (!is.null(set_seed)) {
@@ -297,9 +300,9 @@ CV.RandomPart <- function(DataSet, NPartitions = 10, PTesting = .35, Traits.test
 #' @importFrom dplyr group_by sample_frac '%>%'
 #'
 #' @return
-#' @export
+#' Returns a nested list, with a positions to use as testing.
 #'
-#' @examples
+#' @export
 CV.StratifiedByFrac <- function(DataSet, NSamples = 10, fracTesting = 0.1, replace = FALSE, set_seed = NULL) {
   DataSet$UniqueID <- seq_len(dim(DataSet)[1])
 
@@ -319,7 +322,7 @@ CV.StratifiedByFrac <- function(DataSet, NSamples = 10, fracTesting = 0.1, repla
 
   for (sam in seq_len(NSamples)) {
     DataSet %>%
-      group_by(Env, Trait) %>%
+      group_by('Env', 'Trait') %>%
       #summarise(n = n()) %>%
       sample_frac(fracTesting, replace = replace) %>%
       as.data.frame() -> sampleID
@@ -354,9 +357,8 @@ CV.StratifiedByFrac <- function(DataSet, NSamples = 10, fracTesting = 0.1, repla
 #' @importFrom dplyr group_by sample_n '%>%'
 #'
 #' @return
+#' Returns a nested list, with a positions to use as testing.
 #' @export
-#'
-#' @examples
 CV.Stratified <- function(DataSet, NSamples = 10, nTesting = 10, replace = FALSE, set_seed = NULL) {
   DataSet$UniqueID <- seq_len(dim(DataSet)[1])
 
@@ -376,7 +378,7 @@ CV.Stratified <- function(DataSet, NSamples = 10, nTesting = 10, replace = FALSE
 
   for (sam in seq_len(NSamples)) {
     DataSet %>%
-      group_by(Env, Trait) %>%
+      group_by('Env', 'Trait') %>%
       #summarise(n = n()) %>%
       sample_n(nTesting, replace = replace) %>%
       as.data.frame() -> sampleID

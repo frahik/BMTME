@@ -1,106 +1,20 @@
+# if(getRversion() >= "2.15.1")  utils::globalVariables(c('.','Environment','Trait','Partition','Predicted','Observed','Pearson','MSEP','SE_Pearson', 'SE_MSEP'))
+
 #' @title Summary.BMTMECV
 #'
 #' @description Solo es una prueba
 #'
 #' @param object \code{BMTMECV object} Objeto BMTMECV, resultado de ejecutar BMTME()
-#' @param ... Further arguments passed to or from other methods.
 #' @param information compact, extended, complete
+#' @param digits number of digits.
+#' @param ... Further arguments passed to or from other methods.
 #'
-#' @importFrom stats cor
-#' @importFrom dplyr summarise group_by select '%>%' mutate_if funs
+#' @importFrom stats cor sd
+#' @importFrom dplyr summarise group_by select '%>%' mutate_if funs n
 #'
 #' @export
-summary.BMTMECV <- function(object, information = 'compact', digits = 4, ...){
-  if (!inherits(object, "BMTMECV")) Stop("This function only works for objects of class 'BMTMECV'")
-
-  object$results %>%
-    group_by(Environment, Trait, Partition) %>%
-    summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
-              MSEP = mean((Predicted - Observed)^2, na.rm = T)) %>%
-    select(Environment, Trait, Partition, Pearson, MSEP) %>%
-    mutate_if(is.numeric, funs(round(., digits))) %>%
-    as.data.frame() -> presum
-
-  presum %>%  group_by(Environment, Trait) %>%
-    summarise(SE_MSEP = sd(MSEP, na.rm = T)/sqrt(n()), MSEP = mean(MSEP, na.rm = T),
-              SE_Pearson = sd(Pearson, na.rm = T)/sqrt(n()), Pearson = mean(Pearson, na.rm = T))  %>%
-    select(Environment, Trait, Pearson, SE_Pearson, MSEP, SE_MSEP) %>%
-    mutate_if(is.numeric, funs(round(., digits))) %>%
-    as.data.frame() -> finalSum
-
-  out <- switch(information,
-    compact = finalSum,
-    complete = presum,
-    extended = {
-      finalSum$Partition <- 'All'
-      presum$Partition <- as.character(presum$Partition)
-      presum$SE_Pearson <- NA
-      presum$SE_MSEP <- NA
-      rbind(presum, finalSum)
-    }
-  )
-  return(out)
-}
-
-#' @title Summary.BMECV
-#'
-#' @description Solo es una prueba
-#'
-#' @param object \code{BMECV object} Objeto BMECV, resultado de ejecutar BME()
-#' @param ... Further arguments passed to or from other methods.
-#' @param information compact, extended, complete
-#'
-#' @importFrom stats cor
-#' @importFrom dplyr summarise group_by select '%>%' mutate_if funs
-#'
-#' @export
-summary.BMECV <- function(object, information = 'compact', digits = 4, ...){
-  if (!inherits(object, "BMECV")) Stop("This function only works for objects of class 'BMECV'")
-
-  object$results %>%
-    group_by(Environment, Trait, Partition) %>%
-    summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
-              MSEP = mean((Predicted - Observed)^2, na.rm = T)) %>%
-    select(Environment, Trait, Partition, Pearson, MSEP) %>%
-    mutate_if(is.numeric, funs(round(., digits))) %>%
-    as.data.frame() -> presum
-
-  presum %>%  group_by(Environment, Trait) %>%
-    summarise(SE_MSEP = sd(MSEP, na.rm = T)/sqrt(n()), MSEP = mean(MSEP, na.rm = T),
-              SE_Pearson = sd(Pearson, na.rm = T)/sqrt(n()), Pearson = mean(Pearson, na.rm = T))  %>%
-    select(Environment, Trait, Pearson, SE_Pearson, MSEP, SE_MSEP) %>%
-    mutate_if(is.numeric, funs(round(., digits))) %>%
-    as.data.frame() -> finalSum
-
-  out <- switch(information,
-    compact = finalSum,
-    complete = presum,
-    extended = {
-      finalSum$Partition <- 'All'
-      presum$Partition <- as.character(presum$Partition)
-      presum$SE_Pearson <- NA
-      presum$SE_MSEP <- NA
-      rbind(presum, finalSum)
-    }
-  )
-  return(out)
-}
-
-
-#' @title Summary.BMTMERSCV
-#'
-#' @description Solo es una prueba
-#'
-#' @param object \code{BMTMERSCV object} Objeto BMTMERSCV, resultado de ejecutar MTME()
-#' @param ... Further arguments passed to or from other methods.
-#' @param information compact, extended, complete
-#'
-#' @importFrom stats cor
-#' @importFrom dplyr summarise group_by select '%>%' mutate_if funs
-#'
-#' @export
-summary.BMTMERSCV <- function(object, information = 'compact', digits = 4, ...){
-  if (!inherits(object, "BMTMERSCV")) Stop("This function only works for objects of class 'BMTMERSCV'")
+summary.BMTMECV <- function(object, information = 'compact', digits = 4, ...) {
+  if (!inherits(object, "BMTMECV")) stop("This function only works for objects of class 'BMTMECV'")
 
   object$results %>%
     group_by(Environment, Trait, Partition) %>%
@@ -131,13 +45,104 @@ summary.BMTMERSCV <- function(object, information = 'compact', digits = 4, ...){
   return(out)
 }
 
+#' @title Summary.BMECV
+#'
+#' @description Solo es una prueba
+#'
+#' @param object \code{BMECV object} Objeto BMECV, resultado de ejecutar BME()
+#' @param information compact, extended, complete
+#' @param digits number of digits.
+#' @param ... Further arguments passed to or from other methods.
+#'
+#' @importFrom stats cor sd
+#' @importFrom dplyr summarise group_by select '%>%' mutate_if funs n
+#'
+#' @export
+summary.BMECV <- function(object, information = 'compact', digits = 4, ...) {
+  if (!inherits(object, "BMECV")) stop("This function only works for objects of class 'BMECV'")
+
+  object$results %>%
+    group_by(Environment, Trait, Partition) %>%
+    summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
+              MSEP = mean((Predicted - Observed)^2, na.rm = T)) %>%
+    select(Environment, Trait, Partition, Pearson, MSEP) %>%
+    mutate_if(is.numeric, funs(round(., digits))) %>%
+    as.data.frame() -> presum
+
+  presum %>%  group_by(Environment, Trait) %>%
+    summarise(SE_MSEP = sd(MSEP, na.rm = T)/sqrt(n()), MSEP = mean(MSEP, na.rm = T),
+              SE_Pearson = sd(Pearson, na.rm = T)/sqrt(n()), Pearson = mean(Pearson, na.rm = T))  %>%
+    select(Environment, Trait, Pearson, SE_Pearson, MSEP, SE_MSEP) %>%
+    mutate_if(is.numeric, funs(round(., digits))) %>%
+    as.data.frame() -> finalSum
+
+  out <- switch(information,
+                compact = finalSum,
+                complete = presum,
+                extended = {
+                  finalSum$Partition <- 'All'
+                  presum$Partition <- as.character(presum$Partition)
+                  presum$SE_Pearson <- NA
+                  presum$SE_MSEP <- NA
+                  rbind(presum, finalSum)
+                }
+  )
+  return(out)
+}
+
+#' @title Summary.BMTMERSCV
+#'
+#' @description Solo es una prueba
+#'
+#' @param object \code{BMTMERSCV object} Objeto BMTMERSCV, resultado de ejecutar MTME()
+#' @param information compact, extended, complete
+#' @param digits number of digits.
+#' @param ... Further arguments passed to or from other methods.
+#'
+#' @importFrom stats cor sd
+#' @importFrom dplyr summarise group_by select '%>%' mutate_if funs n
+#'
+#' @export
+summary.BMTMERSCV <- function(object, information = 'compact', digits = 4, ...){
+  if (!inherits(object, "BMTMERSCV")) stop("This function only works for objects of class 'BMTMERSCV'")
+
+  object$results %>%
+    group_by(Environment, Trait, Partition) %>%
+    summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
+              MSEP = mean((Predicted - Observed)^2, na.rm = T)) %>%
+    select(Environment, Trait, Partition, Pearson, MSEP) %>%
+    mutate_if(is.numeric, funs(round(., digits))) %>%
+    as.data.frame() -> presum
+
+  presum %>%  group_by(Environment, Trait) %>%
+    summarise(SE_MSEP = sd(MSEP, na.rm = T)/sqrt(n()), MSEP = mean(MSEP, na.rm = T),
+              SE_Pearson = sd(Pearson, na.rm = T)/sqrt(n()), Pearson = mean(Pearson, na.rm = T))  %>%
+    select(Environment, Trait, Pearson, SE_Pearson, MSEP, SE_MSEP) %>%
+    mutate_if(is.numeric, funs(round(., digits))) %>%
+    as.data.frame() -> finalSum
+
+  out <- switch(information,
+                compact = finalSum,
+                complete = presum,
+                extended = {
+                  finalSum$Partition <- 'All'
+                  presum$Partition <- as.character(presum$Partition)
+                  presum$SE_Pearson <- NA
+                  presum$SE_MSEP <- NA
+                  rbind(presum, finalSum)
+                }
+  )
+  return(out)
+}
+
+
 #' @title Summary.BMTMERSENV
 #'
 #' @description Solo es una prueba
 #'
 #' @param object \code{BMTMERSENV object} Objeto BMTMERSENV, resultado de ejecutar MTME()
+#' @param digits number of digits.
 #' @param ... Further arguments passed to or from other methods.
-#' @param information compact, extended, complete
 #'
 #' @importFrom stats cor
 #' @importFrom dplyr summarise group_by select '%>%' mutate_if funs
@@ -162,7 +167,7 @@ summary.BMTMERSENV <- function(object, digits = 4, ...){
 #' @param x object a
 #' @param ...  more objects
 #'
-#' @return test
+#' @return test of package
 #' @export
 #'
 print.BMTME <- function(x, ...){
@@ -182,10 +187,9 @@ print.BMTME <- function(x, ...){
 #' @param x object a
 #' @param ... more objects
 #'
-#' @return test
+#' @return test of a package
 #' @export
 #'
-#' @examples
 print.BME <- function(x, ...){
   cat('Multi-Environment Model Fitted with: \n',
       x$nIter, ' Iterations, burning the first ', x$burnIn, ' and thining every ', x$thin, '\n',
@@ -204,6 +208,7 @@ print.BME <- function(x, ...){
 #' @param ...  more objects
 #'
 #' @return test
+#' @importFrom utils head
 #' @export
 #'
 print.BMTMECV <- function(x, ...){
@@ -228,6 +233,7 @@ print.BMTMECV <- function(x, ...){
 #' @param ...  more objects
 #'
 #' @return test
+#' @importFrom utils head
 #' @export
 #'
 print.BMECV <- function(x, ...){
@@ -253,6 +259,7 @@ print.BMECV <- function(x, ...){
 #' @param ...  more objects
 #'
 #' @return test
+#' @importFrom utils head
 #' @export
 #'
 print.BMTMERSCV <- function(x, ...){
@@ -277,6 +284,7 @@ print.BMTMERSCV <- function(x, ...){
 #' @param ...  more objects
 #'
 #' @return test
+#' @importFrom utils head
 #' @export
 #'
 print.BMTMERSENV <- function(x, ...){
@@ -301,6 +309,7 @@ print.BMTMERSENV <- function(x, ...){
 #' @description Solo es una prueba
 #'
 #' @param object \code{BME object} Objeto BME, resultado de ejecutar BME
+#' @param digits number of digits.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @export
@@ -314,6 +323,7 @@ residuals.BME <- function(object, digits = 4, ...) {
 #' @description Solo es una prueba
 #'
 #' @param object \code{BMTME object} Objeto BMTME, resultado de ejecutar BMTME
+#' @param digits number of digits.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @export
@@ -398,17 +408,17 @@ plot.BMTMERSCV <- function(x, select = 'Pearson', ...){
 #'
 #' @description Plot from BMTMERSENV object
 #'
-#' @param x \code{BMTMERSENV object} BMTMERSENV object, result of use the MTME() function
+#' @param height \code{BMTMERSENV object} BMTMERSENV object, result of use the MTME() function
 #' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MSEP'), plot the MSEP of the BMTMERSENV Object.
 #' @param ... Further arguments passed to or from other methods.
 #'
-#' @importFrom graphics arrows axis plot
+#' @importFrom graphics barplot
 #' @export
-barplot.BMTMERSENV <- function(x, select = 'Pearson', ...){
+barplot.BMTMERSENV <- function(height, select = 'Pearson', ...){
   ### Check that object is compatible
-  if (!inherits(x, "BMTMERSENV")) stop("This function only works for objects of class 'BMTMERSENV'", call. = FALSE)
+  if (!inherits(height, "BMTMERSENV")) stop("This function only works for objects of class 'BMTMERSENV'", call. = FALSE)
 
-  results <- summary(x)
+  results <- summary(height)
   results <- results[order(results[, select]),]
   results$TxE <- paste(results$Trait, results$Environment, sep = '_')
   barplot(results[, select], xlab = "Trait x Environment", names.arg = results$TxE)

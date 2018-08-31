@@ -9,6 +9,9 @@
 #' @param thin no definition available.
 #' @param bs no definition available.
 #' @param progressBar (Logical) Show the progress bar.
+#' @param testingSet cv object
+#' @param parallelCores number of cores to use
+#' @param digits number of digits of accuracy in the results
 #'
 #' @return
 #'
@@ -18,7 +21,6 @@
 #' @importFrom foreach %dopar%
 #' @export
 #'
-#' @examples Not example provided
 #'
 #'
 #' @useDynLib BMTME
