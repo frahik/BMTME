@@ -37,7 +37,7 @@ test_that('Fit and predict Mada data', {
 
 context('Fit and predict BMTME model with Iranian data')
 
-test_that('Fit and predict Mada data', {
+test_that('Fit and predict Iranian data', {
   data("WheatIranianToy")
 
   LG <- cholesky(genoIranianToy)
@@ -63,12 +63,12 @@ test_that('Fit and predict Mada data', {
   expect_output(str(fm), 'List of 19')
   expect_is(fm$Y, 'matrix')
 
-  expect_output(str(pm), 'List of 5')
+  expect_output(str(pm), 'List of 6')
   expect_is(pm, 'BMTMECV')
   expect_is(pm$results, 'data.frame')
   expect_is(pm$executionTime, 'numeric')
 
-  expect_output(str(pm_parallel), 'List of 5')
+  expect_output(str(pm_parallel), 'List of 6')
   expect_is(pm_parallel, 'BMTMECV')
   expect_is(pm_parallel$results, 'data.frame')
   expect_is(pm_parallel$executionTime, 'numeric')
