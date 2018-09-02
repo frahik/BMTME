@@ -70,4 +70,3 @@ arma::mat  MatMul(arma::mat &X, arma::mat &Y ) {
 arma::mat Krone(const arma::mat & A, const arma::mat & B) {
   return(arma::kron(A, B));
 };
-

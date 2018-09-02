@@ -1,13 +1,8 @@
+CXX_STD = CXX11
+
 PKG_CXXFLAGS = $(SHLIB_OPENMP_CXXFLAGS)
-PKG_LIBS = $(SHLIB_OPENMP_CFLAGS) $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -lgmpxx -lgmp
-PKG_CFLAGS = -I.
+PKG_LIBS = $(SHLIB_OPENMP_CFLAGS) $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+
 CC=ccache clang -Qunused-arguments
 CXX=ccache clang++ -Qunused-arguments
-CXX_STD = CXX11
 CCACHE_CPP2=yes
-
-SOURCES = Sample_IW.c
-OBJECTS = Sample_IW.o
-
-clean:
-	@rm -f $(OBJECTS)
