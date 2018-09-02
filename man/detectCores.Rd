@@ -4,7 +4,7 @@
 \alias{detectCores}
 \title{Detect number of cores}
 \usage{
-detectCores()
+detectCores(all.tests = FALSE, logical = TRUE)
 }
 \description{
 Detect number of cores
