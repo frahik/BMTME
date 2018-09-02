@@ -366,7 +366,8 @@ plot.BMTME <- function(x, ...){
   response <- c(x$Y)
   predictions <- c(x$yHat)
   limits <- range(c(response, predictions), na.rm = TRUE)
-  plot(response, predictions, main = "BMTME fitted model", xlim = limits, ylim = limits, xlab = 'Response', ylab = 'Prediction', ...);
+  plot(response, predictions, main = "BMTME fitted model", xlim = limits,
+       ylim = limits, xlab = 'Response', ylab = 'Prediction', ...)
   abline(a = 0, b = 1, lty = 3)
 }
 
@@ -453,13 +454,17 @@ boxplot.BMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
   if (length(unique(results$Env)) > 1 && length(unique(results$Trait)) > 1) {
     results$TxE <- paste0(results$Trait, '_', results$Env)
 
-    if (ordered) {
+    if (ordered && select != 'MSEP') {
       results$TxE  <- with(results, reorder(TxE , Pearson, median, na.rm = T))
+    } else if (ordered && select == 'MSEP') {
+      results$TxE  <- with(results, reorder(TxE , MSEP, median, na.rm = T))
     }
     boxplot(plot.y ~ results$TxE, col = "grey", ylab = ylab, ...)
   } else if (length(unique(results$Trait)) > 1)  {
-    if (ordered) {
-      results$Trait  <- with(results, reorder(Trait , Pearson, median, na.rm = T))
+    if (ordered && select != 'MSEP') {
+      results$Trait  <- with(results, reorder(Trait, Pearson, median, na.rm = T))
+    } else if (ordered && select == 'MSEP') {
+      results$Trait  <- with(results, reorder(Trait, MSEP, median, na.rm = T))
     }
     boxplot(plot.y ~ results$Trait, col = "grey", xlab = 'Traits', ylab = ylab, ...)
   }
@@ -496,8 +501,10 @@ boxplot.BMTMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
   if (length(unique(results$Env)) > 1) {
     results$TxE <- paste0(results$Trait, '_', results$Env)
 
-    if (ordered) {
+    if (ordered && select != 'MSEP') {
       results$TxE  <- with(results, reorder(TxE , Pearson, median, na.rm = T))
+    } else if (ordered && select == 'MSEP') {
+      results$TxE  <- with(results, reorder(TxE , MSEP, median, na.rm = T))
     }
     boxplot(plot.y ~ results$TxE, col = "grey", ylab = ylab, ...)
   }else{
