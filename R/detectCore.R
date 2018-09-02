@@ -5,7 +5,7 @@
 #' @keywords internal
 #' @export
 #' @importFrom parallel detectCores
-#' @usage detectCores()
+#' @usage detectCores(all.tests = FALSE, logical = TRUE)
 NULL
 
 validate.parallelCores <-  function(parallelCores){

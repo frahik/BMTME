@@ -1,5 +1,3 @@
-# if(getRversion() >= "2.15.1")  utils::globalVariables(c('.','Environment','Trait','Partition','Predicted','Observed','Pearson','MSEP','SE_Pearson', 'SE_MSEP'))
-
 #' @title Summary.BMTMECV
 #'
 #' @description Solo es una prueba
