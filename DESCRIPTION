@@ -23,9 +23,11 @@ NeedsCompilation: yes
 Collate:
   BME.R
   BMTME.R
+  BMTME_Package.R
   BMTMERS.R
   BMTMERSEnv.R
   cholesky.R
+  datasets.R
   detectCore.R
   RandomPartition.R
   RcppExports.R
