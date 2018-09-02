@@ -19,9 +19,8 @@
 #' @importFrom utils txtProgressBar setTxtProgressBar
 #' @importFrom tidyr gather
 #' @importFrom foreach %dopar%
-#' @export
-#'
 #' @useDynLib BMTME
+#' @export
 BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), parallelCores = 1, digits = 4, progressBar = TRUE, testingSet = NULL) {
   time.init <- proc.time()[3]
   parallelCores <- validate.parallelCores(parallelCores)

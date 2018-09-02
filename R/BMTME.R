@@ -1,4 +1,4 @@
-#' BMTME
+#' Bayes Multi-Trait Milti-Environment Model
 #'
 #' @param Y no definition available.
 #' @param X no definition available.
@@ -13,17 +13,13 @@
 #' @param parallelCores number of cores to use
 #' @param digits number of digits of accuracy in the results
 #'
-#' @return
-#'
 #' @importFrom stats lm rnorm var vcov
 #' @importFrom utils txtProgressBar setTxtProgressBar
 #' @importFrom tidyr gather
 #' @importFrom foreach %dopar%
-#' @export
-#'
-#'
 #'
 #' @useDynLib BMTME
+#' @export
 BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim(Z1)[2]/6), parallelCores = 1, digits = 4, progressBar = TRUE, testingSet = NULL) {
   time.init <- proc.time()[3]
   parallelCores <- validate.parallelCores(parallelCores)
