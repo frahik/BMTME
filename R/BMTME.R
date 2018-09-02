@@ -78,7 +78,7 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
                  Trait = observed$Trait,
                  Partition = actual_CV,
                  Observed = round(observed$Observed, digits),
-                 Predicted = round(predicted$Predicted))
+                 Predicted = round(predicted$Predicted, digits))
 
     }
     cat('\n')
