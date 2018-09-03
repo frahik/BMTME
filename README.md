@@ -6,7 +6,7 @@
 
 <h3 align="center">
 
-Bayesian Multi-Trait Multi-Environment | Development version 0.0.12
+Bayesian Multi-Trait Multi-Environment | Development version 0.0.16
 
 </h4>
 
@@ -26,7 +26,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.12
 
 <h4 align="center">
 
-\[Last README update: 2018-08-24\]
+\[Last README update: 2018-09-02\]
 
 </h4>
 
@@ -46,7 +46,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.12
 
 <h2 id="news">
 
-News of this version (0.0.12)
+News of this version (0.0.16)
 
 </h2>
 
