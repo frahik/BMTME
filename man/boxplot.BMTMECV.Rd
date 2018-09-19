@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{\code{BMTMECV object} Objeto BMTMECV, resultado de ejecutar BMTME()}
 
-\item{select}{\code{string} Pearson or MSEP}
+\item{select}{\code{string} Pearson or MAAPE}
 
 \item{ordered}{\code{logic} TRUE or FALSE}
 

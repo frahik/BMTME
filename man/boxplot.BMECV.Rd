@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{\code{BMECV object} Objeto BMECV, resultado de ejecutar BME()}
 
-\item{select}{\code{string} Pearson or MSEP}
+\item{select}{\code{string} Pearson or MAAPE}
 
 \item{ordered}{\code{logic} TRUE or FALSE}
 

@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{\code{BMTMERSCV object} BMTMERSCV object, result of use the MTME() function}
 
-\item{select}{\code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MSEP'), plot the MSEP of the BMTMERSCV Object.}
+\item{select}{\code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MAAPE'), plot the MAAPE of the BMTMERSCV Object.}
 
 \item{...}{Further arguments passed to or from other methods.}
 }
