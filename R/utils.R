@@ -17,15 +17,15 @@ summary.BMTMECV <- function(object, information = 'compact', digits = 4, ...) {
   object$results %>%
     group_by(Environment, Trait, Partition) %>%
     summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
-              MSEP = mean((Predicted - Observed)^2, na.rm = T)) %>%
-    select(Environment, Trait, Partition, Pearson, MSEP) %>%
+              MAAPE = mean(atan(abs(Observed-Predicted)/abs(Observed)))) %>%
+    select(Environment, Trait, Partition, Pearson, MAAPE) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> presum
 
   presum %>%  group_by(Environment, Trait) %>%
-    summarise(SE_MSEP = sd(MSEP, na.rm = T)/sqrt(n()), MSEP = mean(MSEP, na.rm = T),
+    summarise(SE_MAAPE = sd(MAAPE, na.rm = T)/sqrt(n()), MAAPE = mean(MAAPE, na.rm = T),
               SE_Pearson = sd(Pearson, na.rm = T)/sqrt(n()), Pearson = mean(Pearson, na.rm = T))  %>%
-    select(Environment, Trait, Pearson, SE_Pearson, MSEP, SE_MSEP) %>%
+    select(Environment, Trait, Pearson, SE_Pearson, MAAPE, SE_MAAPE) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> finalSum
 
@@ -36,7 +36,7 @@ summary.BMTMECV <- function(object, information = 'compact', digits = 4, ...) {
                   finalSum$Partition <- 'All'
                   presum$Partition <- as.character(presum$Partition)
                   presum$SE_Pearson <- NA
-                  presum$SE_MSEP <- NA
+                  presum$SE_MAAPE <- NA
                   rbind(presum, finalSum)
                 }
   )
@@ -62,15 +62,15 @@ summary.BMECV <- function(object, information = 'compact', digits = 4, ...) {
   object$results %>%
     group_by(Environment, Trait, Partition) %>%
     summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
-              MSEP = mean((Predicted - Observed)^2, na.rm = T)) %>%
-    select(Environment, Trait, Partition, Pearson, MSEP) %>%
+              MAAPE = mean(atan(abs(Observed-Predicted)/abs(Observed)))) %>%
+    select(Environment, Trait, Partition, Pearson, MAAPE) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> presum
 
   presum %>%  group_by(Environment, Trait) %>%
-    summarise(SE_MSEP = sd(MSEP, na.rm = T)/sqrt(n()), MSEP = mean(MSEP, na.rm = T),
+    summarise(SE_MAAPE = sd(MAAPE, na.rm = T)/sqrt(n()), MAAPE = mean(MAAPE, na.rm = T),
               SE_Pearson = sd(Pearson, na.rm = T)/sqrt(n()), Pearson = mean(Pearson, na.rm = T))  %>%
-    select(Environment, Trait, Pearson, SE_Pearson, MSEP, SE_MSEP) %>%
+    select(Environment, Trait, Pearson, SE_Pearson, MAAPE, SE_MAAPE) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> finalSum
 
@@ -81,7 +81,7 @@ summary.BMECV <- function(object, information = 'compact', digits = 4, ...) {
                   finalSum$Partition <- 'All'
                   presum$Partition <- as.character(presum$Partition)
                   presum$SE_Pearson <- NA
-                  presum$SE_MSEP <- NA
+                  presum$SE_MAAPE <- NA
                   rbind(presum, finalSum)
                 }
   )
@@ -107,15 +107,15 @@ summary.BMTMERSCV <- function(object, information = 'compact', digits = 4, ...){
   object$results %>%
     group_by(Environment, Trait, Partition) %>%
     summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
-              MSEP = mean((Predicted - Observed)^2, na.rm = T)) %>%
-    select(Environment, Trait, Partition, Pearson, MSEP) %>%
+              MAAPE = mean(atan(abs(Observed-Predicted)/abs(Observed)))) %>%
+    select(Environment, Trait, Partition, Pearson, MAAPE) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> presum
 
   presum %>%  group_by(Environment, Trait) %>%
-    summarise(SE_MSEP = sd(MSEP, na.rm = T)/sqrt(n()), MSEP = mean(MSEP, na.rm = T),
+    summarise(SE_MAAPE = sd(MAAPE, na.rm = T)/sqrt(n()), MAAPE = mean(MAAPE, na.rm = T),
               SE_Pearson = sd(Pearson, na.rm = T)/sqrt(n()), Pearson = mean(Pearson, na.rm = T))  %>%
-    select(Environment, Trait, Pearson, SE_Pearson, MSEP, SE_MSEP) %>%
+    select(Environment, Trait, Pearson, SE_Pearson, MAAPE, SE_MAAPE) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> finalSum
 
@@ -126,7 +126,7 @@ summary.BMTMERSCV <- function(object, information = 'compact', digits = 4, ...){
                   finalSum$Partition <- 'All'
                   presum$Partition <- as.character(presum$Partition)
                   presum$SE_Pearson <- NA
-                  presum$SE_MSEP <- NA
+                  presum$SE_MAAPE <- NA
                   rbind(presum, finalSum)
                 }
   )
@@ -152,8 +152,8 @@ summary.BMTMERSENV <- function(object, digits = 4, ...){
   object$results %>%
     group_by(Environment, Trait) %>%
     summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
-              MSEP = mean((Predicted - Observed)^2, na.rm = T)) %>%
-    select(Environment, Trait, Pearson, MSEP) %>%
+              MAAPE = mean(atan(abs(Observed-Predicted)/abs(Observed)))) %>%
+    select(Environment, Trait, Pearson, MAAPE) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> out
 
@@ -374,7 +374,7 @@ plot.BMTME <- function(x, ...){
 #' @description Plot from BMTMERSCV object
 #'
 #' @param x \code{BMTMERSCV object} BMTMERSCV object, result of use the MTME() function
-#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MSEP'), plot the MSEP of the BMTMERSCV Object.
+#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MAAPE'), plot the MAAPE of the BMTMERSCV Object.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom graphics arrows axis plot
@@ -389,9 +389,9 @@ plot.BMTMERSCV <- function(x, select = 'Pearson', ...){
   if (select == "Pearson") {
     results$SE <- 1.96 * results$SE_Pearson
     ylab <- "Pearson's Correlation"
-  } else if (select == "MSEP") {
+  } else if (select == "MAAPE") {
 
-    results$SE <- 1.96 * results$SE_MSEP[which(results$Fold == 'Average_all')]
+    results$SE <- 1.96 * results$SE_MAAPE[which(results$Fold == 'Average_all')]
     ylab <- select
   }
   x.labels <- paste0(results$Trait, '_', results$Env)
@@ -408,7 +408,7 @@ plot.BMTMERSCV <- function(x, select = 'Pearson', ...){
 #' @description Plot from BMTMERSENV object
 #'
 #' @param height \code{BMTMERSENV object} BMTMERSENV object, result of use the MTME() function
-#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MSEP'), plot the MSEP of the BMTMERSENV Object.
+#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MAAPE'), plot the MAAPE of the BMTMERSENV Object.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom graphics barplot
@@ -429,7 +429,7 @@ barplot.BMTMERSENV <- function(height, select = 'Pearson', ...){
 #' @description Solo es una prueba
 #'
 #' @param x \code{BMECV object} Objeto BMECV, resultado de ejecutar BME()
-#' @param select \code{string} Pearson or MSEP
+#' @param select \code{string} Pearson or MAAPE
 #' @param ordered \code{logic} TRUE or FALSE
 #' @param ... Further arguments passed to or from other methods.
 #'
@@ -444,25 +444,25 @@ boxplot.BMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
   if (select == "Pearson") {
     plot.y <- results$Pearson
     ylab <- "Pearson's Correlation"
-  } else if (select == "MSEP") {
-    plot.y <- results$MSEP
-    ylab <- "MSEP Average"
+  } else if (select == "MAAPE") {
+    plot.y <- results$MAAPE
+    ylab <- "MAAPE Average"
   }
 
   if (length(unique(results$Env)) > 1 && length(unique(results$Trait)) > 1) {
     results$TxE <- paste0(results$Trait, '_', results$Env)
 
-    if (ordered && select != 'MSEP') {
+    if (ordered && select != 'MAAPE') {
       results$TxE  <- with(results, reorder(TxE , Pearson, median, na.rm = T))
-    } else if (ordered && select == 'MSEP') {
-      results$TxE  <- with(results, reorder(TxE , MSEP, median, na.rm = T))
+    } else if (ordered && select == 'MAAPE') {
+      results$TxE  <- with(results, reorder(TxE , MAAPE, median, na.rm = T))
     }
     boxplot(plot.y ~ results$TxE, col = "grey", ylab = ylab, ...)
   } else if (length(unique(results$Trait)) > 1)  {
-    if (ordered && select != 'MSEP') {
+    if (ordered && select != 'MAAPE') {
       results$Trait  <- with(results, reorder(Trait, Pearson, median, na.rm = T))
-    } else if (ordered && select == 'MSEP') {
-      results$Trait  <- with(results, reorder(Trait, MSEP, median, na.rm = T))
+    } else if (ordered && select == 'MAAPE') {
+      results$Trait  <- with(results, reorder(Trait, MAAPE, median, na.rm = T))
     }
     boxplot(plot.y ~ results$Trait, col = "grey", xlab = 'Traits', ylab = ylab, ...)
   }
@@ -476,7 +476,7 @@ boxplot.BMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
 #' @description Solo es una prueba
 #'
 #' @param x \code{BMTMECV object} Objeto BMTMECV, resultado de ejecutar BMTME()
-#' @param select \code{string} Pearson or MSEP
+#' @param select \code{string} Pearson or MAAPE
 #' @param ordered \code{logic} TRUE or FALSE
 #' @param ... Further arguments passed to or from other methods.
 #'
@@ -491,18 +491,18 @@ boxplot.BMTMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
   if (select == "Pearson") {
     plot.y <- results$Pearson
     ylab <- "Pearson's Correlation"
-  } else if (select == "MSEP") {
-    plot.y <- results$MSEP
-    ylab <- "MSEP Average"
+  } else if (select == "MAAPE") {
+    plot.y <- results$MAAPE
+    ylab <- "MAAPE Average"
   }
 
   if (length(unique(results$Env)) > 1) {
     results$TxE <- paste0(results$Trait, '_', results$Env)
 
-    if (ordered && select != 'MSEP') {
+    if (ordered && select != 'MAAPE') {
       results$TxE  <- with(results, reorder(TxE , Pearson, median, na.rm = T))
-    } else if (ordered && select == 'MSEP') {
-      results$TxE  <- with(results, reorder(TxE , MSEP, median, na.rm = T))
+    } else if (ordered && select == 'MAAPE') {
+      results$TxE  <- with(results, reorder(TxE , MAAPE, median, na.rm = T))
     }
     boxplot(plot.y ~ results$TxE, col = "grey", ylab = ylab, ...)
   }else{
@@ -515,7 +515,7 @@ boxplot.BMTMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
 #' @description Solo es una prueba
 #'
 #' @param x \code{BMTMERSCV object} Objeto BMTMERSCV, resultado de ejecutar MTME()
-#' @param select \code{string} Pearson or MSEP
+#' @param select \code{string} Pearson or MAAPE
 #' @param ordered \code{logic} TRUE or FALSE
 #' @param ... Further arguments passed to or from other methods.
 #'
@@ -531,9 +531,9 @@ boxplot.BMTMERSCV <- function(x, select = 'Pearson', ordered = TRUE, ...){
           Pearson = {
             plot.y <- results$Pearson
             ylab <- "Pearson's Correlation"
-          }, MSEP = {
-            plot.y <- results$MSEP
-            ylab <- "MSEP Average"
+          }, MAAPE = {
+            plot.y <- results$MAAPE
+            ylab <- "MAAPE Average"
           }, CC = {
             plot.y <- results$CC
             ylab <- "Classification correct average"
@@ -544,10 +544,10 @@ boxplot.BMTMERSCV <- function(x, select = 'Pearson', ordered = TRUE, ...){
   if (length(unique(results$Env)) > 1) {
     results$TxE <- paste0(results$Trait, '_', results$Env)
 
-    if (ordered && select != 'MSEP') {
+    if (ordered && select != 'MAAPE') {
       results$TxE  <- with(results, reorder(TxE , Pearson, median, na.rm = T))
-    } else if (ordered && select == 'MSEP') {
-      results$TxE  <- with(results, reorder(TxE , MSEP, median, na.rm = T))
+    } else if (ordered && select == 'MAAPE') {
+      results$TxE  <- with(results, reorder(TxE , MAAPE, median, na.rm = T))
     }
 
     boxplot(plot.y ~ results$TxE, col = "grey", ylab = ylab, ...)

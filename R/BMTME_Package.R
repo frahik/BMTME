@@ -16,9 +16,9 @@ if (getRversion() >= "2.15.1")
       'Predicted',
       'Observed',
       'Pearson',
-      'MSEP',
+      'MAAPE',
       'SE_Pearson',
-      'SE_MSEP'
+      'SE_MAAPE'
     )
 
   )

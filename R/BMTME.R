@@ -447,6 +447,3 @@ coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar,
   return(out)
 }
 
-
-
-
