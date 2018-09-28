@@ -4,8 +4,9 @@
 \alias{BMTMERS}
 \title{Bayesian Multi Trait Multi Environment Regressor Stacking}
 \usage{
-BMTMERS(Y = NULL, ETA = NULL, covModel = "BRR", nIter = 2500,
-  burnIn = 500, thin = 5, progressBar = TRUE, testingSet = NULL,
+BMTMERS(Y = NULL, ETA = NULL, covModel = "BRR",
+  predictor_Sec_complete = FALSE, nIter = 2500, burnIn = 500,
+  thin = 5, progressBar = TRUE, testingSet = NULL,
   parallelCores = 1, digits = 4)
 }
 \arguments{
@@ -14,6 +15,8 @@ BMTMERS(Y = NULL, ETA = NULL, covModel = "BRR", nIter = 2500,
 \item{ETA}{eta}
 
 \item{covModel}{covariates model}
+
+\item{predictor_Sec_complete}{FALSE by default}
 
 \item{nIter}{number of iterations}
 

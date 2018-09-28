@@ -3,6 +3,7 @@
 #' @param Y phenotipes matrix, with every trait in a independent column.
 #' @param ETA eta
 #' @param covModel covariates model
+#' @param predictor_Sec_complete FALSE by default
 #' @param nIter number of iterations
 #' @param burnIn number of burning
 #' @param thin number of thinning
@@ -20,7 +21,7 @@
 #' data('wheat')
 #' CV.RandomPart(phenoWheat, NPartitions = 10, PTesting = 0.2, set_seed = 123)
 #' }
-BMTMERS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE, testingSet = NULL, parallelCores = 1, digits = 4) {
+BMTMERS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete = FALSE, nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE, testingSet = NULL, parallelCores = 1, digits = 4) {
   validate.Y(Y)
   parallelCores <- validate.parallelCores(parallelCores)
   time.init <- proc.time()[3]
@@ -49,7 +50,11 @@ BMTMERS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', nIter = 2500, burnIn
 
       XPV <- scale(YwithCov[, (1L + nTraits):(2L*nTraits)])
       ETA1 <- ETA
-      ETA1$Cov_PreVal <- list(X = XPV, model = covModel)
+      if (predictor_Sec_complete) {
+        ETA1$Cov_PreVal <- list(X = XPV, model = covModel)
+      } else {
+        ETA1 <- list(Cov_PreVal = list(X = XPV, model = covModel))
+      }
 
       for (t in seq_len(nTraits)) {
         if (progressBar) {
