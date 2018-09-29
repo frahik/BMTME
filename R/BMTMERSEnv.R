@@ -5,6 +5,7 @@
 #' @param testingEnv environment to test.
 #' @param nIter number of iterations
 #' @param covModel covariate model
+#' @param predictor_Sec_complete FALSE by default
 #' @param burnIn number of burning
 #' @param thin number of thinning
 #' @param progressBar show the progress bar?
@@ -14,7 +15,7 @@
 #' @export
 #'
 #' @importFrom BGLR BGLR
-BMTMERS_Env <- function(data = NULL, testingEnv = '', ETA = NULL, covModel = 'BRR', nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE, digits = 4) {
+BMTMERS_Env <- function(data = NULL, testingEnv = '', ETA = NULL, covModel = 'BRR', predictor_Sec_complete = FALSE, nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE, digits = 4) {
   time.init <- proc.time()[3]
   Y <- data[, -1]
   YwithCov <-  Y # to include covariable data
@@ -38,7 +39,11 @@ BMTMERS_Env <- function(data = NULL, testingEnv = '', ETA = NULL, covModel = 'BR
 
     XPV <- scale(YwithCov[, (1L + nTraits):(2L*nTraits)])
     ETA1 <- ETA
-    ETA1$Cov_PreVal <- list(X = XPV, model = covModel)
+    if (predictor_Sec_complete) {
+      ETA1$Cov_PreVal <- list(X = XPV, model = covModel)
+    } else {
+      ETA1 <- list(Cov_PreVal = list(X = XPV, model = covModel))
+    }
 
     for (t in seq_len(nTraits)) {
       y2 <- Y[, t]

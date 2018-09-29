@@ -5,8 +5,8 @@
 \title{Bayesian Multi Trait Multi Environment Regressor Stacking for specific environment estimations}
 \usage{
 BMTMERS_Env(data = NULL, testingEnv = "", ETA = NULL,
-  covModel = "BRR", nIter = 2500, burnIn = 500, thin = 5,
-  progressBar = TRUE, digits = 4)
+  covModel = "BRR", predictor_Sec_complete = FALSE, nIter = 2500,
+  burnIn = 500, thin = 5, progressBar = TRUE, digits = 4)
 }
 \arguments{
 \item{data}{phenotipes matrix, with every trait in a independent column.}
@@ -16,6 +16,8 @@ BMTMERS_Env(data = NULL, testingEnv = "", ETA = NULL,
 \item{ETA}{eta}
 
 \item{covModel}{covariate model}
+
+\item{predictor_Sec_complete}{FALSE by default}
 
 \item{nIter}{number of iterations}
 
