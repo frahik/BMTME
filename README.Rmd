@@ -43,10 +43,39 @@ output: github_document
 <h2 id="news">
   News of this version (`r packageVersion('BMTME')`)
 </h2>
+Revision 19
+ 
+ * Update plot and boxplot functions
+ 
+Revision 18
+ 
+ * New `predictor_Sec_complete` parameter in `BMTMERS_Env()` function.
+ 
+Revision 17
 
-Revision 12
+ * New `predictor_Sec_complete` parameter in `BMTMERS()` function.
 
- - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public; this is a pre-release, be careful.
+Revision 16
+
+ * The MSEP was changed to MAAPE for the error estimations of the predictions.
+ * Minor fixes in the documentation.
+ * Now the boxplots can be ordered by the MAAPE.
+ * fixed the predicted output.
+ 
+Revision 15
+ 
+ * Implement parallel mode in the BMTMERS function
+ * Implement validation to `parallelCores` parameter in the functions that could use it. 
+ * export `n_cores` used to fit the models that could use `parallelCores` parameter.
+ * fixed class of `BME` function.
+ 
+Revision 14
+
+ * Update unix support
+ 
+Revision 13
+ 
+ * Initial development is in progress, but there has not yet been a stable, usable release suitable for the public; this is a pre-release, be careful.
 
 <h2 id="instructions">
   Instructions for proper implementation
