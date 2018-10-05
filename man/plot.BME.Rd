@@ -4,10 +4,12 @@
 \alias{plot.BME}
 \title{plot.BME}
 \usage{
-\method{plot}{BME}(x, ...)
+\method{plot}{BME}(x, trait = "", ...)
 }
 \arguments{
-\item{x}{\code{BME object} Objeto BME, resultado de ejecutar BME}
+\item{x}{\code{BME object}.}
+
+\item{trait}{\code{string} name of the trait to plot.}
 
 \item{...}{Further arguments passed to or from other methods.}
 }
