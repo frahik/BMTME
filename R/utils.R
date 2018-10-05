@@ -334,18 +334,19 @@ residuals.BMTME <- function(object, digits = 4, ...) {
 #'
 #' @description Solo es una prueba
 #'
-#' @param x \code{BME object} Objeto BME, resultado de ejecutar BME
+#' @param x \code{BME object}.
+#' @param trait \code{string} name of the trait to plot.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom graphics plot abline
 #' @export
-plot.BME <- function(x, ...){
+plot.BME <- function(x, trait = '', ...){
   ### Check that object is compatible
   if (!inherits(x, "BME")) stop("This function only works for objects of class 'BME'")
-  response <- c(x$Y)
-  predictions <- c(x$yHat)
+  response <- x$Y[,trait]
+  predictions <- x$yHat[,trait]
   limits <- range(c(response, predictions), na.rm = TRUE)
-  plot(response, predictions, main = "BME fitted model", xlim = limits, ylim = limits, xlab = 'Response', ylab = 'Prediction', ...);
+  plot(response, predictions, main = paste("BME fitted model in the trait", trait), xlim = limits, ylim = limits, xlab = 'Observed values', ylab = 'Predicted values', ...);
   abline(a = 0, b = 1, lty = 3)
 }
 
@@ -353,19 +354,20 @@ plot.BME <- function(x, ...){
 #'
 #' @description Solo es una prueba
 #'
-#' @param x \code{BMTME object} Objeto BMTME, resultado de ejecutar BMTME
+#' @param x \code{BMTME object}.
+#' @param trait \code{string} name of the trait to plot.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom graphics plot abline
 #' @export
-plot.BMTME <- function(x, ...){
+plot.BMTME <- function(x, trait = '', ...){
   ### Check that object is compatible
   if (!inherits(x, "BMTME")) stop("This function only works for objects of class 'BMTME'")
-  response <- c(x$Y)
-  predictions <- c(x$yHat)
+  response <- x$Y[,trait]
+  predictions <- x$yHat[,trait]
   limits <- range(c(response, predictions), na.rm = TRUE)
-  plot(response, predictions, main = "BMTME fitted model", xlim = limits,
-       ylim = limits, xlab = 'Response', ylab = 'Prediction', ...)
+  plot(response, predictions, main = paste("BMTME fitted model in the trait", trait), xlim = limits,
+       ylim = limits, xlab = 'Observed values', ylab = 'Predicted values', ...)
   abline(a = 0, b = 1, lty = 3)
 }
 
@@ -446,7 +448,7 @@ boxplot.BMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
     ylab <- "Pearson's Correlation"
   } else if (select == "MAAPE") {
     plot.y <- results$MAAPE
-    ylab <- "MAAPE Average"
+    ylab <- "MAAPE"
   }
 
   if (length(unique(results$Env)) > 1 && length(unique(results$Trait)) > 1) {
@@ -493,7 +495,7 @@ boxplot.BMTMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
     ylab <- "Pearson's Correlation"
   } else if (select == "MAAPE") {
     plot.y <- results$MAAPE
-    ylab <- "MAAPE Average"
+    ylab <- "MAAPE"
   }
 
   if (length(unique(results$Env)) > 1) {
@@ -533,7 +535,7 @@ boxplot.BMTMERSCV <- function(x, select = 'Pearson', ordered = TRUE, ...){
             ylab <- "Pearson's Correlation"
           }, MAAPE = {
             plot.y <- results$MAAPE
-            ylab <- "MAAPE Average"
+            ylab <- "MAAPE"
           }, CC = {
             plot.y <- results$CC
             ylab <- "Classification correct average"
