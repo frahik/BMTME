@@ -71,7 +71,7 @@ Revision 15
  
 Revision 14
 
- * Update unix support
+ * Update Unix support
  
 Revision 13
  
@@ -116,11 +116,11 @@ To load one dataset, use the function `data(datasetName)`
 
 First option, by the article paper
 
-(Comming soon)
+(Coming soon)
 
 Second option, by the manual package
 
-(Comming soon)
+(Coming soon)
 
 
 
