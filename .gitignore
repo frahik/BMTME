@@ -26,3 +26,7 @@ vignettes/*.pdf
 *.dat
 inst/doc
 .Rproj.user
+# Source Files
+src/*.o
+src/*.so
+src/*.dll
