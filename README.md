@@ -6,7 +6,7 @@
 
 <h3 align="center">
 
-Bayesian Multi-Trait Multi-Environment | Development version 0.0.19
+Bayesian Multi-Trait Multi-Environment | Development version 0.0.20
 
 </h4>
 
@@ -26,7 +26,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.19
 
 <h4 align="center">
 
-\[Last README update: 2018-10-16\]
+\[Last README update: 2018-10-17\]
 
 </h4>
 
@@ -46,9 +46,15 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.19
 
 <h2 id="news">
 
-News of this version (0.0.19)
+News of this version (0.0.20)
 
 </h2>
+
+Revision 20
+
+  - Update Windows c++ support.
+  - Fixed issues \#1 (Installation in Windows) and \#2 (Typos). Thanks
+    to @volpatoo and @j450h1 by reporting it.
 
 Revision 19
 

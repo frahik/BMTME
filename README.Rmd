@@ -43,6 +43,12 @@ output: github_document
 <h2 id="news">
   News of this version (`r packageVersion('BMTME')`)
 </h2>
+
+Revision 20
+
+ * Update Windows c++ support.
+ * Fixed issues #1 (Installation in Windows) and #2 (Typos). Thanks to @volpatoo and @j450h1 by reporting it.
+
 Revision 19
  
  * Update plot and boxplot functions
