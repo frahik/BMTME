@@ -26,7 +26,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.19
 
 <h4 align="center">
 
-\[Last README update: 2018-10-05\]
+\[Last README update: 2018-10-16\]
 
 </h4>
 
@@ -81,7 +81,7 @@ Revision 15
 
 Revision 14
 
-  - Update unix support
+  - Update Unix support
 
 Revision 13
 
@@ -139,11 +139,11 @@ How to cite this package
 
 First option, by the article paper
 
-(Comming soon)
+(Coming soon)
 
 Second option, by the manual package
 
-(Comming soon)
+(Coming soon)
 
 <h2 id="contributions">
 
