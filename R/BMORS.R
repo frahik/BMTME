@@ -21,7 +21,7 @@
 #' data('wheat')
 #' CV.RandomPart(phenoWheat, NPartitions = 10, PTesting = 0.2, set_seed = 123)
 #' }
-BMTMERS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete = FALSE, nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE, testingSet = NULL, parallelCores = 1, digits = 4) {
+BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete = FALSE, nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE, testingSet = NULL, parallelCores = 1, digits = 4) {
   validate.Y(Y)
   parallelCores <- validate.parallelCores(parallelCores)
   time.init <- proc.time()[3]
@@ -124,7 +124,7 @@ BMTMERS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_comple
   }
 
   out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
-  class(out) <- 'BMTMERSCV'
+  class(out) <- 'BMORSCV'
   return(out)
 }
 

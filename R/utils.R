@@ -88,11 +88,11 @@ summary.BMECV <- function(object, information = 'compact', digits = 4, ...) {
   return(out)
 }
 
-#' @title Summary.BMTMERSCV
+#' @title Summary.BMORSCV
 #'
 #' @description Solo es una prueba
 #'
-#' @param object \code{BMTMERSCV object} Objeto BMTMERSCV, resultado de ejecutar MTME()
+#' @param object \code{BMORSCV object} Objeto BMORSCV, resultado de ejecutar MTME()
 #' @param information compact, extended, complete
 #' @param digits number of digits.
 #' @param ... Further arguments passed to or from other methods.
@@ -101,8 +101,8 @@ summary.BMECV <- function(object, information = 'compact', digits = 4, ...) {
 #' @importFrom dplyr summarise group_by select '%>%' mutate_if funs n
 #'
 #' @export
-summary.BMTMERSCV <- function(object, information = 'compact', digits = 4, ...){
-  if (!inherits(object, "BMTMERSCV")) stop("This function only works for objects of class 'BMTMERSCV'")
+summary.BMORSCV <- function(object, information = 'compact', digits = 4, ...){
+  if (!inherits(object, "BMORSCV")) stop("This function only works for objects of class 'BMORSCV'")
 
   object$results %>%
     group_by(Environment, Trait, Partition) %>%
@@ -134,11 +134,11 @@ summary.BMTMERSCV <- function(object, information = 'compact', digits = 4, ...){
 }
 
 
-#' @title Summary.BMTMERSENV
+#' @title Summary.BMORSENV
 #'
 #' @description Solo es una prueba
 #'
-#' @param object \code{BMTMERSENV object} Objeto BMTMERSENV, resultado de ejecutar MTME()
+#' @param object \code{BMORSENV object} Objeto BMORSENV, resultado de ejecutar MTME()
 #' @param digits number of digits.
 #' @param ... Further arguments passed to or from other methods.
 #'
@@ -146,8 +146,8 @@ summary.BMTMERSCV <- function(object, information = 'compact', digits = 4, ...){
 #' @importFrom dplyr summarise group_by select '%>%' mutate_if funs
 #'
 #' @export
-summary.BMTMERSENV <- function(object, digits = 4, ...){
-  if (!inherits(object, "BMTMERSENV")) stop("This function only works for objects of class 'BMTMERSENV'")
+summary.BMORSENV <- function(object, digits = 4, ...){
+  if (!inherits(object, "BMORSENV")) stop("This function only works for objects of class 'BMORSENV'")
 
   object$results %>%
     group_by(Environment, Trait) %>%
@@ -251,7 +251,7 @@ print.BMECV <- function(x, ...){
 }
 
 
-#' Print BMTMERSCV information object
+#' Print BMORSCV information object
 #'
 #' @param x object a
 #' @param ...  more objects
@@ -260,7 +260,7 @@ print.BMECV <- function(x, ...){
 #' @importFrom utils head
 #' @export
 #'
-print.BMTMERSCV <- function(x, ...){
+print.BMORSCV <- function(x, ...){
   cat('Fitted Bayesian Multi Trait Multi Environment Regressor Stacking model with: \n',
       x$nIter, ' Iterations, burning the first ', x$burnIn, ' and thining every ', x$thin, '\n',
       'Runtime: ', x$executionTime ,' seconds \n\n',
@@ -276,7 +276,7 @@ print.BMTMERSCV <- function(x, ...){
   invisible(x)
 }
 
-#' Print BMTMERSENV information object
+#' Print BMORSENV information object
 #'
 #' @param x object a
 #' @param ...  more objects
@@ -285,7 +285,7 @@ print.BMTMERSCV <- function(x, ...){
 #' @importFrom utils head
 #' @export
 #'
-print.BMTMERSENV <- function(x, ...){
+print.BMORSENV <- function(x, ...){
   cat('Fitted Bayesian Multi Trait Multi Environment Regressor Stacking model for n environments with: \n',
       x$nIter, ' Iterations, burning the first ', x$burnIn, ' and thining every ', x$thin, '\n',
       'Runtime: ', x$executionTime ,' seconds \n\n',
@@ -371,19 +371,19 @@ plot.BMTME <- function(x, trait = '', ...){
   abline(a = 0, b = 1, lty = 3)
 }
 
-#' @title Plot BMTMERSCV graph
+#' @title Plot BMORSCV graph
 #'
-#' @description Plot from BMTMERSCV object
+#' @description Plot from BMORSCV object
 #'
-#' @param x \code{BMTMERSCV object} BMTMERSCV object, result of use the MTME() function
-#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MAAPE'), plot the MAAPE of the BMTMERSCV Object.
+#' @param x \code{BMORSCV object} BMORSCV object, result of use the MTME() function
+#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MAAPE'), plot the MAAPE of the BMORSCV Object.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom graphics arrows axis plot
 #' @export
-plot.BMTMERSCV <- function(x, select = 'Pearson', ...){
+plot.BMORSCV <- function(x, select = 'Pearson', ...){
   ### Check that object is compatible
-  if (!inherits(x, "BMTMERSCV")) stop("This function only works for objects of class 'BMTMERSCV'", call. = FALSE)
+  if (!inherits(x, "BMORSCV")) stop("This function only works for objects of class 'BMORSCV'", call. = FALSE)
 
   results <- summary(x)
   results <- results[order(results[, select]),]
@@ -405,19 +405,19 @@ plot.BMTMERSCV <- function(x, select = 'Pearson', ...){
 }
 
 
-#' @title barplot BMTMERSENV graph
+#' @title barplot BMORSENV graph
 #'
-#' @description Plot from BMTMERSENV object
+#' @description Plot from BMORSENV object
 #'
-#' @param height \code{BMTMERSENV object} BMTMERSENV object, result of use the MTME() function
-#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MAAPE'), plot the MAAPE of the BMTMERSENV Object.
+#' @param height \code{BMORSENV object} BMORSENV object, result of use the MTME() function
+#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MAAPE'), plot the MAAPE of the BMORSENV Object.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom graphics barplot
 #' @export
-barplot.BMTMERSENV <- function(height, select = 'Pearson', ...){
+barplot.BMORSENV <- function(height, select = 'Pearson', ...){
   ### Check that object is compatible
-  if (!inherits(height, "BMTMERSENV")) stop("This function only works for objects of class 'BMTMERSENV'", call. = FALSE)
+  if (!inherits(height, "BMORSENV")) stop("This function only works for objects of class 'BMORSENV'", call. = FALSE)
 
   results <- summary(height)
   results <- results[order(results[, select]),]
@@ -512,20 +512,20 @@ boxplot.BMTMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
   }
 }
 
-#' @title boxplot.BMTMERSCV
+#' @title boxplot.BMORSCV
 #'
 #' @description Solo es una prueba
 #'
-#' @param x \code{BMTMERSCV object} Objeto BMTMERSCV, resultado de ejecutar MTME()
+#' @param x \code{BMORSCV object} Objeto BMORSCV, resultado de ejecutar MTME()
 #' @param select \code{string} Pearson or MAAPE
 #' @param ordered \code{logic} TRUE or FALSE
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom graphics boxplot
 #' @export
-boxplot.BMTMERSCV <- function(x, select = 'Pearson', ordered = TRUE, ...){
+boxplot.BMORSCV <- function(x, select = 'Pearson', ordered = TRUE, ...){
   ### Check that object is compatible
-  if (!inherits(x, "BMTMERSCV")) stop("This function only works for objects of class 'BMTMERSCV'", call. = FALSE)
+  if (!inherits(x, "BMORSCV")) stop("This function only works for objects of class 'BMORSCV'", call. = FALSE)
 
   results <- summary(x, 'complete')
 

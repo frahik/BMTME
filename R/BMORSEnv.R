@@ -1,4 +1,4 @@
-#' Bayesian Multi Trait Multi Environment Regressor Stacking for specific environment estimations
+#' Bayesian Multi-Output regression stacking for specific environment estimations
 #'
 #' @param data phenotipes matrix, with every trait in a independent column.
 #' @param ETA eta
@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @importFrom BGLR BGLR
-BMTMERS_Env <- function(data = NULL, testingEnv = '', ETA = NULL, covModel = 'BRR', predictor_Sec_complete = FALSE, nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE, digits = 4) {
+BMORS_Env <- function(data = NULL, testingEnv = '', ETA = NULL, covModel = 'BRR', predictor_Sec_complete = FALSE, nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE, digits = 4) {
   time.init <- proc.time()[3]
   Y <- data[, -1]
   YwithCov <-  Y # to include covariable data
@@ -62,6 +62,6 @@ BMTMERS_Env <- function(data = NULL, testingEnv = '', ETA = NULL, covModel = 'BR
     }
   }
   out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
-  class(out) <- 'BMTMERSENV'
+  class(out) <- 'BMORSENV'
   return(out)
 }
