@@ -6,7 +6,7 @@
 
 <h3 align="center">
 
-Bayesian Multi-Trait Multi-Environment | Development version 0.0.20
+Bayesian Multi-Trait Multi-Environment | Development version 0.0.21
 
 </h4>
 
@@ -26,7 +26,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.20
 
 <h4 align="center">
 
-\[Last README update: 2018-10-17\]
+\[Last README update: 2018-10-22\]
 
 </h4>
 
@@ -46,9 +46,13 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.20
 
 <h2 id="news">
 
-News of this version (0.0.20)
+News of this version (0.0.21)
 
 </h2>
+
+Revision 21
+
+  - BMTERS now is BMORS
 
 Revision 20
 

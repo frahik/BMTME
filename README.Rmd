@@ -44,6 +44,10 @@ output: github_document
   News of this version (`r packageVersion('BMTME')`)
 </h2>
 
+Revision 21
+
+ * BMTERS now is BMORS
+
 Revision 20
 
  * Update Windows c++ support.
