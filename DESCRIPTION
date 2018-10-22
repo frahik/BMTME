@@ -1,7 +1,7 @@
 Package: BMTME
 Title: Bayesian Multi-Trait Multi-Environment for genomic selection analysis
-Version: 0.0.20
-Date: 2018-07-03
+Version: 0.0.21
+Date: 2018-10-22
 Authors@R: c(person("Francisco Javier", "Luna-Vazquez", email = "frahik@gmail.com", role = c("aut", "cre")),
              person("Osval Antonio", "Montesinos-Lopez", email= "oamontes1@ucol.mx", role = "aut"),
              person("Abelardo", "Montesinos-Lopez", role = "aut"),
@@ -24,8 +24,8 @@ Collate:
   BME.R
   BMTME.R
   BMTME_Package.R
-  BMTMERS.R
-  BMTMERSEnv.R
+  BMORS.R
+  BMORSEnv.R
   cholesky.R
   datasets.R
   detectCore.R
