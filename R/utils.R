@@ -174,7 +174,7 @@ print.BMTME <- function(x, ...){
       'We found ', x$NAvalues, ' NA values \n\n',
       'Predicted Values: \n')
 
-  print.default(format(x$yHat, digits = 3), print.gap = 2L, quote = FALSE)
+  print.default(format(head(x$yHat, 10), digits = 3), print.gap = 2L, quote = FALSE)
 
   cat('\n Use str() function to found more datailed information.')
   invisible(x)
@@ -194,7 +194,7 @@ print.BME <- function(x, ...){
       'We found ', x$NAvalues, ' NA values \n\n',
       'Predicted Values: \n')
 
-  print.default(format(x$yHat, digits = 3), print.gap = 2L, quote = FALSE)
+  print.default(format(head(x$yHat, 10), digits = 3), print.gap = 2L, quote = FALSE)
 
   cat('\n Use str() function to found more datailed information.')
   invisible(x)
@@ -215,7 +215,7 @@ print.BMTMECV <- function(x, ...){
       'Runtime: ', x$executionTime ,' seconds \n\n',
       'Some predicted values: \n')
 
-  print.default(format(head(x$results$Predicted, 20), digits = 3), print.gap = 2L, quote = FALSE)
+  print.default(format(head(x$results$Predicted, 10), digits = 3), print.gap = 2L, quote = FALSE)
 
   cat('\nPredictive capacity of the model: \n')
 
@@ -240,7 +240,7 @@ print.BMECV <- function(x, ...){
       'Runtime: ', x$executionTime ,' seconds \n\n',
       'Some predicted values: \n')
 
-  print.default(format(head(x$results$Predicted, 20), digits = 3), print.gap = 2L, quote = FALSE)
+  print.default(format(head(x$results$Predicted, 10), digits = 3), print.gap = 2L, quote = FALSE)
 
   cat('\nPredictive capacity of the model: \n')
 
@@ -266,7 +266,7 @@ print.BMORSCV <- function(x, ...){
       'Runtime: ', x$executionTime ,' seconds \n\n',
       'Some predicted values: \n')
 
-  print.default(format(head(x$results$Predicted, 20), digits = 3), print.gap = 2L, quote = FALSE)
+  print.default(format(head(x$results$Predicted, 10), digits = 3), print.gap = 2L, quote = FALSE)
 
   cat('\nPredictive capacity of the model: \n')
 
@@ -291,7 +291,7 @@ print.BMORSENV <- function(x, ...){
       'Runtime: ', x$executionTime ,' seconds \n\n',
       'Some predicted values: \n')
 
-  print.default(format(head(x$results$Predicted, 20), digits = 3), print.gap = 2L, quote = FALSE)
+  print.default(format(head(x$results$Predicted, 10), digits = 3), print.gap = 2L, quote = FALSE)
 
   cat('\nPredictive capacity of the model: \n')
 
@@ -557,4 +557,3 @@ boxplot.BMORSCV <- function(x, select = 'Pearson', ordered = TRUE, ...){
     boxplot(plot.y, col = "grey", ylab = ylab, ...)
   }
 }
-
