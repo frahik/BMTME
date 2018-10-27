@@ -44,9 +44,15 @@ output: github_document
   News of this version (`r packageVersion('BMTME')`)
 </h2>
 
+Revision 22
+
+ * Important updates to the documentation.
+ * Fixed MAC-OS 10.11 El Capitan, installation (issue #1).
+ 
 Revision 21
 
- * BMTERS now is BMORS
+ * `BMTERS()` function now is `BMORS()` function.
+ * `BMTERS_Env()` function now is `BMORS_Env()` function.
 
 Revision 20
 

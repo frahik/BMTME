@@ -6,7 +6,7 @@
 
 <h3 align="center">
 
-Bayesian Multi-Trait Multi-Environment | Development version 0.0.21
+Bayesian Multi-Trait Multi-Environment | Development version 0.0.22
 
 </h4>
 
@@ -26,7 +26,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.21
 
 <h4 align="center">
 
-\[Last README update: 2018-10-22\]
+\[Last README update: 2018-10-27\]
 
 </h4>
 
@@ -46,13 +46,19 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.21
 
 <h2 id="news">
 
-News of this version (0.0.21)
+News of this version (0.0.22)
 
 </h2>
 
+Revision 22
+
+  - Important updates to the documentation.
+  - Fixed MAC-OS 10.11 El Capitan, installation (issue \#1).
+
 Revision 21
 
-  - BMTERS now is BMORS
+  - `BMTERS()` function now is `BMORS()` function.
+  - `BMTERS_Env()` function now is `BMORS_Env()` function.
 
 Revision 20
 
