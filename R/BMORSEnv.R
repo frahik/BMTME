@@ -1,17 +1,16 @@
 #' Bayesian Multi-Output regression stacking for specific environment estimations
 #'
-#' @param data phenotipes matrix, with every trait in a independent column.
-#' @param ETA eta
-#' @param testingEnv environment to test.
-#' @param nIter number of iterations
-#' @param covModel covariate model
-#' @param predictor_Sec_complete FALSE by default
-#' @param burnIn number of burning
-#' @param thin number of thinning
-#' @param progressBar show the progress bar?
-#' @param digits number of digits of accuracy in the results
+#' @param data \code{(data.frame)} Phenotypic respones where each column it's a different trait and the first column are the name of the enviroment where it was evaluated.
+#' @param ETA \code{(matrix)} This is a two-level list used to specify the regression function (or linear predictor).
+#' @param testingEnv \code{(string)} Name of the Environment to test.
+#' @param nIter \code{(integer)} Number of iterations to fit the model.
+#' @param burnIn \code{(integer)} Number of items to burn at the beginning of the model.
+#' @param thin \code{(integer)} Number of items to thin the model.
+#' @param covModel \code{(string)} Name of the covariates model to implement (BRR, BayesA, BayesB, BayesC).
+#' @param predictor_Sec_complete \code{(Logical)} FALSE by default.
+#' @param progressBar \code{(Logical)} Show the progress bar.
+#' @param digits \code{(integer)} Number of digits of accuracy in the results.
 #'
-#' @return Something cool
 #' @export
 #'
 #' @importFrom BGLR BGLR

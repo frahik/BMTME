@@ -2,7 +2,7 @@
 % Please edit documentation in R/BMORS.R
 \name{BMORS}
 \alias{BMORS}
-\title{Bayesian Multi Trait Multi Environment Regressor Stacking}
+\title{Bayesian Multi-Output Regression Stacking (BMORS)}
 \usage{
 BMORS(Y = NULL, ETA = NULL, covModel = "BRR",
   predictor_Sec_complete = FALSE, nIter = 2500, burnIn = 500,
@@ -10,33 +10,30 @@ BMORS(Y = NULL, ETA = NULL, covModel = "BRR",
   parallelCores = 1, digits = 4)
 }
 \arguments{
-\item{Y}{phenotipes matrix, with every trait in a independent column.}
+\item{Y}{\code{(matrix)} Phenotypic respones where each column it's a different trait.}
 
-\item{ETA}{eta}
+\item{ETA}{\code{(matrix)} This is a two-level list used to specify the regression function (or linear predictor).}
 
-\item{covModel}{covariates model}
+\item{covModel}{\code{(string)} Name of the covariates model to implement (BRR, BayesA, BayesB, BayesC).}
 
 \item{predictor_Sec_complete}{FALSE by default}
 
-\item{nIter}{number of iterations}
+\item{nIter}{\code{(integer)} Number of iterations to fit the model.}
 
-\item{burnIn}{number of burning}
+\item{burnIn}{\code{(integer)} Number of items to burn at the beginning of the model.}
 
-\item{thin}{number of thinning}
+\item{thin}{\code{(integer)} Number of items to thin the model.}
 
-\item{progressBar}{The progress bar}
+\item{progressBar}{\code{(Logical)} Show the progress bar.}
 
-\item{testingSet}{cv object}
+\item{testingSet}{\code{(object or vector)} Crossvalidation object or vector with the positions to use like testing in a cross-validation test.}
 
-\item{parallelCores}{number of cores to use}
+\item{parallelCores}{\code{(integer)} Number of cores to use.}
 
-\item{digits}{number of digits of accuracy in the results}
-}
-\value{
-Something cool
+\item{digits}{\code{(integer)} Number of digits of accuracy in the results.}
 }
 \description{
-Bayesian Multi Trait Multi Environment Regressor Stacking
+Bayesian Multi-Output Regression Stacking (BMORS)
 }
 \examples{
 \dontrun{

@@ -9,28 +9,25 @@ BMORS_Env(data = NULL, testingEnv = "", ETA = NULL,
   burnIn = 500, thin = 5, progressBar = TRUE, digits = 4)
 }
 \arguments{
-\item{data}{phenotipes matrix, with every trait in a independent column.}
+\item{data}{\code{(data.frame)} Phenotypic respones where each column it's a different trait and the first column are the name of the enviroment where it was evaluated.}
 
-\item{testingEnv}{environment to test.}
+\item{testingEnv}{\code{(string)} Name of the Environment to test.}
 
-\item{ETA}{eta}
+\item{ETA}{\code{(matrix)} This is a two-level list used to specify the regression function (or linear predictor).}
 
-\item{covModel}{covariate model}
+\item{covModel}{\code{(string)} Name of the covariates model to implement (BRR, BayesA, BayesB, BayesC).}
 
-\item{predictor_Sec_complete}{FALSE by default}
+\item{predictor_Sec_complete}{\code{(Logical)} FALSE by default.}
 
-\item{nIter}{number of iterations}
+\item{nIter}{\code{(integer)} Number of iterations to fit the model.}
 
-\item{burnIn}{number of burning}
+\item{burnIn}{\code{(integer)} Number of items to burn at the beginning of the model.}
 
-\item{thin}{number of thinning}
+\item{thin}{\code{(integer)} Number of items to thin the model.}
 
-\item{progressBar}{show the progress bar?}
+\item{progressBar}{\code{(Logical)} Show the progress bar.}
 
-\item{digits}{number of digits of accuracy in the results}
-}
-\value{
-Something cool
+\item{digits}{\code{(integer)} Number of digits of accuracy in the results.}
 }
 \description{
 Bayesian Multi-Output regression stacking for specific environment estimations

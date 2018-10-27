@@ -1,17 +1,17 @@
-#' Bayes Multi-Trait Milti-Environment Model
+#' Bayes Multi-Trait Milti-Environment Model (BMTME)
 #'
-#' @param Y no definition available.
-#' @param X no definition available.
-#' @param Z1 no definition available.
-#' @param Z2 no definition available.
-#' @param nIter no definition available.
-#' @param burnIn no definition available.
-#' @param thin no definition available.
-#' @param bs no definition available.
-#' @param progressBar (Logical) Show the progress bar.
-#' @param testingSet cv object
-#' @param parallelCores number of cores to use
-#' @param digits number of digits of accuracy in the results
+#' @param Y \code{(matrix)} Phenotypic respones where each column it's a different trait.
+#' @param X \code{(matrix)} Matrix design for the environment effects.
+#' @param Z1 \code{(matrix)} Matrix design for the genetic effects.
+#' @param Z2 \code{(matrix)} Matrix design for the genetic effects interaction with the environment effects.
+#' @param nIter \code{(integer)} Number of iterations to fit the model.
+#' @param burnIn \code{(integer)} Number of items to burn at the beginning of the model.
+#' @param thin \code{(integer)} Number of items to thin the model.
+#' @param bs \code{(integer)} Number of groups.
+#' @param parallelCores \code{(integer)} Number of cores to use.
+#' @param digits \code{(integer)} Number of digits of accuracy in the results.
+#' @param progressBar \code{(Logical)} Show the progress bar.
+#' @param testingSet \code{(object or vector)} Crossvalidation object or vector with the positions to use like testing in a cross-validation test.
 #'
 #' @importFrom stats lm rnorm var vcov
 #' @importFrom utils txtProgressBar setTxtProgressBar

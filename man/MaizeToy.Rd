@@ -3,13 +3,16 @@
 \docType{data}
 \name{MaizeToy}
 \alias{MaizeToy}
-\title{MaizeToy Data}
-\format{format, 300 row per 4 columns.}
+\title{Maize Data}
+\format{2 objects are loaded (phenoMaizeToy and genoMaizeToy)}
 \usage{
 data(MaizeToy)
 }
 \description{
-The package includes a data set based on a portion of the data used in the study of
+This data set is based on the data set  used in the study of (Montesinos-López et al., 2017). The original dataset is composed of a sample of 309 maize lines evaluated for three traits: anthesis-silking interval (ASI), plant height (PH), grain yield (GY), each of them was evaluated in three optimal environments (Env1, Env2 and Env3). The total numbers of GBS data were 681,257 SNPs, and, after filtering for missing values and minor allele frequency, were used 158,281 SNPs for the analyses. To load this dataset in the package we only use 30 lines, and we have identified this data set as MaizeToy. For more details, see the study of (Montesinos-López et al., 2017).
+}
+\references{
+Montesinos-López, O. A., Montesinos-López, A., Crossa, J., Montesinos-López, J. C., Luna-Vázquez, F. J., Salinas, J., … Buenrostro-Mariscal, R. (2017). A Variational Bayes Genomic-Enabled Prediction Model with Genotype × Environment Interaction. G3: Genes|Genomes|Genetics, 7(8), g3.117.041202. https://doi.org/10.1534/g3.117.041202
 }
 \author{
 Luna-Vázquez, Francisco Javier

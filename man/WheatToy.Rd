@@ -4,17 +4,28 @@
 \name{WheatToy}
 \alias{WheatToy}
 \title{Phenotypic values and Genetic values of Wheat toy dataset.}
-\format{format, 300 row per 4 columns.}
+\format{2 objects are loaded (phenoWheatToy and genoWheatToy)}
+\source{
+International Maize and Wheat Improvement Center (CIMMYT), Mexico.
+}
 \usage{
 data(WheatToy)
 }
 \description{
-A data set based on a portion of the data used in the study of...
-The variables are as follows:
+A data set based on a portion of the data used in the study
+from a collection of 599 historical CIMMYT wheat lines.
+The wheat data set is from CIMMYT's Global Wheat Program.
+
+The variables that import the dataset are as follows:
 
 * 'phenoWheatToy': Phenotypic values.
-* 'genoWheatToy':  Geno values.
+* 'genoWheatToy':  Genomic values.
+}
+\references{
+McLaren, C. G., R. Bruskiewich, A.M. Portugal, and A.B. Cosico. 2005. The International Rice Information System. A platform for meta-analysis of rice crop data. \emph{Plant Physiology} \bold{139}: 637-642.
 }
 \author{
 Luna-Vázquez, Francisco Javier
 }
+\keyword{Wheat}
+\keyword{dataset}

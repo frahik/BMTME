@@ -1,15 +1,15 @@
-#' BME
+#' Bayesian Multi-Environment Model (BME)
 #'
-#' @param Y no definition available.
-#' @param Z1 no definition available.
-#' @param nIter no definition available.
-#' @param burnIn no definition available.
-#' @param thin no definition available.
-#' @param bs no definition available.
-#' @param parallelCores number of cores to use
-#' @param digits number of digits of accuracy in the results
-#' @param progressBar (Logical) Show the progress bar.
-#' @param testingSet (numeric) Crossvalidation object or vector with the positions to use like testing in a cross-validation test.
+#' @param Y \code{(matrix)} Phenotypic respones where each column it's a different environment.
+#' @param Z1 \code{(matrix)} Matrix design for the genetic effects.
+#' @param nIter \code{(integer)} Number of iterations to fit the model.
+#' @param burnIn \code{(integer)} Number of items to burn at the beginning of the model.
+#' @param thin \code{(integer)} Number of items to thin the model.
+#' @param bs \code{(integer)} Number of groups.
+#' @param parallelCores \code{(integer)} Number of cores to use.
+#' @param digits \code{(integer)} Number of digits of accuracy in the results.
+#' @param progressBar \code{(Logical)} Show the progress bar.
+#' @param testingSet \code{(object or vector)} Crossvalidation object or vector with the positions to use like testing in a cross-validation test.
 #'
 #' @return If the testingSet is NULL, the function returns the predictions.
 #'

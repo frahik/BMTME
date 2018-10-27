@@ -4,12 +4,18 @@
 \name{WheatIranianToy}
 \alias{WheatIranianToy}
 \title{Wheat Iranian Toy Data}
-\format{format, 300 row per 4 columns.}
+\format{2 objects are loaded (phenoIranianToy and genoIranianToy)}
 \usage{
 data(WheatIranianToy)
 }
 \description{
-The package includes a data set based on a portion of the data used in the study of
+This data set is based on the data set used in the study of (Crossa et al., 2016).
+The original dataset was composed of 2374 wheat lines that were evaluated in field (D) and heat (H) drought experiments at the CIMMYT experimental station near Ciudad Obregón, Sonora, Mexico (27°20' N, 109°54' W, 38 meters above sea level), during the Obregón 2010-2011 cycle.
+ Two traits were evaluated (DTM days at maturity and DTH days to heading). From a total of 40,000 markers, after quality control 39,758 markers were used.
+  To load this dataset in the package we only use 30 lines, and we have identified this data set as WheatIranianToy. For more details, see the study of (Crossa et al., 2016).
+}
+\references{
+Crossa, J., Jarquín, D., Franco, J., Pérez-Rodríguez, P., Burgueño, J., Saint-Pierre, C., Singh, S. (2016). Genomic Prediction of Gene Bank Wheat Landraces. G3: Genes|Genomes|Genetics, 6(7), 1819–1834. https://doi.org/10.1534/g3.116.029637
 }
 \author{
 Luna-Vázquez, Francisco Javier

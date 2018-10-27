@@ -4,36 +4,36 @@
 \name{BMTME}
 \alias{BMTME}
 \alias{BMTME-package}
-\title{Bayes Multi-Trait Milti-Environment Model}
+\title{Bayes Multi-Trait Milti-Environment Model (BMTME)}
 \usage{
 BMTME(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L,
   bs = ceiling(dim(Z1)[2]/6), parallelCores = 1, digits = 4,
   progressBar = TRUE, testingSet = NULL)
 }
 \arguments{
-\item{Y}{no definition available.}
+\item{Y}{\code{(matrix)} Phenotypic respones where each column it's a different trait.}
 
-\item{X}{no definition available.}
+\item{X}{\code{(matrix)} Matrix design for the environment effects.}
 
-\item{Z1}{no definition available.}
+\item{Z1}{\code{(matrix)} Matrix design for the genetic effects.}
 
-\item{Z2}{no definition available.}
+\item{Z2}{\code{(matrix)} Matrix design for the genetic effects interaction with the environment effects.}
 
-\item{nIter}{no definition available.}
+\item{nIter}{\code{(integer)} Number of iterations to fit the model.}
 
-\item{burnIn}{no definition available.}
+\item{burnIn}{\code{(integer)} Number of items to burn at the beginning of the model.}
 
-\item{thin}{no definition available.}
+\item{thin}{\code{(integer)} Number of items to thin the model.}
 
-\item{bs}{no definition available.}
+\item{bs}{\code{(integer)} Number of groups.}
 
-\item{parallelCores}{number of cores to use}
+\item{parallelCores}{\code{(integer)} Number of cores to use.}
 
-\item{digits}{number of digits of accuracy in the results}
+\item{digits}{\code{(integer)} Number of digits of accuracy in the results.}
 
-\item{progressBar}{(Logical) Show the progress bar.}
+\item{progressBar}{\code{(Logical)} Show the progress bar.}
 
-\item{testingSet}{cv object}
+\item{testingSet}{\code{(object or vector)} Crossvalidation object or vector with the positions to use like testing in a cross-validation test.}
 }
 \description{
 The Bayesian Multi-Trait Multi-Environment models (BMTME) package was developed to implement...
