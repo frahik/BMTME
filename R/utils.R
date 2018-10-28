@@ -261,7 +261,7 @@ print.BMECV <- function(x, ...){
 #' @export
 #'
 print.BMORSCV <- function(x, ...){
-  cat('Fitted Bayesian Multi Trait Multi Environment Regressor Stacking model with: \n',
+  cat('Fitted Bayesian Multi-Output Regression Stacking model with: \n',
       x$nIter, ' Iterations, burning the first ', x$burnIn, ' and thining every ', x$thin, '\n',
       'Runtime: ', x$executionTime ,' seconds \n\n',
       'Some predicted values: \n')
@@ -286,7 +286,7 @@ print.BMORSCV <- function(x, ...){
 #' @export
 #'
 print.BMORSENV <- function(x, ...){
-  cat('Fitted Bayesian Multi Trait Multi Environment Regressor Stacking model for n environments with: \n',
+  cat('Fitted Bayesian Multi-Output Regression Stacking model for n environments with: \n',
       x$nIter, ' Iterations, burning the first ', x$burnIn, ' and thining every ', x$thin, '\n',
       'Runtime: ', x$executionTime ,' seconds \n\n',
       'Some predicted values: \n')
