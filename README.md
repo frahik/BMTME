@@ -6,7 +6,7 @@
 
 <h3 align="center">
 
-Bayesian Multi-Trait Multi-Environment | Development version 0.0.22
+Bayesian Multi-Trait Multi-Environment | Development version 0.0.23
 
 </h4>
 
@@ -26,7 +26,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.22
 
 <h4 align="center">
 
-\[Last README update: 2018-10-27\]
+\[Last README update: 2018-10-28\]
 
 </h4>
 
@@ -46,9 +46,15 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.22
 
 <h2 id="news">
 
-News of this version (0.0.22)
+News of this version (0.0.23)
 
 </h2>
+
+Revision 23
+
+  - Include more tests.
+  - Fixed print message of `BMORS()` and `BMORS_Env()` functions.
+  - Fixed parallel work of `BMORS()` function.
 
 Revision 22
 

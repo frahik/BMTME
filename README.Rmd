@@ -44,6 +44,12 @@ output: github_document
   News of this version (`r packageVersion('BMTME')`)
 </h2>
 
+Revision 23
+
+ * Include more tests.
+ * Fixed print message of `BMORS()` and `BMORS_Env()` functions.
+ * Fixed parallel work of `BMORS()` function.
+ 
 Revision 22
 
  * Important updates to the documentation.
