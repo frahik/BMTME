@@ -31,6 +31,7 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
   results <- data.frame() # save cross-validation results
   pb <- progress::progress_bar$new(format = ':what  [:bar]:percent;  Time elapsed: :elapsed - time left: :eta',
                                    total = 2L*(nCV*nTraits), clear = FALSE, show_after = 0)
+
   if (parallelCores <= 1 && inherits(testingSet, 'CrossValidation')) {
     # Covariance
     for (actual_CV in seq_len(nCV)) {
@@ -74,7 +75,7 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
       }
 
     }
-  } else if(parallelCores > 1 && inherits(testingSet, 'CrossValidation')) {
+  } else if (parallelCores > 1 && inherits(testingSet, 'CrossValidation')) {
     cl <- snow::makeCluster(parallelCores)
     doSNOW::registerDoSNOW(cl)
     nCV <- length(testingSet$CrossValidation_list)
@@ -83,11 +84,7 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
     progress <- function(n) utils::setTxtProgressBar(pb, n)
     opts <- list(progress = progress)
     results <- foreach::foreach(actual_CV = seq_len(nCV), .combine = rbind, .packages = 'BMTME', .options.snow = opts) %dopar% {
-      #########First stage analysis#################################
       for (t in seq_len(nTraits)) {
-        if (progressBar) {
-          pb$tick(tokens = list(what = paste0('Estimating covariates')))
-        }
         y <- Y[, t]
         positionTST <- testingSet$CrossValidation_list[[actual_CV]]
         y[positionTST] <- NA
@@ -101,22 +98,19 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
       ETA1$Cov_PreVal <- list(X = XPV, model = covModel)
 
       for (t in seq_len(nTraits)) {
-        if (progressBar) {
-          pb$tick(tokens = list(what = paste0('Fitting the model')))
-        }
         y1 <- Y[, t]
         positionTST <- testingSet$CrossValidation_list[[actual_CV]]
         y1[positionTST] <- NA
 
         fm <- BGLR(y1, ETA = ETA1, nIter = nIter, burnIn = burnIn, thin = thin, verbose = F)
-        data.frame(Position = positionTST,
+        results <- data.frame(Position = positionTST,
                    Environment = testingSet$Environments[positionTST],
                    Trait = colnames(Y)[t],
                    Partition = actual_CV,
                    Observed = round(Y[positionTST, t], digits),
                    Predicted = round(fm$yHat[positionTST], digits))
       }
-
+      results
     }
 
 
