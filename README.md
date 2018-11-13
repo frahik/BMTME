@@ -12,7 +12,9 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.23
 
 <p align="center">
 
-<a href="https://www.gnu.org/licenses/lgpl-3.0">
+<a href="https://www.tidyverse.org/lifecycle/#experimental">
+<img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Experimental">
+</a> <a href="https://www.gnu.org/licenses/lgpl-3.0">
 <img src="https://img.shields.io/badge/License-LGPL%20v3-blue.svg" alt="LGPL, Version 3.0">
 </a> <a href="http://www.repostatus.org/#wip">
 <img src="http://www.repostatus.org/badges/latest/wip.svg" alt="Status of the Repo:  Initial development is in progress, but there has not yet been a stable, usable release suitable for the public">
@@ -26,7 +28,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.23
 
 <h4 align="center">
 
-\[Last README update: 2018-10-28\]
+\[Last README update: 2018-11-13\]
 
 </h4>
 
