@@ -23,8 +23,8 @@ summary.BMTMECV <- function(object, information = 'compact', digits = 4, ...) {
     as.data.frame() -> presum
 
   presum %>%  group_by(Environment, Trait) %>%
-    summarise(SE_MAAPE = sd(MAAPE, na.rm = T)/sqrt(n()), MAAPE = mean(MAAPE, na.rm = T),
-              SE_Pearson = sd(Pearson, na.rm = T)/sqrt(n()), Pearson = mean(Pearson, na.rm = T))  %>%
+    summarise(SE_MAAPE = sd(MAAPE, na.rm = TRUE)/sqrt(n()), MAAPE = mean(MAAPE, na.rm = TRUE),
+              SE_Pearson = sd(Pearson, na.rm = TRUE)/sqrt(n()), Pearson = mean(Pearson, na.rm = TRUE))  %>%
     select(Environment, Trait, Pearson, SE_Pearson, MAAPE, SE_MAAPE) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> finalSum
@@ -68,8 +68,8 @@ summary.BMECV <- function(object, information = 'compact', digits = 4, ...) {
     as.data.frame() -> presum
 
   presum %>%  group_by(Environment, Trait) %>%
-    summarise(SE_MAAPE = sd(MAAPE, na.rm = T)/sqrt(n()), MAAPE = mean(MAAPE, na.rm = T),
-              SE_Pearson = sd(Pearson, na.rm = T)/sqrt(n()), Pearson = mean(Pearson, na.rm = T))  %>%
+    summarise(SE_MAAPE = sd(MAAPE, na.rm = TRUE)/sqrt(n()), MAAPE = mean(MAAPE, na.rm = TRUE),
+              SE_Pearson = sd(Pearson, na.rm = TRUE)/sqrt(n()), Pearson = mean(Pearson, na.rm = TRUE))  %>%
     select(Environment, Trait, Pearson, SE_Pearson, MAAPE, SE_MAAPE) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> finalSum
@@ -113,8 +113,8 @@ summary.BMORSCV <- function(object, information = 'compact', digits = 4, ...){
     as.data.frame() -> presum
 
   presum %>%  group_by(Environment, Trait) %>%
-    summarise(SE_MAAPE = sd(MAAPE, na.rm = T)/sqrt(n()), MAAPE = mean(MAAPE, na.rm = T),
-              SE_Pearson = sd(Pearson, na.rm = T)/sqrt(n()), Pearson = mean(Pearson, na.rm = T))  %>%
+    summarise(SE_MAAPE = sd(MAAPE, na.rm = TRUE)/sqrt(n()), MAAPE = mean(MAAPE, na.rm = TRUE),
+              SE_Pearson = sd(Pearson, na.rm = TRUE)/sqrt(n()), Pearson = mean(Pearson, na.rm = TRUE))  %>%
     select(Environment, Trait, Pearson, SE_Pearson, MAAPE, SE_MAAPE) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> finalSum
@@ -346,7 +346,7 @@ plot.BME <- function(x, trait = '', ...){
   response <- x$Y[,trait]
   predictions <- x$yHat[,trait]
   limits <- range(c(response, predictions), na.rm = TRUE)
-  plot(response, predictions, main = paste("BME fitted model in the trait", trait), xlim = limits, ylim = limits, xlab = 'Observed values', ylab = 'Predicted values', ...);
+  plot(response, predictions, main = paste("BME fitted model in the trait", trait), xlim = limits, ylim = limits, xlab = 'Observed values', ylab = 'Predicted values', ...)
   abline(a = 0, b = 1, lty = 3)
 }
 
@@ -397,7 +397,7 @@ plot.BMORSCV <- function(x, select = 'Pearson', ...){
     ylab <- select
   }
   x.labels <- paste0(results$Trait, '_', results$Env)
-  plot.x <- 1:length(x.labels)
+  plot.x <- seq_len(x.labels)
   plot(plot.x, results[, select], ylim = range(c(results[, select] - results$SE, results[, select] + results$SE)),
        type = 'p', ylab = ylab, xlab = '', xaxt = "n", ...)
   axis(1, at = plot.x, labels = x.labels, las = 2)
@@ -455,16 +455,16 @@ boxplot.BMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
     results$TxE <- paste0(results$Trait, '_', results$Env)
 
     if (ordered && select != 'MAAPE') {
-      results$TxE  <- with(results, reorder(TxE , Pearson, median, na.rm = T))
+      results$TxE  <- with(results, reorder(TxE , Pearson, median, na.rm = TRUE))
     } else if (ordered && select == 'MAAPE') {
-      results$TxE  <- with(results, reorder(TxE , MAAPE, median, na.rm = T))
+      results$TxE  <- with(results, reorder(TxE , MAAPE, median, na.rm = TRUE))
     }
     boxplot(plot.y ~ results$TxE, col = "grey", ylab = ylab, ...)
   } else if (length(unique(results$Trait)) > 1)  {
     if (ordered && select != 'MAAPE') {
-      results$Trait  <- with(results, reorder(Trait, Pearson, median, na.rm = T))
+      results$Trait  <- with(results, reorder(Trait, Pearson, median, na.rm = TRUE))
     } else if (ordered && select == 'MAAPE') {
-      results$Trait  <- with(results, reorder(Trait, MAAPE, median, na.rm = T))
+      results$Trait  <- with(results, reorder(Trait, MAAPE, median, na.rm = TRUE))
     }
     boxplot(plot.y ~ results$Trait, col = "grey", xlab = 'Traits', ylab = ylab, ...)
   }
@@ -502,9 +502,9 @@ boxplot.BMTMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
     results$TxE <- paste0(results$Trait, '_', results$Env)
 
     if (ordered && select != 'MAAPE') {
-      results$TxE  <- with(results, reorder(TxE , Pearson, median, na.rm = T))
+      results$TxE  <- with(results, reorder(TxE , Pearson, median, na.rm = TRUE))
     } else if (ordered && select == 'MAAPE') {
-      results$TxE  <- with(results, reorder(TxE , MAAPE, median, na.rm = T))
+      results$TxE  <- with(results, reorder(TxE , MAAPE, median, na.rm = TRUE))
     }
     boxplot(plot.y ~ results$TxE, col = "grey", ylab = ylab, ...)
   }else{
@@ -547,9 +547,9 @@ boxplot.BMORSCV <- function(x, select = 'Pearson', ordered = TRUE, ...){
     results$TxE <- paste0(results$Trait, '_', results$Env)
 
     if (ordered && select != 'MAAPE') {
-      results$TxE  <- with(results, reorder(TxE , Pearson, median, na.rm = T))
+      results$TxE  <- with(results, reorder(TxE , Pearson, median, na.rm = TRUE))
     } else if (ordered && select == 'MAAPE') {
-      results$TxE  <- with(results, reorder(TxE , MAAPE, median, na.rm = T))
+      results$TxE  <- with(results, reorder(TxE , MAAPE, median, na.rm = TRUE))
     }
 
     boxplot(plot.y ~ results$TxE, col = "grey", ylab = ylab, ...)

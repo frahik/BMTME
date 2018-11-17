@@ -44,7 +44,7 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
         positionTST <- testingSet$CrossValidation_list[[actual_CV]]
         y[positionTST] <- NA
 
-        fm <- BGLR(y, ETA = ETA, nIter = nIter, burnIn = burnIn, thin = thin, verbose = F)
+        fm <- BGLR(y, ETA = ETA, nIter = nIter, burnIn = burnIn, thin = thin, verbose = FALSE)
         YwithCov[, nTraits + t] <- fm$yHat
       }
 
@@ -64,7 +64,7 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
         positionTST <- testingSet$CrossValidation_list[[actual_CV]]
         y1[positionTST] <- NA
 
-        fm <- BGLR(y1, ETA = ETA1, nIter = nIter, burnIn = burnIn, thin = thin, verbose = F)
+        fm <- BGLR(y1, ETA = ETA1, nIter = nIter, burnIn = burnIn, thin = thin, verbose = FALSE)
 
         results <- rbind(results, data.frame(Position = positionTST,
                                              Environment = testingSet$Environments[positionTST],
@@ -89,7 +89,7 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
         positionTST <- testingSet$CrossValidation_list[[actual_CV]]
         y[positionTST] <- NA
 
-        fm <- BGLR(y, ETA = ETA, nIter = nIter, burnIn = burnIn, thin = thin, verbose = F)
+        fm <- BGLR(y, ETA = ETA, nIter = nIter, burnIn = burnIn, thin = thin, verbose = FALSE)
         YwithCov[, nTraits + t] <- fm$yHat
       }
 
@@ -102,7 +102,7 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
         positionTST <- testingSet$CrossValidation_list[[actual_CV]]
         y1[positionTST] <- NA
 
-        fm <- BGLR(y1, ETA = ETA1, nIter = nIter, burnIn = burnIn, thin = thin, verbose = F)
+        fm <- BGLR(y1, ETA = ETA1, nIter = nIter, burnIn = burnIn, thin = thin, verbose = FALSE)
         results <- data.frame(Position = positionTST,
                    Environment = testingSet$Environments[positionTST],
                    Trait = colnames(Y)[t],

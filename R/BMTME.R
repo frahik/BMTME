@@ -257,7 +257,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar,
   R2e <- 0.5
   my.model <- lm(YStar ~ X - 1L)
   beta0 <- my.model$coefficient
-  m0 <- apply(beta0, 2L, mean, na.rm = T)
+  m0 <- apply(beta0, 2L, mean, na.rm = TRUE)
   #vcov(my.model)/(summary(my.model)[[1]]$sigma^2)
   Cov_Beta_Inv <- vcov(my.model)
 
@@ -285,10 +285,10 @@ coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar,
   u_b2 <- MatMul(Z2, b2)
   betav <- beta0
 
-  VarY <- var(Y, na.rm = T)
-  yyy <- matrix(c(t(Y)), ncol = nI, byrow = F)
+  VarY <- var(Y, na.rm = TRUE)
+  yyy <- matrix(c(t(Y)), ncol = nI, byrow = FALSE)
   St <- VarY * R2 * (vt + 2L)
-  SE <- var(yyy, na.rm = T) * R2 * (vE + 2L)
+  SE <- var(yyy, na.rm = TRUE) * R2 * (vE + 2L)
   Se <- VarY * (1L - R2e) * (ve + 2L)
   sigmaT <- St / (vt + 2L)
   EigenT <- eigen(sigmaT)
@@ -328,7 +328,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar,
     M <- sigmaB.Inv + Krone(Re.Inv, tXX)
     mu_ac <- MatMul(sigmaB.Inv, matrixcalc::vec(beta0)) + MatMul(Krone(Re.Inv, tX), matrixcalc::vec(e))
     betav1 <- t(MVnormvv(mu_ac, M))
-    betav <- matrix(betav1, ncol = nt, byrow = F)
+    betav <- matrix(betav1, ncol = nt, byrow = FALSE)
     u_b0 <- MatMul(X, betav)
     e <- e - u_b0
 
@@ -338,7 +338,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar,
     M1 <- sigmaTG.Inv + Krone(Re.Inv, tZ1Z1)
     mu_b1 <- MatMul(Krone(Re.Inv, tZ1), matrixcalc::vec(e))
     b11 <- rmv_f(ps = bs, c = mu_b1, A = M1, x = b1)
-    b1 <- matrix(b11, ncol = nt, byrow = F)
+    b1 <- matrix(b11, ncol = nt, byrow = FALSE)
     u_b1 <- MatMul(Z1, b1)
     e <- e - u_b1
 
@@ -360,12 +360,12 @@ coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar,
     M2 <- sigmaTGE.Inv + Krone(Re.Inv, tZ2Z2)
     mu_b2 <- MatMul(Krone(Re.Inv, tZ2), matrixcalc::vec(e))
     b22 <- rmv_f(ps = bs, c = mu_b2, A = M2, x = b2)
-    b2 <- matrix(b22, ncol = nt, byrow = F)
+    b2 <- matrix(b22, ncol = nt, byrow = FALSE)
     u_b2 <- MatMul(Z2, b2)
     e <- e - u_b2
 
     ##### Sample of Environments###########################################
-    ME3 <- matrix(matrixcalc::vec(t(b2)), ncol = nI, byrow = F)
+    ME3 <- matrix(matrixcalc::vec(t(b2)), ncol = nI, byrow = FALSE)
     G_invb1 <- Krone(G_invg, sigmaT.Inv)
     MEE <- MatMul(t(ME3), (G_invb1 %*% ME3))
     sigmaEnv <- inv_wishart(vE + nI + nJ * nt - 1L, MEE + SE)

@@ -85,7 +85,7 @@ CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
   #Lineas ?nicas restantes
   UL_k <- unique(dat_F_k[, DataSetID])
   Pos_R_k <- rep(NA, length(UL_k))
-  for (j in 1:length(UL_k)) {
+  for (j in seq_len(UL_k)) {
     Pos_j_k <-  which(DataSet[, DataSetID] == UL_k[j])
     Pos_R_k[j] <- sample(Pos_j_k, 1)
   }
@@ -110,7 +110,7 @@ CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
       #Posiciones de lineas a mantener fuera del grupo k
       Pos_R_k <- rep(NA, length(UL_k))
 
-      for (j in 1:length(UL_k)) {
+      for (j in seq_len(UL_k)) {
         Pos_j_k <-  which((DataSet[, DataSetID] == UL_k[j]))
         if (length(Pos_j_k) > 1) {
           Pos_R_k[j] <- sample(Pos_j_k, 1)
@@ -191,7 +191,7 @@ CV.RandomPart <- function(DataSet, NPartitions = 10, PTesting = .35, Traits.test
     DataSet$Trait <- ''
   }
   if (length(unique(DataSet$Trait)) == 1) {
-    Traits.testing = NULL
+    Traits.testing <- NULL
   }
 
   new_Data <- tidyr::unite(DataSet, 'TraitxEnv', 'Trait', 'Env', sep = "_")
@@ -258,15 +258,15 @@ CV.RandomPart <- function(DataSet, NPartitions = 10, PTesting = .35, Traits.test
 
     if (!is.null(Traits.testing)) {
       Traits_Selec_F <- c()
-      for (r in 1:length(Traits.testing)) {
-        Traits_Selec <- which(grepl(Traits.testing[r], Names_MFormat) == T)
+      for (r in seq_len(Traits.testing)) {
+        Traits_Selec <- which(grepl(Traits.testing[r], Names_MFormat) == TRUE)
         Traits_Selec_F <- c(Traits_Selec_F,Traits_Selec)
       }
 
-      B1[, -c(Traits_Selec_F)] = 1
+      B1[, -c(Traits_Selec_F)] <- 1
     }
     pos <- c(B1)
-    p_list[[paste('partition', i, sep = '')]] = which(pos == 2)
+    p_list[[paste('partition', i, sep = '')]] <- which(pos == 2)
   }
 
 

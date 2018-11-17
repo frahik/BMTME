@@ -216,7 +216,7 @@ coreME <- function(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingS
   u_b1 <- MatMul(Z1, b1)
   betav <- beta0
 
-  VarY <- var(Y, na.rm = T)
+  VarY <- var(Y, na.rm = TRUE)
   St <- VarY * R2 * (vt + 2L)
   Se <- VarY * (1L - R2e) * (ve + 2L)
   sigmaT <- St / (vt + 2L)
@@ -256,7 +256,7 @@ coreME <- function(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingS
     M <- sigmaB.Inv + Re.Inv * tXX
     mu_ac <- MatMul(sigmaB.Inv, matrixcalc::vec(beta0)) + MatMul(Krone(Re.Inv, tX), matrixcalc::vec(e))
     betav1 <- t(MVnormvv(mu_ac, M))
-    betav <- matrix(betav1, ncol = nt, byrow = F)
+    betav <- matrix(betav1, ncol = nt, byrow = FALSE)
     u_b0 <- X %*% betav
     e <- e - u_b0
 
@@ -266,7 +266,7 @@ coreME <- function(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingS
     M1 <- sigmaTG.Inv + Krone(Re.Inv, tZ1Z1)
     mu_b1 <- MatMul(Krone(Re.Inv, tZ1), matrixcalc::vec(e))
     b11 <- rmv_f(ps = bs, c = mu_b1, A = M1, x = b1)
-    b1 <- matrix(b11, ncol = nt, byrow = F)
+    b1 <- matrix(b11, ncol = nt, byrow = FALSE)
     u_b1 <- MatMul(Z1, b1)
     e <- e - u_b1
 
@@ -292,8 +292,8 @@ coreME <- function(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingS
     V_Re_Star <- V_Re[, pos_Re]
     Re.Inv <- MatMul(V_Re_Star, MatMul(diag(1 / d_Re_Star), t(V_Re_Star)))
     if ((nNa > 0L)) {
-      W[tst, ] = yHat[tst, ] + mvtnorm::rmvnorm(nNa, mean = rep(0, nt), sigma = Re, method = "chol")
-      e[tst, ] = W[tst, ] - yHat[tst, ]
+      W[tst, ] <- yHat[tst, ] + mvtnorm::rmvnorm(nNa, mean = rep(0, nt), sigma = Re, method = "chol")
+      e[tst, ] <- W[tst, ] - yHat[tst, ]
     }
 
     ##### Saving output #########################################
@@ -302,21 +302,21 @@ coreME <- function(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingS
     }
 
     if ((t > burnIn) & (t %% thin == 0L)) {
-      nSums = nSums + 1L
-      k = (nSums - 1L) / (nSums)
-      post_beta = post_beta * k + betav / nSums
-      post_beta_2 = post_beta_2 * k + (betav ^ 2) / nSums
-      post_b1 = post_b1 * k + b1 / nSums
-      post_b1_2 = post_b1_2 * k + (b1 ^ 2) / nSums
+      nSums <- nSums + 1L
+      k <- (nSums - 1L) / (nSums)
+      post_beta <- post_beta * k + betav / nSums
+      post_beta_2 <- post_beta_2 * k + (betav ^ 2) / nSums
+      post_b1 <- post_b1 * k + b1 / nSums
+      post_b1_2 <- post_b1_2 * k + (b1 ^ 2) / nSums
 
-      post_var_b1 = post_var_b1 * k + sigmaT / nSums
-      post_var_b1_2 = post_var_b1_2 * k + (sigmaT ^ 2) / nSums
+      post_var_b1 <- post_var_b1 * k + sigmaT / nSums
+      post_var_b1_2 <- post_var_b1_2 * k + (sigmaT ^ 2) / nSums
 
-      post_var_e = post_var_e * k + Re / nSums
-      post_var_e_2 = post_var_e_2 * k + (Re ^ 2) / nSums
+      post_var_e <- post_var_e * k + Re / nSums
+      post_var_e_2 <- post_var_e_2 * k + (Re ^ 2) / nSums
 
-      post_yHat = post_yHat * k + yHat / nSums
-      post_yHat_2 = post_yHat_2 * k + (yHat ^ 2) / nSums
+      post_yHat <- post_yHat * k + yHat / nSums
+      post_yHat_2 <- post_yHat_2 * k + (yHat ^ 2) / nSums
 
       out <- list(
         Y = round(Y, digits),

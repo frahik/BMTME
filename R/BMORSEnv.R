@@ -32,7 +32,7 @@ BMORS_Env <- function(data = NULL, testingEnv = '', ETA = NULL, covModel = 'BRR'
       y1 <- Y[, trait]
       y1[Pos_ts] <- NA
 
-      fm <- BGLR(y = y1, ETA = ETA, nIter = nIter, burnIn = burnIn, verbose = F)
+      fm <- BGLR(y = y1, ETA = ETA, nIter = nIter, burnIn = burnIn, verbose = FALSE)
       YwithCov[, nTraits + trait] <- fm$yHat
     }
 
@@ -51,7 +51,7 @@ BMORS_Env <- function(data = NULL, testingEnv = '', ETA = NULL, covModel = 'BRR'
       }
       y1 <- y2
       y1[Pos_ts] <- NA
-      fm <- BGLR(y1, ETA = ETA1, nIter = nIter, burnIn = burnIn, thin = thin, verbose = F)
+      fm <- BGLR(y1, ETA = ETA1, nIter = nIter, burnIn = burnIn, thin = thin, verbose = FALSE)
       results <- rbind(results, data.frame(Position = Pos_ts,
                                            Environment = data[Pos_ts, 1],
                                            Trait = colnames(Y)[t],
