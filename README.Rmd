@@ -12,8 +12,6 @@ output: github_document
   <p align="center">
   <a href="https://www.tidyverse.org/lifecycle/#experimental">
   <img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Experimental">
-  </a> <a href="https://www.tidyverse.org/lifecycle/#experimental">
-  <img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Experimental">
   </a> <a href="https://www.gnu.org/licenses/lgpl-3.0">
     <img src="https://img.shields.io/badge/License-LGPL%20v3-blue.svg" alt="LGPL, Version 3.0">
   </a> <a href="http://www.repostatus.org/#wip">
@@ -47,6 +45,15 @@ output: github_document
 <h2 id="news">
   News of this version (`r packageVersion('BMTME')`)
 </h2>
+
+Revision 24
+
+ * Removed stratified random partitions.
+ * Fixed barplot for BMORS_Env.
+ * Good practice with <-
+ * complete F or T, logical arguments.
+ * Bug fixed: changed 1:length to seq_len to avoid bugs.
+ * Incude ORCID.
 
 Revision 23
 

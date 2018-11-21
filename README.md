@@ -6,7 +6,7 @@
 
 <h3 align="center">
 
-Bayesian Multi-Trait Multi-Environment | Development version 0.0.23
+Bayesian Multi-Trait Multi-Environment | Development version 0.0.24
 
 </h4>
 
@@ -28,7 +28,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.23
 
 <h4 align="center">
 
-\[Last README update: 2018-11-13\]
+\[Last README update: 2018-11-21\]
 
 </h4>
 
@@ -48,9 +48,18 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.23
 
 <h2 id="news">
 
-News of this version (0.0.23)
+News of this version (0.0.24)
 
 </h2>
+
+Revision 24
+
+  - Removed stratified random partitions.
+  - Fixed barplot for BMORS\_Env.
+  - Good practice with \<-
+  - complete F or T, logical arguments.
+  - Bug fixed: changed 1:length to seq\_len to avoid bugs.
+  - Incude ORCID.
 
 Revision 23
 
