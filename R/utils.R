@@ -422,7 +422,8 @@ barplot.BMORSENV <- function(height, select = 'Pearson', ...){
   results <- summary(height)
   results <- results[order(results[, select]),]
   results$TxE <- paste(results$Trait, results$Environment, sep = '_')
-  barplot(results[, select], xlab = "Trait x Environment", names.arg = results$TxE)
+  ylab <- ifelse(select == 'Pearson', "Pearson's Correlation", 'MAAPE')
+  barplot(results[, select], ylab = ylab, names.arg = results$TxE)
 }
 
 
@@ -536,9 +537,6 @@ boxplot.BMORSCV <- function(x, select = 'Pearson', ordered = TRUE, ...){
           }, MAAPE = {
             plot.y <- results$MAAPE
             ylab <- "MAAPE"
-          }, CC = {
-            plot.y <- results$CC
-            ylab <- "Classification correct average"
           },
           stop('Error in select parameter.', call. = )
   )
