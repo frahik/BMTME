@@ -39,42 +39,6 @@ test_that('RandomPartition',{
   expect_length(RP_Test$Traits, length(pheno$Env))
 })
 
-test_that('Stratified by number',{
-  data("MaizeToy")
-  phenoMaizeToy <- phenoMaizeToy[order(phenoMaizeToy$Env, phenoMaizeToy$Line), ]
-  pheno <- data.frame(GID = phenoMaizeToy[, 1], Env = phenoMaizeToy$Env, Response = phenoMaizeToy[, 3])
-
-  SN_Test <- CV.Stratified(pheno, set_seed = 123)
-
-  expect_output(str(SN_Test), 'List of 3')
-  expect_is(SN_Test, 'CrossValidation')
-  expect_is(SN_Test$CrossValidation_list, 'list')
-  expect_output(str(SN_Test$CrossValidation_list), 'List of 10')
-  expect_is(SN_Test$Environments, 'factor')
-  expect_length(SN_Test$Environments, length(pheno$Env))
-  expect_equal(unique(SN_Test$Environments), unique(pheno$Env))
-  expect_is(SN_Test$Traits, 'character')
-  expect_length(SN_Test$Traits, length(pheno$Env))
-})
-
-test_that('Stratified by fraction',{
-  data("MaizeToy")
-  phenoMaizeToy <- phenoMaizeToy[order(phenoMaizeToy$Env, phenoMaizeToy$Line), ]
-  pheno <- data.frame(GID = phenoMaizeToy[, 1], Env = phenoMaizeToy$Env, Response = phenoMaizeToy[, 3])
-
-  SF_Test <- CV.Stratified(pheno, set_seed = 123)
-
-  expect_output(str(SF_Test), 'List of 3')
-  expect_is(SF_Test, 'CrossValidation')
-  expect_is(SF_Test$CrossValidation_list, 'list')
-  expect_output(str(SF_Test$CrossValidation_list), 'List of 10')
-  expect_is(SF_Test$Environments, 'factor')
-  expect_length(SF_Test$Environments, length(pheno$Env))
-  expect_equal(unique(SF_Test$Environments), unique(pheno$Env))
-  expect_is(SF_Test$Traits, 'character')
-  expect_length(SF_Test$Traits, length(pheno$Env))
-})
-
 context('Predictions')
 
 test_that('BME function with Mada data', {
@@ -98,12 +62,21 @@ test_that('BME function with Mada data', {
   expect_output(print(fm), 'Multi-Environment Model Fitted with')
   expect_silent(plot(fm, trait = 'PH'))
 
-  # Check predictive capacities of the model
+
   pheno <- data.frame(GID = phenoMada[, 1], Env = '', Response = phenoMada[, 3])
   CrossV <- CV.RandomPart(pheno, NPartitions = 4, PTesting = 0.2, set_seed = 123)
 
-  pm <- BME(Y = Y, Z1 = Z.G, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV)
+  # Check predictive capacities of the model in only one testingSet
+  pm_basic <- BME(Y = Y, Z1 = Z.G, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV$CrossValidation_list[[1]])
+  expect_output(str(pm_basic), 'List of 5')
+  expect_is(pm_basic, 'BMECV')
+  expect_is(pm_basic$results, 'data.frame')
+  expect_is(pm_basic$executionTime, 'numeric')
+  expect_output(print(pm_basic), 'Fitted Bayesian Multi Environment model with:')
+  # expect_silent(boxplot(pm_basic))
 
+  # Check predictive capacities of the model with CrossValidation object
+  pm <- BME(Y = Y, Z1 = Z.G, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV)
   expect_output(str(pm), 'List of 6')
   expect_is(pm, 'BMECV')
   expect_is(pm$results, 'data.frame')
@@ -153,6 +126,16 @@ test_that('BMTME function with Iranian data', {
   pheno <- data.frame(GID = phenoIranianToy[, 1], Env = phenoIranianToy[, 2], Response = phenoIranianToy[, 3])
 
   CrossV <- CV.RandomPart(pheno, NPartitions = 4, PTesting = 0.2, set_seed = 123)
+  pm_basic <- BMTME(Y = Y, X = Z.E, Z1 = Z.G, Z2 = Z.EG, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV$CrossValidation_list$partition1)
+
+  expect_output(str(pm_basic), 'List of 6')
+  expect_is(pm_basic, 'BMTMECV')
+  expect_is(pm_basic$results, 'data.frame')
+  expect_is(pm_basic$executionTime, 'numeric')
+  expect_output(print(pm_basic), 'Fitted Bayesian Multi-Trait Multi-Environment Model with:')
+  # expect_silent(boxplot(pm))
+
+  # Check predictive capacities of the model
   pm <- BMTME(Y = Y, X = Z.E, Z1 = Z.G, Z2 = Z.EG, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV)
 
   expect_output(str(pm), 'List of 6')
