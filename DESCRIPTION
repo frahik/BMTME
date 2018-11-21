@@ -1,7 +1,7 @@
 Package: BMTME
 Title: Bayesian Multi-Trait Multi-Environment for Genomic Selection Analysis
-Version: 0.0.23
-Date: 2018-10-22
+Version: 0.0.24
+Date: 2018-11-21
 Authors@R: c(person("Francisco Javier", "Luna-Vazquez", email = "frahik@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-5370-7152")),
              person("Osval Antonio", "Montesinos-Lopez", email= "oamontes1@ucol.mx", role = "aut", comment = c(ORCID = "0000-0002-3973-6547")),
              person("Abelardo", "Montesinos-Lopez", role = "aut"),
@@ -16,7 +16,7 @@ License: LGPL-3
 Encoding: UTF-8
 LazyData: true
 Type: Package
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 URL: https://github.com/frahik/BMTME
 BugReports: https://github.com/frahik/BMTME/issues/new
 NeedsCompilation: yes
