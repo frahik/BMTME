@@ -87,7 +87,7 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
     predicted <- tidyr::gather(as.data.frame(fm$yHat[testingSet, ]), 'Trait', 'Predicted')
 
     results <- data.frame(Position = testingSet,
-                          Environment = testingSet$Environments[positionTST],
+                          Environment = NA,
                           Trait = rep(colnames(Y), each = length(testingSet)),
                           Partition = 1,
                           Observed = round(observed$Observed, digits),
