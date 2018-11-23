@@ -85,7 +85,7 @@ CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
   #Lineas ?nicas restantes
   UL_k <- unique(dat_F_k[, DataSetID])
   Pos_R_k <- rep(NA, length(UL_k))
-  for (j in seq_len(UL_k)) {
+  for (j in seq_len(length(UL_k))) {
     Pos_j_k <-  which(DataSet[, DataSetID] == UL_k[j])
     Pos_R_k[j] <- sample(Pos_j_k, 1)
   }
@@ -110,7 +110,7 @@ CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
       #Posiciones de lineas a mantener fuera del grupo k
       Pos_R_k <- rep(NA, length(UL_k))
 
-      for (j in seq_len(UL_k)) {
+      for (j in seq_len(length(UL_k))) {
         Pos_j_k <-  which((DataSet[, DataSetID] == UL_k[j]))
         if (length(Pos_j_k) > 1) {
           Pos_R_k[j] <- sample(Pos_j_k, 1)
