@@ -48,69 +48,14 @@ output: github_document
   News of this version (`r packageVersion('BMTME')`)
 </h2>
 
-Revision 24
+ * Include coverage test
+ * Typo fixed
+ * Fixed bug in `BMTME()` function with a vector as testingSet parameter.
+ * Fixed bug in `RandomPartition()` function.
+ * Implemented predictions with not crossvalidation in `BMORS()` function.
+ * Include `print()` function to `BMORS` object with not crossvalidation.
 
- * Removed stratified random partitions.
- * Fixed barplot for BMORS_Env.
- * Good practice with <-
- * complete F or T, logical arguments.
- * Bug fixed: changed 1:length to seq_len to avoid bugs.
- * Incude ORCID.
-
-Revision 23
-
- * Include more tests.
- * Fixed print message of `BMORS()` and `BMORS_Env()` functions.
- * Fixed parallel work of `BMORS()` function.
- 
-Revision 22
-
- * Important updates to the documentation.
- * Fixed MAC-OS 10.11 El Capitan, installation (issue #1).
- 
-Revision 21
-
- * `BMTERS()` function now is `BMORS()` function.
- * `BMTERS_Env()` function now is `BMORS_Env()` function.
-
-Revision 20
-
- * Update Windows c++ support.
- * Fixed issues #1 (Installation in Windows) and #2 (Typos). Thanks to @volpatoo and @j450h1 by reporting it.
-
-Revision 19
- 
- * Update plot and boxplot functions
- 
-Revision 18
- 
- * New `predictor_Sec_complete` parameter in `BMTMERS_Env()` function.
- 
-Revision 17
-
- * New `predictor_Sec_complete` parameter in `BMTMERS()` function.
-
-Revision 16
-
- * The MSEP was changed to MAAPE for the error estimations of the predictions.
- * Minor fixes in the documentation.
- * Now the boxplots can be ordered by the MAAPE.
- * fixed the predicted output.
- 
-Revision 15
- 
- * Implement parallel mode in the BMTMERS function
- * Implement validation to `parallelCores` parameter in the functions that could use it. 
- * export `n_cores` used to fit the models that could use `parallelCores` parameter.
- * fixed class of `BME` function.
- 
-Revision 14
-
- * Update Unix support
- 
-Revision 13
- 
- * Initial development is in progress, but there has not yet been a stable, usable release suitable for the public; this is a pre-release, be careful.
+See the last updates in [NEWS](NEWS.md).
 
 <h2 id="instructions">
   Instructions for proper implementation
