@@ -6,7 +6,7 @@
 
 <h3 align="center">
 
-Bayesian Multi-Trait Multi-Environment | Development version 0.0.24
+Bayesian Multi-Trait Multi-Environment | Development version 0.0.25
 
 </h4>
 
@@ -14,6 +14,8 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.24
 
 <a href="https://www.tidyverse.org/lifecycle/#experimental">
 <img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Experimental">
+</a> <a href="https://travis-ci.org/frahik/BMTME">
+<img src="https://travis-ci.org/frahik/BMTME.svg?branch=master" alt="Travis build status">
 </a> <a href="https://www.gnu.org/licenses/lgpl-3.0">
 <img src="https://img.shields.io/badge/License-LGPL%20v3-blue.svg" alt="LGPL, Version 3.0">
 </a> <a href="http://www.repostatus.org/#wip">
@@ -28,7 +30,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.24
 
 <h4 align="center">
 
-\[Last README update: 2018-11-21\]
+\[Last README update: 2018-11-24\]
 
 </h4>
 
@@ -48,7 +50,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.24
 
 <h2 id="news">
 
-News of this version (0.0.24)
+News of this version (0.0.25)
 
 </h2>
 
