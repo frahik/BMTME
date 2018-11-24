@@ -176,7 +176,7 @@ print.BMTME <- function(x, ...){
 
   print.default(format(head(x$yHat, 10), digits = 3), print.gap = 2L, quote = FALSE)
 
-  cat('\n Use str() function to found more datailed information.')
+  cat('\n Use str() function to found more detailed information.')
   invisible(x)
 }
 
@@ -196,7 +196,7 @@ print.BME <- function(x, ...){
 
   print.default(format(head(x$yHat, 10), digits = 3), print.gap = 2L, quote = FALSE)
 
-  cat('\n Use str() function to found more datailed information.')
+  cat('\n Use str() function to found more detailed information.')
   invisible(x)
 }
 
@@ -221,7 +221,7 @@ print.BMTMECV <- function(x, ...){
 
   print.data.frame(summary(x, 'compact', digits = 3), print.gap = 2L, quote = FALSE)
 
-  cat('\n Use str() function to found more datailed information.')
+  cat('\n Use str() function to found more detailed information.')
   invisible(x)
 }
 
@@ -246,7 +246,7 @@ print.BMECV <- function(x, ...){
 
   print.data.frame(summary(x, 'compact', digits = 3), print.gap = 2L, quote = FALSE)
 
-  cat('\n Use str() function to found more datailed information.')
+  cat('\n Use str() function to found more detailed information.')
   invisible(x)
 }
 
@@ -268,7 +268,7 @@ print.BMORS <- function(x, ...){
 
   print.default(format(head(x$results$Predicted, 10), digits = 3), print.gap = 2L, quote = FALSE)
 
-  cat('\n Use str() function to found more datailed information.')
+  cat('\n Use str() function to found more detailed information.')
   invisible(x)
 }
 
@@ -293,7 +293,7 @@ print.BMORSCV <- function(x, ...){
 
   print.data.frame(summary(x, 'compact', digits = 3), print.gap = 2L, quote = FALSE)
 
-  cat('\n Use str() function to found more datailed information.')
+  cat('\n Use str() function to found more detailed information.')
   invisible(x)
 }
 
@@ -318,7 +318,7 @@ print.BMORSENV <- function(x, ...){
 
   print.data.frame(summary(x, digits = 3), print.gap = 2L, quote = FALSE)
 
-  cat('\n Use str() function to found more datailed information.')
+  cat('\n Use str() function to found more detailed information.')
   invisible(x)
 }
 
