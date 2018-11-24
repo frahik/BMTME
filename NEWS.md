@@ -1,3 +1,116 @@
+BMTME v0.0.25
+==============
+
+Changes:
+ 
+ * Include coverage test
+ * Typo fixed
+ * Fixed bug in `BMTME()` function with a vector as testingSet parameter.
+ * Fixed bug in `RandomPartition()` function.
+ * Implemented predictions with not crossvalidation in `BMORS()` function.
+ * Include `print()` function to `BMORS` object with not crossvalidation.
+ 
+
+BMTME v0.0.24
+==============
+
+Changes:
+
+ * Removed stratified random partitions.
+ * Fixed barplot for BMORS_Env.
+ * Good practice with <-
+ * complete F or T, logical arguments.
+ * Bug fixed: changed 1:length to seq_len to avoid bugs.
+ * Incude ORCID.
+
+BMTME v0.0.23
+==============
+
+Changes:
+
+ * Include more tests.
+ * Fixed print message of `BMORS()` and `BMORS_Env()` functions.
+ * Fixed parallel work of `BMORS()` function.
+ 
+BMTME v0.0.22
+==============
+
+Changes:
+
+ * Important updates to the documentation.
+ * Fixed MAC-OS 10.11 El Capitan, installation (issue #1).
+ 
+BMTME v0.0.21
+==============
+
+Changes:
+
+ * `BMTERS()` function now is `BMORS()` function.
+ * `BMTERS_Env()` function now is `BMORS_Env()` function.
+
+BMTME v0.0.20
+==============
+
+Changes:
+
+ * Update Windows c++ support.
+ * Fixed issues #1 (Installation in Windows) and #2 (Typos). Thanks to @volpatoo and @j450h1 by reporting it.
+
+BMTME v0.0.19
+==============
+
+Changes:
+ 
+ * Update plot and boxplot functions
+ 
+BMTME v0.0.18
+==============
+
+Changes:
+ 
+ * New `predictor_Sec_complete` parameter in `BMTMERS_Env()` function.
+ 
+BMTME v0.0.17
+==============
+
+Changes:
+
+ * New `predictor_Sec_complete` parameter in `BMTMERS()` function.
+
+BMTME v0.0.16
+==============
+
+Changes:
+
+ * The MSEP was changed to MAAPE for the error estimations of the predictions.
+ * Minor fixes in the documentation.
+ * Now the boxplots can be ordered by the MAAPE.
+ * fixed the predicted output.
+ 
+BMTME v0.0.15
+==============
+
+Changes:
+ 
+ * Implement parallel mode in the BMTMERS function
+ * Implement validation to `parallelCores` parameter in the functions that could use it. 
+ * export `n_cores` used to fit the models that could use `parallelCores` parameter.
+ * fixed class of `BME` function.
+ 
+BMTME v0.0.14
+==============
+
+Changes:
+
+ * Update Unix support
+ 
+BMTME v0.0.13
+==============
+
+Changes:
+
+ * Initial development is in progress, but there has not yet been a stable, usable release suitable for the public; this is a pre-release, be careful.
+
 BMTME v0.0.1
 ==============
 
