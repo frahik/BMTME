@@ -7,12 +7,12 @@
 \method{plot}{BME}(x, trait = "", ...)
 }
 \arguments{
-\item{x}{\code{BME object}.}
+\item{x}{an \code{BME object} for which the plot of model is meaningful.}
 
-\item{trait}{\code{string} name of the trait to plot.}
+\item{trait}{\code{string} Name of the trait to plot.}
 
 \item{...}{Further arguments passed to or from other methods.}
 }
 \description{
-Solo es una prueba
+Simple scatter plot comparing the observed values against the predicted values.
 }

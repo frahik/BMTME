@@ -7,12 +7,9 @@
 \method{print}{BMECV}(x, ...)
 }
 \arguments{
-\item{x}{object a}
+\item{x}{an BMECV object used to print.}
 
-\item{...}{more objects}
-}
-\value{
-test
+\item{...}{Further arguments passed to or from other methods.}
 }
 \description{
 Print BMECV information object

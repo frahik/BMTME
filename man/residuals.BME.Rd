@@ -7,12 +7,12 @@
 \method{residuals}{BME}(object, digits = 4, ...)
 }
 \arguments{
-\item{object}{\code{BME object} Objeto BME, resultado de ejecutar BME}
+\item{object}{an \code{BME object} for which the extraction of model residuals is meaningful.}
 
 \item{digits}{number of digits.}
 
 \item{...}{Further arguments passed to or from other methods.}
 }
 \description{
-Solo es una prueba
+extracts model residuals from BME objects returned by modeling function BME.
 }

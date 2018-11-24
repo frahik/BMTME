@@ -7,14 +7,14 @@
 \method{boxplot}{BMORSCV}(x, select = "Pearson", ordered = TRUE, ...)
 }
 \arguments{
-\item{x}{\code{BMORSCV object} Objeto BMORSCV, resultado de ejecutar MTME()}
+\item{x}{an \code{BMORSCV object} for which the plot of model is meaningful.}
 
-\item{select}{\code{string} Pearson or MAAPE}
+\item{select}{\code{character} By default ('Pearson'), plot the Pearson Correlations of the BMORSCV Object, else ('MAAPE'), plot the MAAPE of the BMORSCV Object.}
 
-\item{ordered}{\code{logic} TRUE or FALSE}
+\item{ordered}{\code{logic} The graph should be sorted by the median? by default is \code{TRUE}.}
 
 \item{...}{Further arguments passed to or from other methods.}
 }
 \description{
-Solo es una prueba
+Produce box-and-whisker plot(s) of the given BMORSCV object.
 }

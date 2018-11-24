@@ -2,17 +2,19 @@
 % Please edit documentation in R/utils.R
 \name{summary.BMORSENV}
 \alias{summary.BMORSENV}
-\title{Summary.BMORSENV}
+\title{summary.BMORSENV}
 \usage{
 \method{summary}{BMORSENV}(object, digits = 4, ...)
 }
 \arguments{
-\item{object}{\code{BMORSENV object} Objeto BMORSENV, resultado de ejecutar MTME()}
+\item{object}{\code{BMORSENV object} an BMORSENV object for which a summary is desired.}
 
 \item{digits}{number of digits.}
 
 \item{...}{Further arguments passed to or from other methods.}
 }
 \description{
-Solo es una prueba
+Produces a summary of the results of the fitted model adding
+the predictive capabilities of the model, as well as the MAAPE error rate
+and the respective standard errors.
 }

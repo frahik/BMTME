@@ -7,12 +7,9 @@
 \method{print}{BMORS}(x, ...)
 }
 \arguments{
-\item{x}{BMORS object}
+\item{x}{an BMORS object used to print.}
 
-\item{...}{more objects}
-}
-\value{
-test
+\item{...}{Further arguments passed to or from other methods.}
 }
 \description{
 Print BMORS information object

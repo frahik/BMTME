@@ -7,12 +7,9 @@
 \method{print}{BMTME}(x, ...)
 }
 \arguments{
-\item{x}{object a}
+\item{x}{an BMTME object used to print.}
 
-\item{...}{more objects}
-}
-\value{
-test of package
+\item{...}{Further arguments passed to or from other methods.}
 }
 \description{
 Print BMTME information object

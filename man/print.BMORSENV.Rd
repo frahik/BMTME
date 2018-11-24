@@ -7,9 +7,9 @@
 \method{print}{BMORSENV}(x, ...)
 }
 \arguments{
-\item{x}{object a}
+\item{x}{an BMORSENV object used to print.}
 
-\item{...}{more objects}
+\item{...}{Further arguments passed to or from other methods.}
 }
 \value{
 test

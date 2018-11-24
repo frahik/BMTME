@@ -1,9 +1,11 @@
-#' @title Summary.BMTMECV
+#' @title summary.BMTMECV
 #'
-#' @description Solo es una prueba
+#' @description Produces a summary of the results of the fitted model adding
+#' the predictive capabilities of the model, as well as the MAAPE error rate
+#' and the respective standard errors.
 #'
-#' @param object \code{BMTMECV object} Objeto BMTMECV, resultado de ejecutar BMTME()
-#' @param information compact, extended, complete
+#' @param object \code{BMTMECV object} an BMTMECV object for which a summary is desired.
+#' @param information The type of summary to obtain from the model (compact, extended, complete), by default is compact.
 #' @param digits number of digits.
 #' @param ... Further arguments passed to or from other methods.
 #'
@@ -43,12 +45,15 @@ summary.BMTMECV <- function(object, information = 'compact', digits = 4, ...) {
   return(out)
 }
 
-#' @title Summary.BMECV
+#' @title summary.BMECV
 #'
-#' @description Solo es una prueba
+#' @description Produces a summary of the results of the fitted model adding
+#' the predictive capabilities of the model, as well as the MAAPE error rate
+#' and the respective standard errors.
 #'
-#' @param object \code{BMECV object} Objeto BMECV, resultado de ejecutar BME()
-#' @param information compact, extended, complete
+#' @param object \code{BMECV object} an BMECV object for which a summary is desired.
+#' @param information The type of summary to obtain from the model (compact, extended, complete), by default is compact.
+#'
 #' @param digits number of digits.
 #' @param ... Further arguments passed to or from other methods.
 #'
@@ -88,12 +93,14 @@ summary.BMECV <- function(object, information = 'compact', digits = 4, ...) {
   return(out)
 }
 
-#' @title Summary.BMORSCV
+#' @title summary.BMORSCV
 #'
-#' @description Solo es una prueba
+#' @description Produces a summary of the results of the fitted model adding
+#' the predictive capabilities of the model, as well as the MAAPE error rate
+#' and the respective standard errors.
 #'
-#' @param object \code{BMORSCV object} Objeto BMORSCV, resultado de ejecutar MTME()
-#' @param information compact, extended, complete
+#' @param object \code{BMORSCV object} an BMORSCV object for which a summary is desired.
+#' @param information The type of summary to obtain from the model (compact, extended, complete), by default is compact.
 #' @param digits number of digits.
 #' @param ... Further arguments passed to or from other methods.
 #'
@@ -134,11 +141,13 @@ summary.BMORSCV <- function(object, information = 'compact', digits = 4, ...){
 }
 
 
-#' @title Summary.BMORSENV
+#' @title summary.BMORSENV
 #'
-#' @description Solo es una prueba
+#' @description Produces a summary of the results of the fitted model adding
+#' the predictive capabilities of the model, as well as the MAAPE error rate
+#' and the respective standard errors.
 #'
-#' @param object \code{BMORSENV object} Objeto BMORSENV, resultado de ejecutar MTME()
+#' @param object \code{BMORSENV object} an BMORSENV object for which a summary is desired.
 #' @param digits number of digits.
 #' @param ... Further arguments passed to or from other methods.
 #'
@@ -162,10 +171,9 @@ summary.BMORSENV <- function(object, digits = 4, ...){
 
 #' Print BMTME information object
 #'
-#' @param x object a
-#' @param ...  more objects
+#' @param x an BMTME object used to print.
+#' @param ...  Further arguments passed to or from other methods.
 #'
-#' @return test of package
 #' @export
 #'
 print.BMTME <- function(x, ...){
@@ -182,10 +190,8 @@ print.BMTME <- function(x, ...){
 
 #' Print BME information object
 #'
-#' @param x object a
-#' @param ... more objects
-#'
-#' @return test of a package
+#' @param x an BME object used to print.
+#' @param ...  Further arguments passed to or from other methods.
 #' @export
 #'
 print.BME <- function(x, ...){
@@ -202,10 +208,8 @@ print.BME <- function(x, ...){
 
 #' Print BMTMECV information object
 #'
-#' @param x object a
-#' @param ...  more objects
-#'
-#' @return test
+#' @param x an BMTMECV object used to print.
+#' @param ...  Further arguments passed to or from other methods.
 #' @importFrom utils head
 #' @export
 #'
@@ -227,10 +231,9 @@ print.BMTMECV <- function(x, ...){
 
 #' Print BMECV information object
 #'
-#' @param x object a
-#' @param ...  more objects
+#' @param x an BMECV object used to print.
+#' @param ...  Further arguments passed to or from other methods.
 #'
-#' @return test
 #' @importFrom utils head
 #' @export
 #'
@@ -252,10 +255,8 @@ print.BMECV <- function(x, ...){
 
 #' Print BMORS information object
 #'
-#' @param x BMORS object
-#' @param ...  more objects
-#'
-#' @return test
+#' @param x an BMORS object used to print.
+#' @param ...  Further arguments passed to or from other methods.
 #' @importFrom utils head
 #' @export
 #'
@@ -274,10 +275,8 @@ print.BMORS <- function(x, ...){
 
 #' Print BMORSCV information object
 #'
-#' @param x object a
-#' @param ...  more objects
-#'
-#' @return test
+#' @param x an BMORSCV object used to print.
+#' @param ...  Further arguments passed to or from other methods.
 #' @importFrom utils head
 #' @export
 #'
@@ -299,9 +298,8 @@ print.BMORSCV <- function(x, ...){
 
 #' Print BMORSENV information object
 #'
-#' @param x object a
-#' @param ...  more objects
-#'
+#' @param x an BMORSENV object used to print.
+#' @param ...  Further arguments passed to or from other methods.
 #' @return test
 #' @importFrom utils head
 #' @export
@@ -325,9 +323,9 @@ print.BMORSENV <- function(x, ...){
 
 #' @title residuals.BME
 #'
-#' @description Solo es una prueba
+#' @description extracts model residuals from BME objects returned by modeling function BME.
 #'
-#' @param object \code{BME object} Objeto BME, resultado de ejecutar BME
+#' @param object an \code{BME object} for which the extraction of model residuals is meaningful.
 #' @param digits number of digits.
 #' @param ... Further arguments passed to or from other methods.
 #'
@@ -339,9 +337,9 @@ residuals.BME <- function(object, digits = 4, ...) {
 
 #' @title residuals.BMTME
 #'
-#' @description Solo es una prueba
+#' @description  extracts model residuals from BMTME objects returned by modeling function BMTME.
 #'
-#' @param object \code{BMTME object} Objeto BMTME, resultado de ejecutar BMTME
+#' @param object an \code{BMTME object} for which the extraction of model residuals is meaningful.
 #' @param digits number of digits.
 #' @param ... Further arguments passed to or from other methods.
 #'
@@ -353,10 +351,10 @@ residuals.BMTME <- function(object, digits = 4, ...) {
 
 #' @title plot.BME
 #'
-#' @description Solo es una prueba
+#' @description Simple scatter plot comparing the observed values against the predicted values.
 #'
-#' @param x \code{BME object}.
-#' @param trait \code{string} name of the trait to plot.
+#' @param x an \code{BME object} for which the plot of model is meaningful.
+#' @param trait \code{string} Name of the trait to plot.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom graphics plot abline
@@ -373,10 +371,10 @@ plot.BME <- function(x, trait = '', ...){
 
 #' @title plot.BMTME
 #'
-#' @description Solo es una prueba
+#' Simple scatter plot comparing the observed values against the predicted values.
 #'
-#' @param x \code{BMTME object}.
-#' @param trait \code{string} name of the trait to plot.
+#' @param x an \code{BMTME object} for which the plot of model is meaningful.
+#' @param trait \code{string} Name of the trait to plot.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom graphics plot abline
@@ -392,12 +390,11 @@ plot.BMTME <- function(x, trait = '', ...){
   abline(a = 0, b = 1, lty = 3)
 }
 
-#' @title Plot BMORSCV graph
+#' @title Plot BMORSCV
+#' Simple scatter plot comparing the observed values against the predicted values.
 #'
-#' @description Plot from BMORSCV object
-#'
-#' @param x \code{BMORSCV object} BMORSCV object, result of use the MTME() function
-#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MAAPE'), plot the MAAPE of the BMORSCV Object.
+#' @param x an \code{BMORS object} for which the plot of model is meaningful.
+#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the BMORSCV Object, else ('MAAPE'), plot the MAAPE of the BMORSCV Object.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom graphics arrows axis plot
@@ -428,10 +425,10 @@ plot.BMORSCV <- function(x, select = 'Pearson', ...){
 
 #' @title barplot BMORSENV graph
 #'
-#' @description Plot from BMORSENV object
+#' @description Creates a bar plot with vertical bars, showing the predictive capability of the model or the error rate.
 #'
-#' @param height \code{BMORSENV object} BMORSENV object, result of use the MTME() function
-#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MAAPE'), plot the MAAPE of the BMORSENV Object.
+#' @param height an \code{BMORSENV object} for which the plot of model is meaningful.
+#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the BMORSENV Object, else ('MAAPE'), plot the MAAPE of the BMORSENV Object.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom graphics barplot
@@ -450,11 +447,11 @@ barplot.BMORSENV <- function(height, select = 'Pearson', ...){
 
 #' @title boxplot.BMECV
 #'
-#' @description Solo es una prueba
+#' @description Produce box-and-whisker plot(s) of the given BMECV object.
 #'
-#' @param x \code{BMECV object} Objeto BMECV, resultado de ejecutar BME()
-#' @param select \code{string} Pearson or MAAPE
-#' @param ordered \code{logic} TRUE or FALSE
+#' @param x an \code{BMECV object} for which the plot of model is meaningful.
+#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the BMECV Object, else ('MAAPE'), plot the MAAPE of the BMECV Object.
+#' @param ordered \code{logic} The graph should be sorted by the median? by default is \code{TRUE}.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom graphics boxplot
@@ -497,11 +494,11 @@ boxplot.BMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
 
 #' @title boxplot.BMTMECV
 #'
-#' @description Solo es una prueba
+#' @description Produce box-and-whisker plot(s) of the given BMTMECV object.
 #'
-#' @param x \code{BMTMECV object} Objeto BMTMECV, resultado de ejecutar BMTME()
-#' @param select \code{string} Pearson or MAAPE
-#' @param ordered \code{logic} TRUE or FALSE
+#' @param x an \code{BMTMECV object} for which the plot of model is meaningful.
+#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the BMTMECV Object, else ('MAAPE'), plot the MAAPE of the BMTMECV Object.
+#' @param ordered \code{logic} The graph should be sorted by the median? by default is \code{TRUE}.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom graphics boxplot
@@ -536,11 +533,11 @@ boxplot.BMTMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
 
 #' @title boxplot.BMORSCV
 #'
-#' @description Solo es una prueba
+#' @description Produce box-and-whisker plot(s) of the given BMORSCV object.
 #'
-#' @param x \code{BMORSCV object} Objeto BMORSCV, resultado de ejecutar MTME()
-#' @param select \code{string} Pearson or MAAPE
-#' @param ordered \code{logic} TRUE or FALSE
+#' @param x an \code{BMORSCV object} for which the plot of model is meaningful.
+#' @param select \code{character} By default ('Pearson'), plot the Pearson Correlations of the BMORSCV Object, else ('MAAPE'), plot the MAAPE of the BMORSCV Object.
+#' @param ordered \code{logic} The graph should be sorted by the median? by default is \code{TRUE}.
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom graphics boxplot

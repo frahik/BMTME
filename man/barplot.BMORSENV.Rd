@@ -7,12 +7,12 @@
 \method{barplot}{BMORSENV}(height, select = "Pearson", ...)
 }
 \arguments{
-\item{height}{\code{BMORSENV object} BMORSENV object, result of use the MTME() function}
+\item{height}{an \code{BMORSENV object} for which the plot of model is meaningful.}
 
-\item{select}{\code{character} By default ('Pearson'), plot the Pearson Correlations of the MTME Object, else ('MAAPE'), plot the MAAPE of the BMORSENV Object.}
+\item{select}{\code{character} By default ('Pearson'), plot the Pearson Correlations of the BMORSENV Object, else ('MAAPE'), plot the MAAPE of the BMORSENV Object.}
 
 \item{...}{Further arguments passed to or from other methods.}
 }
 \description{
-Plot from BMORSENV object
+Creates a bar plot with vertical bars, showing the predictive capability of the model or the error rate.
 }

@@ -2,17 +2,21 @@
 % Please edit documentation in R/utils.R
 \name{plot.BMTME}
 \alias{plot.BMTME}
-\title{plot.BMTME}
+\title{plot.BMTME
+
+Simple scatter plot comparing the observed values against the predicted values.}
 \usage{
 \method{plot}{BMTME}(x, trait = "", ...)
 }
 \arguments{
-\item{x}{\code{BMTME object}.}
+\item{x}{an \code{BMTME object} for which the plot of model is meaningful.}
 
-\item{trait}{\code{string} name of the trait to plot.}
+\item{trait}{\code{string} Name of the trait to plot.}
 
 \item{...}{Further arguments passed to or from other methods.}
 }
 \description{
-Solo es una prueba
+plot.BMTME
+
+Simple scatter plot comparing the observed values against the predicted values.
 }

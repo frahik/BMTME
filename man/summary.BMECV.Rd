@@ -2,20 +2,22 @@
 % Please edit documentation in R/utils.R
 \name{summary.BMECV}
 \alias{summary.BMECV}
-\title{Summary.BMECV}
+\title{summary.BMECV}
 \usage{
 \method{summary}{BMECV}(object, information = "compact", digits = 4,
   ...)
 }
 \arguments{
-\item{object}{\code{BMECV object} Objeto BMECV, resultado de ejecutar BME()}
+\item{object}{\code{BMECV object} an BMECV object for which a summary is desired.}
 
-\item{information}{compact, extended, complete}
+\item{information}{The type of summary to obtain from the model (compact, extended, complete), by default is compact.}
 
 \item{digits}{number of digits.}
 
 \item{...}{Further arguments passed to or from other methods.}
 }
 \description{
-Solo es una prueba
+Produces a summary of the results of the fitted model adding
+the predictive capabilities of the model, as well as the MAAPE error rate
+and the respective standard errors.
 }

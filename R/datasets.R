@@ -52,7 +52,7 @@ NULL
 #' @name WheatIranianToy
 #' @title Wheat Iranian Toy Data
 #' @description This data set is based on the data set used in the study of (Crossa et al., 2016).
-#' The original dataset was composed of 2374 wheat lines that were evaluated in field (D) and heat (H) drought experiments at the CIMMYT experimental station near Ciudad Obregón, Sonora, Mexico (27°20' N, 109°54' W, 38 meters above sea level), during the Obregón 2010-2011 cycle.
+#' The original dataset was composed of 2374 wheat lines that were evaluated in field (D) and heat (H) drought experiments at the CIMMYT experimental station near Obregón City, Sonora, Mexico (27°20' N, 109°54' W, 38 meters above sea level), during the Obregón 2010-2011 cycle.
 #'  Two traits were evaluated (DTM days at maturity and DTH days to heading). From a total of 40,000 markers, after quality control 39,758 markers were used.
 #'   To load this dataset in the package we only use 30 lines, and we have identified this data set as WheatIranianToy. For more details, see the study of (Crossa et al., 2016).
 #'

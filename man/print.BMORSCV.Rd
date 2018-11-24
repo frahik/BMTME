@@ -7,12 +7,9 @@
 \method{print}{BMORSCV}(x, ...)
 }
 \arguments{
-\item{x}{object a}
+\item{x}{an BMORSCV object used to print.}
 
-\item{...}{more objects}
-}
-\value{
-test
+\item{...}{Further arguments passed to or from other methods.}
 }
 \description{
 Print BMORSCV information object
