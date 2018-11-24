@@ -250,6 +250,27 @@ print.BMECV <- function(x, ...){
   invisible(x)
 }
 
+#' Print BMORS information object
+#'
+#' @param x BMORS object
+#' @param ...  more objects
+#'
+#' @return test
+#' @importFrom utils head
+#' @export
+#'
+print.BMORS <- function(x, ...){
+  cat('Fitted Bayesian Multi-Output Regression Stacking model with: \n',
+      x$nIter, ' Iterations, burning the first ', x$burnIn, ' and thining every ', x$thin, '\n',
+      'We found ', x$NAvalues, ' NA values \n',
+      'Runtime: ', x$executionTime ,' seconds \n\n',
+      'Some predicted values: \n')
+
+  print.default(format(head(x$results$Predicted, 10), digits = 3), print.gap = 2L, quote = FALSE)
+
+  cat('\n Use str() function to found more datailed information.')
+  invisible(x)
+}
 
 #' Print BMORSCV information object
 #'
