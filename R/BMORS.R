@@ -33,46 +33,46 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
                                    total = 2L*(nCV*nTraits), clear = FALSE, show_after = 0)
 
   if (is.null(testingSet)) {
-    nCV <- 1
-    # Covariance
-    for (actual_CV in seq_len(nCV)) {
-      #########First stage analysis#################################
-      for (t in seq_len(nTraits)) {
-        if (progressBar) {
-          pb$tick(tokens = list(what = paste0('Estimating covariates')))
-        }
-        y <- Y[, t]
-        fm <- BGLR(y, ETA = ETA, nIter = nIter, burnIn = burnIn, thin = thin, verbose = FALSE)
-        YwithCov[, nTraits + t] <- fm$yHat
+    nNA <- 0
+    #########First stage analysis#################################
+    for (t in seq_len(nTraits)) {
+      if (progressBar) {
+        pb$tick(tokens = list(what = paste0('Estimating covariates')))
       }
-
-      XPV <- scale(YwithCov[, (1L + nTraits):(2L*nTraits)])
-      ETA1 <- ETA
-      if (predictor_Sec_complete) {
-        ETA1$Cov_PreVal <- list(X = XPV, model = covModel)
-      } else {
-        ETA1 <- list(Cov_PreVal = list(X = XPV, model = covModel))
-      }
-
-      naTraits <- colnames(Y)[colSums(is.na(Y)) > 0]
-      for (t in naTraits) {
-        if (progressBar) {
-          pb$tick(tokens = list(what = paste0('Fitting the model')))
-        }
-        y1 <- Y[, t]
-        positionTST <- which(is.na(Y[, t]))
-
-        fm <- BGLR(y1, ETA = ETA1, nIter = nIter, burnIn = burnIn, thin = thin, verbose = FALSE)
-
-        results <- rbind(results, data.frame(Position = positionTST,
-                                             Environment = NA,
-                                             Trait = t,
-                                             Partition = actual_CV,
-                                             Observed = round(Y[positionTST, t], digits), #$response, digits),
-                                             Predicted = round(fm$yHat[positionTST], digits)))
-      }
-
+      y <- Y[, t]
+      fm <- BGLR(y, ETA = ETA, nIter = nIter, burnIn = burnIn, thin = thin, verbose = FALSE)
+      YwithCov[, nTraits + t] <- fm$yHat
     }
+
+    XPV <- scale(YwithCov[, (1L + nTraits):(2L*nTraits)])
+    ETA1 <- ETA
+    if (predictor_Sec_complete) {
+      ETA1$Cov_PreVal <- list(X = XPV, model = covModel)
+    } else {
+      ETA1 <- list(Cov_PreVal = list(X = XPV, model = covModel))
+    }
+
+    naTraits <- colnames(Y)[colSums(is.na(Y)) > 0]
+    for (t in naTraits) {
+      if (progressBar) {
+        pb$tick(tokens = list(what = paste0('Fitting the model')))
+      }
+      y1 <- Y[, t]
+      positionTST <- which(is.na(Y[, t]))
+      nNA <- nNA + length(positionTST)
+
+      fm <- BGLR(y1, ETA = ETA1, nIter = nIter, burnIn = burnIn, thin = thin, verbose = FALSE)
+
+      results <- rbind(results, data.frame(Position = positionTST,
+                                           Environment = NA,
+                                           Trait = t,
+                                           Partition = 1,
+                                           Observed = round(Y[positionTST, t], digits),
+                                           Predicted = round(fm$yHat[positionTST], digits)))
+    }
+
+    out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init, NAvalues = nNA)
+    class(out) <- 'BMORS'
   } else if (parallelCores <= 1 && inherits(testingSet, 'CrossValidation')) {
     # Covariance
     for (actual_CV in seq_len(nCV)) {
@@ -111,11 +111,13 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
                                              Environment = testingSet$Environments[positionTST],
                                              Trait = colnames(Y)[t],
                                              Partition = actual_CV,
-                                             Observed = round(Y[positionTST, t], digits), #$response, digits),
+                                             Observed = round(Y[positionTST, t], digits),
                                              Predicted = round(fm$yHat[positionTST], digits)))
       }
 
     }
+    out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
+    class(out) <- 'BMORSCV'
   } else if (parallelCores > 1 && inherits(testingSet, 'CrossValidation')) {
     cl <- snow::makeCluster(parallelCores)
     doSNOW::registerDoSNOW(cl)
@@ -153,12 +155,11 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
       }
       results
     }
-
-
+    out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
+    class(out) <- 'BMORSCV'
   }
 
-  out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
-  class(out) <- 'BMORSCV'
+
   return(out)
 }
 
