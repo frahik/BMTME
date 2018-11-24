@@ -49,4 +49,4 @@ LinkingTo:
 SystemRequirements: C++11
 Suggests: 
     testthat (>= 2.0.1),
-    covr (>= 3.2.1)
+    covr
