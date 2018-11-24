@@ -172,11 +172,7 @@ print.BMTME <- function(x, ...){
   cat('Fitted Bayesian Multi-Trait Multi-Environment Model with: \n',
       x$nIter, ' Iterations, burning the first ', x$burnIn, ' and thining every ', x$thin, '\n',
       'We found ', x$NAvalues, ' NA values \n\n',
-      'Predicted Values: \n')
-
-  print.default(format(head(x$yHat, 10), digits = 3), print.gap = 2L, quote = FALSE)
-
-  cat('\n Use str() function to found more detailed information.')
+      '\n Use str() function to found more detailed information.')
   invisible(x)
 }
 
@@ -190,11 +186,7 @@ print.BME <- function(x, ...){
   cat('Multi-Environment Model Fitted with: \n',
       x$nIter, ' Iterations, burning the first ', x$burnIn, ' and thining every ', x$thin, '\n',
       'We found ', x$NAvalues, ' NA values \n\n',
-      'Predicted Values: \n')
-
-  print.default(format(head(x$yHat, 10), digits = 3), print.gap = 2L, quote = FALSE)
-
-  cat('\n Use str() function to found more detailed information.')
+      '\n Use str() function to found more detailed information.')
   invisible(x)
 }
 
@@ -209,11 +201,7 @@ print.BMTMECV <- function(x, ...){
   cat('Fitted Bayesian Multi-Trait Multi-Environment Model with: \n',
       x$nIter, ' Iterations, burning the first ', x$burnIn, ' and thining every ', x$thin, '\n',
       'Runtime: ', x$executionTime ,' seconds \n\n',
-      'Some predicted values: \n')
-
-  print.default(format(head(x$results$Predicted, 10), digits = 3), print.gap = 2L, quote = FALSE)
-
-  cat('\nPredictive capacity of the model: \n')
+      'Predictive capacity of the model: \n')
 
   print.data.frame(summary(x, 'compact', digits = 3), print.gap = 2L, quote = FALSE)
 
@@ -233,11 +221,7 @@ print.BMECV <- function(x, ...){
   cat('Fitted Bayesian Multi Environment model with: \n',
       x$nIter, ' Iterations, burning the first ', x$burnIn, ' and thining every ', x$thin, '\n',
       'Runtime: ', x$executionTime ,' seconds \n\n',
-      'Some predicted values: \n')
-
-  print.default(format(head(x$results$Predicted, 10), digits = 3), print.gap = 2L, quote = FALSE)
-
-  cat('\nPredictive capacity of the model: \n')
+      'Predictive capacity of the model: \n')
 
   print.data.frame(summary(x, 'compact', digits = 3), print.gap = 2L, quote = FALSE)
 
@@ -257,11 +241,7 @@ print.BMORS <- function(x, ...){
       x$nIter, ' Iterations, burning the first ', x$burnIn, ' and thining every ', x$thin, '\n',
       'We found ', x$NAvalues, ' NA values \n',
       'Runtime: ', x$executionTime ,' seconds \n\n',
-      'Some predicted values: \n')
-
-  print.default(format(head(x$results$Predicted, 10), digits = 3), print.gap = 2L, quote = FALSE)
-
-  cat('\n Use str() function to found more detailed information.')
+      '\n Use str() function to found more detailed information.')
   invisible(x)
 }
 
@@ -276,11 +256,7 @@ print.BMORSCV <- function(x, ...){
   cat('Fitted Bayesian Multi-Output Regression Stacking model with: \n',
       x$nIter, ' Iterations, burning the first ', x$burnIn, ' and thining every ', x$thin, '\n',
       'Runtime: ', x$executionTime ,' seconds \n\n',
-      'Some predicted values: \n')
-
-  print.default(format(head(x$results$Predicted, 10), digits = 3), print.gap = 2L, quote = FALSE)
-
-  cat('\nPredictive capacity of the model: \n')
+      'Predictive capacity of the model: \n')
 
   print.data.frame(summary(x, 'compact', digits = 3), print.gap = 2L, quote = FALSE)
 
@@ -300,11 +276,7 @@ print.BMORSENV <- function(x, ...){
   cat('Fitted Bayesian Multi-Output Regression Stacking model for n environments with: \n',
       x$nIter, ' Iterations, burning the first ', x$burnIn, ' and thining every ', x$thin, '\n',
       'Runtime: ', x$executionTime ,' seconds \n\n',
-      'Some predicted values: \n')
-
-  print.default(format(head(x$results$Predicted, 10), digits = 3), print.gap = 2L, quote = FALSE)
-
-  cat('\nPredictive capacity of the model: \n')
+      'Predictive capacity of the model: \n')
 
   print.data.frame(summary(x, digits = 3), print.gap = 2L, quote = FALSE)
 
