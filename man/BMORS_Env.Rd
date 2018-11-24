@@ -9,7 +9,7 @@ BMORS_Env(data = NULL, testingEnv = "", ETA = NULL,
   burnIn = 500, thin = 5, progressBar = TRUE, digits = 4)
 }
 \arguments{
-\item{data}{\code{(data.frame)} Phenotypic respones where each column it's a different trait and the first column are the name of the enviroment where it was evaluated.}
+\item{data}{\code{(data.frame)} Phenotypic respones where each column it's a different trait and the first column are the name of the environment where it was evaluated.}
 
 \item{testingEnv}{\code{(string)} Name of the Environment to test.}
 

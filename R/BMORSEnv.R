@@ -1,6 +1,6 @@
 #' Bayesian Multi-Output regression stacking for specific environment estimations
 #'
-#' @param data \code{(data.frame)} Phenotypic respones where each column it's a different trait and the first column are the name of the enviroment where it was evaluated.
+#' @param data \code{(data.frame)} Phenotypic respones where each column it's a different trait and the first column are the name of the environment where it was evaluated.
 #' @param ETA \code{(matrix)} This is a two-level list used to specify the regression function (or linear predictor).
 #' @param testingEnv \code{(string)} Name of the Environment to test.
 #' @param nIter \code{(integer)} Number of iterations to fit the model.
