@@ -100,7 +100,8 @@ test_that('BME function with Mada data', {
   expect_equal(fm$NAvalues, 0)
   expect_output(print(fm), 'Multi-Environment Model Fitted with')
   expect_silent(plot(fm, trait = 'PH'))
-
+  expect_is(residuals(fm), 'matrix')
+  expect_false(any(is.nan(residuals(fm))))
 
   pheno <- data.frame(GID = phenoMada[, 1], Env = '', Response = phenoMada[, 3])
   CrossV <- CV.RandomPart(pheno, NPartitions = 4, PTesting = 0.2, set_seed = 123)
@@ -122,6 +123,7 @@ test_that('BME function with Mada data', {
   expect_is(pm$executionTime, 'numeric')
   expect_output(print(pm), 'Fitted Bayesian Multi Environment model with:')
   expect_silent(boxplot(pm))
+  expect_silent(boxplot(pm, select = 'MAAPE'))
 
   # Check the work in parallel
   pm_parallel <- BME(Y = Y, Z1 = Z.G, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV, parallelCores = 2)
@@ -206,6 +208,8 @@ test_that('BMTME function with Iranian data', {
   expect_equal(fm$NAvalues, 0)
   expect_output(print(fm), 'Fitted Bayesian Multi-Trait Multi-Environment Model with:')
   expect_silent(plot(fm, trait = 'DTH'))
+  expect_is(residuals(fm), 'matrix')
+  expect_false(any(is.nan(residuals(fm))))
 
   # Check predictive capacities of the model
   pheno <- data.frame(GID = phenoIranianToy[, 1], Env = phenoIranianToy[, 2], Response = phenoIranianToy[, 3])
@@ -229,6 +233,7 @@ test_that('BMTME function with Iranian data', {
   expect_is(pm$executionTime, 'numeric')
   expect_output(print(pm), 'Fitted Bayesian Multi-Trait Multi-Environment Model with:')
   expect_silent(boxplot(pm))
+  expect_silent(boxplot(pm, select = 'MAAPE'))
 
   # Check the work in parallel
   pm_parallel <- BMTME(Y = Y, X = Z.E, Z1 = Z.G, Z2 = Z.EG, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV, parallelCores = 2)
@@ -290,7 +295,8 @@ test_that('BMORS function with Wheat full data', {
   expect_is(pm$executionTime, 'numeric')
   expect_output(print(pm), 'Fitted Bayesian Multi-Output Regression Stacking model with:')
   expect_silent(boxplot(pm))
-
+  expect_silent(boxplot(pm, select = 'MAAPE'))
+  expect_silent(plot(pm))
   # Check the work in parallel
   pm_parallel <- BMORS(Y, ETA = ETA, nIter = 10, burnIn = 5, thin = 2, progressBar = FALSE,
                        testingSet = CrossValidation,  digits = 4, parallelCores = 2)
