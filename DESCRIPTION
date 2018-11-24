@@ -44,4 +44,6 @@ Imports:
   tidyr
 LinkingTo: Rcpp, RcppArmadillo
 SystemRequirements: C++11
-Suggests: testthat
+Suggests: 
+    testthat,
+    covr
