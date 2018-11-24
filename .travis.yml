@@ -6,9 +6,7 @@ r:
   - devel
 sudo: false
 cache: packages
-
-r_github_packages:
-  - r-lib/covr
+dist: trusty
 
 after_success:
   - Rscript -e 'covr::codecov()'
