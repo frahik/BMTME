@@ -16,6 +16,8 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.25
 <img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Experimental">
 </a> <a href="https://travis-ci.org/frahik/BMTME">
 <img src="https://travis-ci.org/frahik/BMTME.svg?branch=master" alt="Travis build status">
+</a> <a href="https://codecov.io/gh/frahik/BMTME">
+<img src="https://codecov.io/gh/frahik/BMTME/branch/master/graph/badge.svg" />
 </a> <a href="https://www.gnu.org/licenses/lgpl-3.0">
 <img src="https://img.shields.io/badge/License-LGPL%20v3-blue.svg" alt="LGPL, Version 3.0">
 </a> <a href="http://www.repostatus.org/#wip">
