@@ -14,8 +14,6 @@
 #'
 #' @export
 summary.BMTMECV <- function(object, information = 'compact', digits = 4, ...) {
-  if (!inherits(object, "BMTMECV")) stop("This function only works for objects of class 'BMTMECV'")
-
   object$results %>%
     group_by(Environment, Trait, Partition) %>%
     summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
@@ -62,8 +60,6 @@ summary.BMTMECV <- function(object, information = 'compact', digits = 4, ...) {
 #'
 #' @export
 summary.BMECV <- function(object, information = 'compact', digits = 4, ...) {
-  if (!inherits(object, "BMECV")) stop("This function only works for objects of class 'BMECV'")
-
   object$results %>%
     group_by(Environment, Trait, Partition) %>%
     summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
@@ -109,8 +105,6 @@ summary.BMECV <- function(object, information = 'compact', digits = 4, ...) {
 #'
 #' @export
 summary.BMORSCV <- function(object, information = 'compact', digits = 4, ...){
-  if (!inherits(object, "BMORSCV")) stop("This function only works for objects of class 'BMORSCV'")
-
   object$results %>%
     group_by(Environment, Trait, Partition) %>%
     summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
@@ -156,8 +150,6 @@ summary.BMORSCV <- function(object, information = 'compact', digits = 4, ...){
 #'
 #' @export
 summary.BMORSENV <- function(object, digits = 4, ...){
-  if (!inherits(object, "BMORSENV")) stop("This function only works for objects of class 'BMORSENV'")
-
   object$results %>%
     group_by(Environment, Trait) %>%
     summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
@@ -331,8 +323,7 @@ print.BMORSENV <- function(x, ...){
 #'
 #' @export
 residuals.BME <- function(object, digits = 4, ...) {
-  if (!inherits(object, "BME")) stop("This function only works for objects of class 'BME'")
-	return(round(object$Y - object$yHat, digits))
+  return(round(object$Y - object$yHat, digits))
 }
 
 #' @title residuals.BMTME
@@ -345,8 +336,7 @@ residuals.BME <- function(object, digits = 4, ...) {
 #'
 #' @export
 residuals.BMTME <- function(object, digits = 4, ...) {
-  if (!inherits(object, "BMTME")) stop("This function only works for objects of class 'BMTME'")
-	return(round(object$Y - object$yHat, digits))
+  return(round(object$Y - object$yHat, digits))
 }
 
 #' @title plot.BME
@@ -360,8 +350,6 @@ residuals.BMTME <- function(object, digits = 4, ...) {
 #' @importFrom graphics plot abline
 #' @export
 plot.BME <- function(x, trait = '', ...){
-  ### Check that object is compatible
-  if (!inherits(x, "BME")) stop("This function only works for objects of class 'BME'")
   response <- x$Y[,trait]
   predictions <- x$yHat[,trait]
   limits <- range(c(response, predictions), na.rm = TRUE)
@@ -380,8 +368,6 @@ plot.BME <- function(x, trait = '', ...){
 #' @importFrom graphics plot abline
 #' @export
 plot.BMTME <- function(x, trait = '', ...){
-  ### Check that object is compatible
-  if (!inherits(x, "BMTME")) stop("This function only works for objects of class 'BMTME'")
   response <- x$Y[,trait]
   predictions <- x$yHat[,trait]
   limits <- range(c(response, predictions), na.rm = TRUE)
@@ -400,9 +386,6 @@ plot.BMTME <- function(x, trait = '', ...){
 #' @importFrom graphics arrows axis plot
 #' @export
 plot.BMORSCV <- function(x, select = 'Pearson', ...){
-  ### Check that object is compatible
-  if (!inherits(x, "BMORSCV")) stop("This function only works for objects of class 'BMORSCV'", call. = FALSE)
-
   results <- summary(x)
   results <- results[order(results[, select]),]
 
@@ -415,7 +398,7 @@ plot.BMORSCV <- function(x, select = 'Pearson', ...){
     ylab <- select
   }
   x.labels <- paste0(results$Trait, '_', results$Env)
-  plot.x <- seq_len(x.labels)
+  plot.x <- seq_len(length(x.labels))
   plot(plot.x, results[, select], ylim = range(c(results[, select] - results$SE, results[, select] + results$SE)),
        type = 'p', ylab = ylab, xlab = '', xaxt = "n", ...)
   axis(1, at = plot.x, labels = x.labels, las = 2)
@@ -434,9 +417,6 @@ plot.BMORSCV <- function(x, select = 'Pearson', ...){
 #' @importFrom graphics barplot
 #' @export
 barplot.BMORSENV <- function(height, select = 'Pearson', ...){
-  ### Check that object is compatible
-  if (!inherits(height, "BMORSENV")) stop("This function only works for objects of class 'BMORSENV'", call. = FALSE)
-
   results <- summary(height)
   results <- results[order(results[, select]),]
   results$TxE <- paste(results$Trait, results$Environment, sep = '_')
@@ -457,9 +437,6 @@ barplot.BMORSENV <- function(height, select = 'Pearson', ...){
 #' @importFrom graphics boxplot
 #' @export
 boxplot.BMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
-  ### Check that object is compatible
-  if (!inherits(x, "BMECV")) stop("This function only works for objects of class 'BMECV'")
-
   results <- summary(x, 'complete')
 
   if (select == "Pearson") {
@@ -504,9 +481,6 @@ boxplot.BMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
 #' @importFrom graphics boxplot
 #' @export
 boxplot.BMTMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
-  ### Check that object is compatible
-  if (!inherits(x, "BMTMECV")) stop("This function only works for objects of class 'BMTMECV'")
-
   results <- summary(x, 'complete')
 
   if (select == "Pearson") {
@@ -543,9 +517,6 @@ boxplot.BMTMECV <- function(x, select = 'Pearson', ordered = TRUE, ...){
 #' @importFrom graphics boxplot
 #' @export
 boxplot.BMORSCV <- function(x, select = 'Pearson', ordered = TRUE, ...){
-  ### Check that object is compatible
-  if (!inherits(x, "BMORSCV")) stop("This function only works for objects of class 'BMORSCV'", call. = FALSE)
-
   results <- summary(x, 'complete')
 
   switch(select,
