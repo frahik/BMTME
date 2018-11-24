@@ -1,8 +1,8 @@
 Package: BMTME
 Title: Bayesian Multi-Trait Multi-Environment for Genomic Selection Analysis
-Version: 0.0.25
-Date: 2018-11-23
-Language:en-US
+Version: 0.0.26
+Date: 2018-11-24
+Language: en-US
 Authors@R: c(person("Francisco Javier", "Luna-Vazquez", email = "frahik@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-5370-7152")),
              person("Osval Antonio", "Montesinos-Lopez", email= "oamontes1@ucol.mx", role = "aut", comment = c(ORCID = "0000-0002-3973-6547")),
              person("Abelardo", "Montesinos-Lopez", role = "aut"),
@@ -34,17 +34,19 @@ Collate:
   RcppExports.R
   utils.R
 Imports:
-  BGLR,
-  doSNOW,
-  dplyr,
-  foreach,
-  matrixcalc, 
-  mvtnorm,
-  progress,
-  snow,
-  tidyr
-LinkingTo: Rcpp, RcppArmadillo
+    BGLR (>= 1.0.8),
+    doSNOW (>= 1.0.16),
+    dplyr (>= 0.7.8),
+    foreach (>= 1.4.4),
+    matrixcalc (>= 1.0.3),
+    mvtnorm (>= 1.0.8),
+    progress (>= 1.2.0),
+    snow (>= 0.4.3),
+    tidyr (>= 0.8.2)
+LinkingTo: 
+    Rcpp (>= 1.0.0),
+    RcppArmadillo (>= 0.9.200.4.0)
 SystemRequirements: C++11
 Suggests: 
-    testthat,
-    covr
+    testthat (>= 2.0.1),
+    covr (>= 3.2.1)
