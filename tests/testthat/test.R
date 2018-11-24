@@ -5,7 +5,7 @@ context('Partitions test')
 test_that('K-Folds', {
   data("WheatMadaToy")
   phenoMada <- (phenoMada[order(phenoMada$GID),])
-  pheno <- data.frame(GID = phenoMada[, 1], Env = 'Unique', Response = phenoMada[, 3])
+  pheno <- data.frame(GID = phenoMada[, 1], Response = phenoMada[, 3])
 
   KFold_Test <- CV.KFold(pheno, set_seed = 123)
 
@@ -14,11 +14,28 @@ test_that('K-Folds', {
   expect_is(KFold_Test$CrossValidation_list, 'list')
   expect_output(str(KFold_Test$CrossValidation_list), 'List of 5')
   expect_is(KFold_Test$ng, 'numeric')
-  expect_is(KFold_Test$Environments, 'factor')
+  expect_is(KFold_Test$Environments, 'character')
   expect_length(KFold_Test$Environments, length(phenoMada$GID))
-  expect_equal(unique(KFold_Test$Environments), unique(pheno$Env))
   expect_is(KFold_Test$Traits, 'character')
   expect_length(KFold_Test$Traits, length(phenoMada$GID))
+
+  data("WheatIranianToy")
+
+  pheno <- data.frame(GID = phenoIranianToy[, 1], Env = phenoIranianToy[, 2], Response = phenoIranianToy[, 3])
+
+  KFold_Test2 <- CV.KFold(pheno, DataSetID = 'GID', K = 5, set_seed = 123)
+
+  expect_output(str(KFold_Test2), 'List of 5')
+  expect_is(KFold_Test2, 'CrossValidation')
+  expect_is(KFold_Test2$CrossValidation_list, 'list')
+  expect_output(str(KFold_Test2$CrossValidation_list), 'List of 5')
+  expect_is(KFold_Test2$ng, 'numeric')
+  expect_is(KFold_Test2$Environments, 'factor')
+  expect_length(KFold_Test2$Environments, length(pheno$GID))
+  expect_equal(unique(KFold_Test2$Environments), unique(pheno$Env))
+  expect_is(KFold_Test2$Traits, 'character')
+  expect_length(KFold_Test2$Traits, length(pheno$GID))
+
 })
 
 test_that('RandomPartition',{
