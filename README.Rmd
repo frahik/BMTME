@@ -11,20 +11,19 @@ output: github_document
    
   <p align="center">
   <a href="https://www.tidyverse.org/lifecycle/#experimental">
-  <img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Experimental">
-  </a> <a href="https://travis-ci.org/frahik/BMTME">
-  <img src="https://travis-ci.org/frahik/BMTME.svg?branch=master" alt="Travis build status">
-  </a> <a href="https://codecov.io/gh/frahik/BMTME">
-  <img src="https://codecov.io/gh/frahik/BMTME/branch/master/graph/badge.svg" />
-</a> <a href="https://www.gnu.org/licenses/lgpl-3.0">
-    <img src="https://img.shields.io/badge/License-LGPL%20v3-blue.svg" alt="LGPL, Version 3.0">
-  </a> <a href="http://www.repostatus.org/#wip">
-    <img src="http://www.repostatus.org/badges/latest/wip.svg" alt="Status of the Repo:  Initial development is in progress, but there has not yet been a stable, usable release suitable for the public">
-  </a> <a href="">
-    <img src="http://cranlogs.r-pkg.org/badges/BMTME" alt="Dowloads from the CRAN">
-  </a> <a href="https://cran.r-project.org/package=BMTME">
-    <img src="http://www.r-pkg.org/badges/version-ago/BMTME" alt="CRAN">
-  </a>
+    <img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Experimental"> </a>
+  <a href="https://travis-ci.org/frahik/BMTME">
+    <img src="https://travis-ci.org/frahik/BMTME.svg?branch=master" alt="Travis build status"> </a> 
+  <a href='https://coveralls.io/github/frahik/BMTME'>
+    <img src='https://coveralls.io/repos/github/frahik/BMTME/badge.svg' alt='Coverage Status' /> </a>
+  <a href="https://www.gnu.org/licenses/lgpl-3.0">
+    <img src="https://img.shields.io/badge/License-LGPL%20v3-blue.svg" alt="LGPL, Version 3.0"> </a>
+  <a href="http://www.repostatus.org/#wip">
+    <img src="http://www.repostatus.org/badges/latest/wip.svg" alt="Status of the Repo:  Initial development is in progress, but there has not yet been a stable, usable release suitable for the public"> </a>
+  <a href="">
+    <img src="http://cranlogs.r-pkg.org/badges/BMTME" alt="Dowloads from the CRAN"> </a>
+  <a href="https://cran.r-project.org/package=BMTME">
+    <img src="http://www.r-pkg.org/badges/version-ago/BMTME" alt="CRAN"> </a>
   </p>
 
   <h4 align="center">
