@@ -58,8 +58,11 @@ BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim
     doSNOW::registerDoSNOW(cl)
     nCV <- length(testingSet$CrossValidation_list)
 
-    pb <- utils::txtProgressBar(max = nCV, style = 3)
-    progress <- function(n) utils::setTxtProgressBar(pb, n)
+    progress <- NULL
+    if (progressBar) {
+      pb <- utils::txtProgressBar(max = nCV, style = 3)
+      progress <- function(n) utils::setTxtProgressBar(pb, n)
+    }
     opts <- list(progress = progress)
 
     results <- foreach::foreach(actual_CV = seq_len(nCV), .combine = rbind, .packages = 'BMTME', .options.snow = opts) %dopar% {

@@ -123,8 +123,11 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
     doSNOW::registerDoSNOW(cl)
     nCV <- length(testingSet$CrossValidation_list)
 
-    pb <- utils::txtProgressBar(max = nCV, style = 3)
-    progress <- function(n) utils::setTxtProgressBar(pb, n)
+    progress <- NULL
+    if (progressBar) {
+      pb <- utils::txtProgressBar(max = nCV, style = 3)
+      progress <- function(n) utils::setTxtProgressBar(pb, n)
+    }
     opts <- list(progress = progress)
     results <- foreach::foreach(actual_CV = seq_len(nCV), .combine = rbind, .packages = 'BMTME', .options.snow = opts) %dopar% {
       for (t in seq_len(nTraits)) {
