@@ -126,9 +126,8 @@ test_that('BME function with Mada data', {
   expect_silent(boxplot(pm, select = 'MAAPE'))
 
   # Check the work in parallel
-  pm_parallel <- BME(Y = Y, Z1 = Z.G, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV, parallelCores = 2)
+  pm_parallel <- BME(Y = Y, Z1 = Z.G, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV, parallelCores = 2, progressBar = FALSE)
 
-  expect_message(BME(Y = Y, Z1 = Z.G, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV, parallelCores = detectCores() + 1), regexp = '[!]')
   expect_output(str(pm_parallel), 'List of 6')
   expect_is(pm_parallel, 'BMECV')
   expect_is(pm_parallel$results, 'data.frame')
@@ -236,7 +235,7 @@ test_that('BMTME function with Iranian data', {
   expect_silent(boxplot(pm, select = 'MAAPE'))
 
   # Check the work in parallel
-  pm_parallel <- BMTME(Y = Y, X = Z.E, Z1 = Z.G, Z2 = Z.EG, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV, parallelCores = 2)
+  pm_parallel <- BMTME(Y = Y, X = Z.E, Z1 = Z.G, Z2 = Z.EG, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV, parallelCores = 2, progressBar = FALSE)
 
   expect_output(str(pm_parallel), 'List of 6')
   expect_is(pm_parallel, 'BMTMECV')
