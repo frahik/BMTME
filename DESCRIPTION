@@ -49,4 +49,7 @@ LinkingTo:
 SystemRequirements: C++11
 Suggests: 
     testthat (>= 2.0.1),
-    covr
+    covr,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

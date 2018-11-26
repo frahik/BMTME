@@ -1,3 +1,5 @@
+Meta
+doc
 # History files
 .Rhistory
 .Rapp.history
@@ -31,3 +33,6 @@ src/*.o
 src/*.so
 src/*.dll
 *.pdf
+#vignettes
+vignettes/*.html
+vignettes/*.R
