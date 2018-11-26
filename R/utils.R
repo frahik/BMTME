@@ -17,7 +17,7 @@ summary.BMTMECV <- function(object, information = 'compact', digits = 4, ...) {
   object$results %>%
     group_by(Environment, Trait, Partition) %>%
     summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
-              MAAPE = mean(atan(abs(Observed-Predicted)/abs(Observed)))) %>%
+              MAAPE = mean(atan(abs(Observed - Predicted)/abs(Observed)))) %>%
     select(Environment, Trait, Partition, Pearson, MAAPE) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> presum
@@ -63,7 +63,7 @@ summary.BMECV <- function(object, information = 'compact', digits = 4, ...) {
   object$results %>%
     group_by(Environment, Trait, Partition) %>%
     summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
-              MAAPE = mean(atan(abs(Observed-Predicted)/abs(Observed)))) %>%
+              MAAPE = mean(atan(abs(Observed - Predicted)/abs(Observed)))) %>%
     select(Environment, Trait, Partition, Pearson, MAAPE) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> presum
@@ -108,7 +108,7 @@ summary.BMORSCV <- function(object, information = 'compact', digits = 4, ...){
   object$results %>%
     group_by(Environment, Trait, Partition) %>%
     summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
-              MAAPE = mean(atan(abs(Observed-Predicted)/abs(Observed)))) %>%
+              MAAPE = mean(atan(abs(Observed - Predicted)/abs(Observed)))) %>%
     select(Environment, Trait, Partition, Pearson, MAAPE) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> presum
@@ -153,7 +153,7 @@ summary.BMORSENV <- function(object, digits = 4, ...){
   object$results %>%
     group_by(Environment, Trait) %>%
     summarise(Pearson = cor(Predicted, Observed, use = 'pairwise.complete.obs'),
-              MAAPE = mean(atan(abs(Observed-Predicted)/abs(Observed)))) %>%
+              MAAPE = mean(atan(abs(Observed - Predicted)/abs(Observed)))) %>%
     select(Environment, Trait, Pearson, MAAPE) %>%
     mutate_if(is.numeric, funs(round(., digits))) %>%
     as.data.frame() -> out

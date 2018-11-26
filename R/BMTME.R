@@ -241,9 +241,9 @@ coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar,
   post_beta <- matrix(nrow = nI, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
   post_beta_2 <- matrix(nrow = nI, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
   post_b1 <- matrix(nrow = nJ, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
-  post_b1_2 <- matrix(nrow = nJ, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
+  # post_b1_2 <- matrix(nrow = nJ, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
   post_b2 <- matrix(nrow = nJ * nI, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
-  post_b2_2 <- matrix(nrow = nJ * nI, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
+  # post_b2_2 <- matrix(nrow = nJ * nI, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
   post_var_b1 <- matrix(nrow = nt, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
   post_var_b1_2 <- matrix(nrow = nt, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
   post_var_b2 <- matrix(nrow = nI, ncol = nI, 0L, dimnames = list(NULL, envNames))
@@ -252,7 +252,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar,
   post_var_e_2 <- matrix(nrow = nt, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
   post_yHat <- matrix(nrow = n, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
   post_yHat_2 <- matrix(nrow = n, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
-  post_logLik <- 0L
+  # post_logLik <- 0L
 
   YStar <- Y
   vt <- vE <- ve <- 5L
@@ -275,7 +275,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar,
       YStar[tmpSubject, tmpTraits] <- m0[tmpTraits]
     }
   }
-  tst <- c(as.numeric(whichNa$subjects))
+  # tst <- c(as.numeric(whichNa$subjects))
   tX  <- t(X)
   tZ1 <- t(Z1)
   tZ2 <- t(Z2)

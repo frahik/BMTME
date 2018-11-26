@@ -48,7 +48,7 @@ CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
 
   UL <- unique(DataSet[, DataSetID])
   #Number of sites where each line appear
-  n_UL <- length(UL)
+  # n_UL <- length(UL)
   # nSLA <- rep(NA, n_UL)
 
   nEAL <- table(DataSet[, DataSetID])#Number of Sites that appear  each line
@@ -207,8 +207,8 @@ CV.RandomPart <- function(DataSet, NPartitions = 10, PTesting = .35, Traits.test
     NTraits <- length(unique(DataSet$Trait))
   }
 
-  Trait <- unique(DataSet$Trait)
-  Env <- unique(DataSet$Env)
+  # Trait <- unique(DataSet$Trait)
+  # Env <- unique(DataSet$Env)
 
   p_list <- vector('list', NPartitions)
   names(p_list) <- paste0('partition', 1:NPartitions)

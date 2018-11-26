@@ -195,10 +195,10 @@ coreME <- function(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingS
   post_var_e_2 <- matrix(nrow = nt, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
   post_yHat <- matrix(nrow = n, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
   post_yHat_2 <- matrix(nrow = n, ncol = nt, 0L, dimnames = list(NULL, colnames(Y)))
-  post_logLik <- 0L
+  # post_logLik <- 0L
 
   YStar <- Y
-  vt <- vE <- ve <- 5L
+  vt <- ve <- 5L
   R2 <- 0.25
   R2e <- 0.5
   my.model <- lm(YStar ~ 1)
@@ -250,7 +250,7 @@ coreME <- function(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingS
   nSums <- 0L
 
   for (t in seq_len(nIter)) {
-    logLik <- 0L
+    # logLik <- 0L
     ##### Linear predictor #####################################
     e <- e + u_b0
 
