@@ -1,3 +1,19 @@
+BMTME v1.0.0  [First CRAN release]
+==============
+
+Changes:
+ * Fixed typo
+ * Include vignettes
+ * Removed unused code
+ 
+BMTME v0.0.26
+==============
+
+Changes:
+ * Improvements in tests
+ * Minor fixes
+ 
+
 BMTME v0.0.25
 ==============
 
