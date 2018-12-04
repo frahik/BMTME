@@ -12,16 +12,16 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.26
 
 <p align="center">
 
-<a href="https://www.tidyverse.org/lifecycle/#experimental">
-<img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Experimental">
+<a href="https://www.tidyverse.org/lifecycle/#maturing">
+<img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Maturing">
 </a> <a href="https://travis-ci.org/frahik/BMTME">
 <img src="https://travis-ci.org/frahik/BMTME.svg?branch=master" alt="Travis build status">
 </a> <a href='https://coveralls.io/github/frahik/BMTME'>
 <img src='https://coveralls.io/repos/github/frahik/BMTME/badge.svg' alt='Coverage Status' />
 </a> <a href="https://www.gnu.org/licenses/lgpl-3.0">
 <img src="https://img.shields.io/badge/License-LGPL%20v3-blue.svg" alt="LGPL, Version 3.0">
-</a> <a href="http://www.repostatus.org/#wip">
-<img src="http://www.repostatus.org/badges/latest/wip.svg" alt="Status of the Repo:  Initial development is in progress, but there has not yet been a stable, usable release suitable for the public">
+</a> <a href="http://www.repostatus.org/#active">
+<img src="https://www.repostatus.org/badges/latest/active.svg" alt="The project has reached a stable, usable state and is being actively developed.">
 </a> <a href="">
 <img src="http://cranlogs.r-pkg.org/badges/BMTME" alt="Dowloads from the CRAN">
 </a> <a href="https://cran.r-project.org/package=BMTME">
@@ -32,7 +32,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 0.0.26
 
 <h4 align="center">
 
-\[Last README update: 2018-11-24\]
+\[Last README update: 2018-12-04\]
 
 </h4>
 
@@ -56,15 +56,9 @@ News of this version (0.0.26)
 
 </h2>
 
-  - Include coverage test
-  - Typo fixed
-  - Fixed bug in `BMTME()` function with a vector as testingSet
-    parameter.
-  - Fixed bug in `RandomPartition()` function.
-  - Implemented predictions with not crossvalidation in `BMORS()`
-    function.
-  - Include `print()` function to `BMORS` object with not
-    crossvalidation.
+  - Fixed typo
+  - Include vignettes
+  - Removed unused code
 
 See the last updates in [NEWS](NEWS.md).
 

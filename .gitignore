@@ -36,3 +36,5 @@ src/*.dll
 #vignettes
 vignettes/*.html
 vignettes/*.R
+
+CRAN-RELEASE
