@@ -1,6 +1,6 @@
 #' Bayes Multi-Trait Milti-Environment Model (BMTME)
 #'
-#' @param Y \code{(matrix)} Phenotypic respones where each column it's a different trait.
+#' @param Y \code{(matrix)} Phenotypic response where each column is a different trait.
 #' @param X \code{(matrix)} Matrix design for the environment effects.
 #' @param Z1 \code{(matrix)} Matrix design for the genetic effects.
 #' @param Z2 \code{(matrix)} Matrix design for the genetic effects interaction with the environment effects.

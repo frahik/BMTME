@@ -11,7 +11,7 @@ BMTME(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L,
   progressBar = TRUE, testingSet = NULL)
 }
 \arguments{
-\item{Y}{\code{(matrix)} Phenotypic respones where each column it's a different trait.}
+\item{Y}{\code{(matrix)} Phenotypic response where each column is a different trait.}
 
 \item{X}{\code{(matrix)} Matrix design for the environment effects.}
 

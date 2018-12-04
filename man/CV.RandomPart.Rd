@@ -20,7 +20,7 @@ CV.RandomPart(DataSet, NPartitions = 10, PTesting = 0.35,
 
 \item{Traits.testing}{\code{character} By default is null and use all the traits to fit the model, else only part of the traits specified be used to fit the model.}
 
-\item{set_seed}{\code{integer} Number of seed for reproducible research. Is NULL by default.}
+\item{set_seed}{\code{integer} Seed number for reproducible research. Is \code{NULL} by default.}
 }
 \value{
 \code{List} A list object with length of \code{NPartitions}, every index has a the positions to use like testing.

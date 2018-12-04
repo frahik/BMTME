@@ -8,7 +8,7 @@
 #' \code{$Response} Variable response obtained for the row corresponding to line and environment.
 #' @param DataSetID (\code{string}) The ID of the lines.
 #' @param K (\code{integer}) Number of groups to the cross-validation.
-#' @param set_seed (\code{integer}) Number of seed for replicable research.
+#' @param set_seed (\code{integer}) Seed number for reproducible research. Is \code{NULL} by default
 #'
 #' @importFrom stats na.omit
 #' @return
@@ -159,7 +159,7 @@ CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
 #' @param NPartitions \code{integer} Number of Partitions for the Cross-Validation. Is 10 by default.
 #' @param PTesting \code{Double} Percentage of Testing for the Cross-Validation. Is 0.35 by default.
 #' @param Traits.testing \code{character} By default is null and use all the traits to fit the model, else only part of the traits specified be used to fit the model.
-#' @param set_seed \code{integer} Number of seed for reproducible research. Is NULL by default.
+#' @param set_seed \code{integer} Seed number for reproducible research. Is \code{NULL} by default.
 #'
 #' @return \code{List} A list object with length of \code{NPartitions}, every index has a the positions to use like testing.
 #'

@@ -9,7 +9,7 @@ BME(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L,
   progressBar = TRUE, testingSet = NULL)
 }
 \arguments{
-\item{Y}{\code{(matrix)} Phenotypic respones where each column it's a different environment.}
+\item{Y}{\code{(matrix)} Phenotypic response where each column is a different environment.}
 
 \item{Z1}{\code{(matrix)} Matrix design for the genetic effects.}
 

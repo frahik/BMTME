@@ -10,7 +10,7 @@ BMORS(Y = NULL, ETA = NULL, covModel = "BRR",
   parallelCores = 1, digits = 4)
 }
 \arguments{
-\item{Y}{\code{(matrix)} Phenotypic respones where each column it's a different trait.}
+\item{Y}{\code{(matrix)} Phenotypic response where each column is a different trait}
 
 \item{ETA}{\code{(matrix)} This is a two-level list used to specify the regression function (or linear predictor).}
 

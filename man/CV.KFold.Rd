@@ -16,7 +16,7 @@ CV.KFold(DataSet, DataSetID = "Line", K = 5, set_seed = NULL)
 
 \item{K}{(\code{integer}) Number of groups to the cross-validation.}
 
-\item{set_seed}{(\code{integer}) Number of seed for replicable research.}
+\item{set_seed}{(\code{integer}) Seed number for reproducible research. Is \code{NULL} by default}
 }
 \value{
 Returns a nested list, with a positions to use as testing.

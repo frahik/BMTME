@@ -1,6 +1,6 @@
 #' Bayesian Multi-Environment Model (BME)
 #'
-#' @param Y \code{(matrix)} Phenotypic respones where each column it's a different environment.
+#' @param Y \code{(matrix)} Phenotypic response where each column is a different environment.
 #' @param Z1 \code{(matrix)} Matrix design for the genetic effects.
 #' @param nIter \code{(integer)} Number of iterations to fit the model.
 #' @param burnIn \code{(integer)} Number of items to burn at the beginning of the model.
