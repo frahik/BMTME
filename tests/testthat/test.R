@@ -259,10 +259,14 @@ test_that('BMORS function with Wheat data with NA values', {
   Z.G <- ZG %*% LG
   ETA <- list(Gen = list(X = Z.G, model = 'BRR'))
 
+  Y_Error <- phenoWheatToy[, c(3,4)]
+  expect_error(BMORS(Y_Error, ETA = ETA, nIter = 10, burnIn = 5, thin = 2, progressBar = FALSE,
+                     digits = 4))
+
+
   Y <- as.matrix(phenoWheatToy[, c(3,4)])
   # Check predictive capacities of the model
-  pm <- BMORS(Y, ETA = ETA, nIter = 10, burnIn = 5, thin = 2, progressBar = FALSE,
-              digits = 4)
+  pm <- BMORS(Y, ETA = ETA, nIter = 10, burnIn = 5, thin = 2, progressBar = FALSE, digits = 4)
   expect_output(str(pm), 'List of 6')
   expect_is(pm, 'BMORS')
   expect_is(pm$results, 'data.frame')
