@@ -1,4 +1,13 @@
-BMTME v1.0.0  [First CRAN release]
+BMTME v1.0.1  [First CRAN release]
+==============
+
+Changes:
+ 
+ * [Fixed] Makevars.win to compile C++ code.
+ * [refactoring code] cholesky function.
+
+
+BMTME v1.0.0
 ==============
 
 Changes:
