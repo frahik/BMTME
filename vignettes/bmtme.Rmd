@@ -58,7 +58,7 @@ Finally, the model is adjusted, with the commands provided below:
 
 ```{r}
 fm <- BMTME(Y = Y, X = Z.E, Z1 = Z.G, Z2 = Z.EG, nIter = 1250, burnIn = 500, thin = 2,
-            bs = 50)
+            bs = 50, progressBar = FALSE)
 ```
 
 To know all the details about the results of the model fit using the BMTME function, we will use the str() function, which returns the following information:
