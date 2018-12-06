@@ -6,7 +6,7 @@
 
 <h3 align="center">
 
-Bayesian Multi-Trait Multi-Environment | Development version 1.0.0
+Bayesian Multi-Trait Multi-Environment | Development version 1.0.1
 
 </h4>
 
@@ -32,7 +32,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.0
 
 <h4 align="center">
 
-\[Last README update: 2018-12-04\]
+\[Last README update: 2018-12-06\]
 
 </h4>
 
@@ -52,13 +52,12 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.0
 
 <h2 id="news">
 
-News of this version (1.0.0)
+News of this version (1.0.1)
 
 </h2>
 
-  - Fixed typo
-  - Include vignettes
-  - Removed unused code
+  - \[Fixed\] Makevars.win to compile C++ code.
+  - \[refactoring code\] cholesky function.
 
 See the last updates in [NEWS](NEWS.md).
 

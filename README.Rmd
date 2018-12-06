@@ -49,9 +49,9 @@ output: github_document
   News of this version (`r packageVersion('BMTME')`)
 </h2>
 
- * Fixed typo
- * Include vignettes
- * Removed unused code
+ * [Fixed] Makevars.win to compile C++ code.
+ * [refactoring code] cholesky function.
+
 
 See the last updates in [NEWS](NEWS.md).
 
