@@ -1,4 +1,5 @@
 ## Test environments
+
 * Linux - Manjaro R-base [3.5.1]
 * Windows 10 R [3.5.1]
 * win-builder (devel and release)
@@ -6,12 +7,16 @@
 * TravisCI (devel and release)
 
 ## R CMD check results
-There were no ERRORs, NOTEs or WARNINGs.
 
-── R CMD check results ─────────────────────────────────────── BMTME 0.0.26 ────
-Duration: 6m 5s
+There were no ERRORs, or WARNINGs.
 
-0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+There were 1 NOTE:
+
+Maintainer: 'Francisco Javier Luna-Vazquez <frahik@gmail.com>'
+
+New submission
+
+Uses the superseded package: 'doSNOW'
 
 R CMD check succeeded
 
