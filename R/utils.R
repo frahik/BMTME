@@ -516,3 +516,8 @@ boxplot.BMORSCV <- function(x, select = 'Pearson', ordered = TRUE, ...){
     boxplot(plot.y, col = "grey", ylab = ylab, ...)
   }
 }
+
+
+getProgressBar <- function(title = '', total = 1) {
+  return(progress::progress_bar$new(format = title, total = total, clear = FALSE, show_after = 0))
+}

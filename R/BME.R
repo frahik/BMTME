@@ -16,7 +16,6 @@
 #' Else, if the testingSet is not NULL, the function returns the correlation of the predictions of the cross-validation test.
 #'
 #' @importFrom stats lm rnorm var vcov
-#' @importFrom utils txtProgressBar setTxtProgressBar
 #' @importFrom tidyr gather
 #' @importFrom foreach %dopar%
 #' @useDynLib BMTME
@@ -30,7 +29,7 @@ BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim
   } else if (parallelCores <= 1 && inherits(testingSet, 'CrossValidation')) {
     results <- data.frame()
     nCV <- length(testingSet$CrossValidation_list)
-    pb <- progress::progress_bar$new(format = 'Fitting Cross-Validation :what  [:bar] :percent;  Time elapsed: :elapsed', total = nCV, clear = FALSE, show_after = 0)
+    pb <- getProgressBar('Fitting Cross-Validation :what  [:bar] :percent;  Time elapsed: :elapsed', nCV)
 
     for (actual_CV in seq_len(nCV)) {
       if (progressBar) {
@@ -39,64 +38,53 @@ BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim
 
       positionTST <- testingSet$CrossValidation_list[[actual_CV]]
 
-      fm <- coreME(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar = FALSE, positionTST)
-      observed <- tidyr::gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
-      predicted <- tidyr::gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
-      results <- rbind(results, data.frame(Position = positionTST,
-                                           Environment = testingSet$Environments[positionTST],
-                                           Trait = observed$Trait,
-                                           Partition = actual_CV,
-                                           Observed = round(observed$Observed,digits),
-                                           Predicted = round(predicted$Predicted, digits)))
-
+      results <- rbind(results, CVME(Y, Z1, nIter, burnIn, thin, bs, digits,
+                                     positionTST, actual_CV,
+                                     testingSet$Environments[positionTST]))
     }
-    cat('\n')
-    out <- list(results = results, n_cores = parallelCores, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
+
+    out <- list(results = results, n_cores = parallelCores, nIter = nIter,
+                burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMECV'
+
   } else if (parallelCores > 1 && inherits(testingSet, 'CrossValidation')) {
-    cl <- snow::makeCluster(parallelCores)
-    doSNOW::registerDoSNOW(cl)
     nCV <- length(testingSet$CrossValidation_list)
+    cl <- parallel::makeForkCluster(parallelCores)
+    pbapply::pboptions(type = ifelse(progressBar, 'timer', 'none'))
+    tmp <- pbapply::pblapply(seq_len(nCV),
+                             function(i) CVME(Y, Z1, nIter, burnIn, thin, bs,
+                                              digits, testingSet$CrossValidation_list[[i]], i,
+                                              testingSet$Environments[testingSet$CrossValidation_list[[i]]]),
+                                              cl = cl)
+    parallel::stopCluster(cl)
 
-    progress <- NULL
-    if (progressBar) {
-      pb <- utils::txtProgressBar(max = nCV, style = 3)
-      progress <- function(n) utils::setTxtProgressBar(pb, n)
-    }
-    opts <- list(progress = progress)
-
-    results <- foreach::foreach(actual_CV = seq_len(nCV), .combine = rbind, .packages = 'BMTME', .options.snow = opts) %dopar% {
-      positionTST <- testingSet$CrossValidation_list[[actual_CV]]
-      fm <- coreME(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar = FALSE, positionTST)
-      observed <- tidyr::gather(as.data.frame(Y[positionTST, ]), 'Trait', 'Observed')
-      predicted <- tidyr::gather(as.data.frame(fm$yHat[positionTST, ]), 'Trait', 'Predicted')
-      data.frame(Position = positionTST,
-                 Environment = testingSet$Environments[positionTST],
-                 Trait = observed$Trait,
-                 Partition = actual_CV,
-                 Observed = round(observed$Observed, digits),
-                 Predicted = round(predicted$Predicted, digits))
-    }
-
-    out <- list(results = results,
-                n_cores = parallelCores, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
+    res <- do.call("rbind", tmp)
+    out <- list(results = res, n_cores = parallelCores, nIter = nIter,
+                burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMECV'
   } else {
-    fm <- coreME(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingSet)
-    observed <- tidyr::gather(as.data.frame(Y[testingSet, ]), 'Trait', 'Observed')
-    predicted <- tidyr::gather(as.data.frame(fm$yHat[testingSet, ]), 'Trait', 'Predicted')
+    results <- CVME(Y, Z1, nIter, burnIn, thin, bs, digits, testingSet, 1, NA)
 
-    results <- data.frame(Position = testingSet,
-                          Environment = NA,
-                          Trait = rep(colnames(Y), each = length(testingSet)),
-                          Partition = 1,
-                          Observed = round(observed$Observed, digits),
-                          Predicted = round(predicted$Predicted, digits))
-    out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
+    out <- list(results = results, n_cores = parallelCores, nIter = nIter,
+                burnIn = burnIn, thin = thin,
+                executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMECV'
   }
 
   return(out)
+}
+
+CVME <- function(Y, Z1, nIter, burnIn, thin, bs, digits, testingSet, iterationNumber, Env){
+  fm <- coreME(Y, Z1, nIter, burnIn, thin, bs, digits, FALSE, testingSet)
+  observed <- tidyr::gather(as.data.frame(Y[testingSet, ]), 'Trait', 'Observed')
+  predicted <- tidyr::gather(as.data.frame(fm$yHat[testingSet, ]), 'Trait', 'Predicted')
+
+  return(data.frame(Position = testingSet,
+                    Environment = Env,
+                    Trait = rep(colnames(Y), each = length(testingSet)),
+                    Partition = iterationNumber,
+                    Observed = round(observed$Observed, digits),
+                    Predicted = round(predicted$Predicted, digits)))
 }
 
 coreME <- function(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingSet){
