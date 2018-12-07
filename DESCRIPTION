@@ -1,6 +1,6 @@
 Package: BMTME
 Title: Bayesian Multi-Trait Multi-Environment for Genomic Selection Analysis
-Version: 1.0.1
+Version: 1.0.2
 Date: 2018-12-6
 Language: en-US
 Authors@R: c(person("Francisco Javier", "Luna-Vazquez", email = "frahik@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-5370-7152")),
@@ -9,8 +9,7 @@ Authors@R: c(person("Francisco Javier", "Luna-Vazquez", email = "frahik@gmail.co
              person("Jose", "Crossa", role = "aut", comment = c(ORCID = "0000-0001-9429-5855")),
              person("Fernando", "Tolero", role = "aut"))
 Maintainer: Francisco Javier Luna-Vazquez <frahik@gmail.com>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Genomic selection and prediction models with the capacity to use multiple traits and environments, through ready-to-use Bayesian models.
 Depends:
   R (>= 3.0.0)
 License: LGPL-3
@@ -35,21 +34,21 @@ Collate:
   utils.R
 Imports:
     BGLR,
-    doSNOW,
     dplyr,
     foreach,
     matrixcalc,
     mvtnorm,
+    parallel,
+    pbapply,
     progress,
-    snow,
     tidyr
 LinkingTo: 
     Rcpp,
     RcppArmadillo
 SystemRequirements: C++11
 Suggests: 
-    testthat,
     covr,
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat,
 VignetteBuilder: knitr
