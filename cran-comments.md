@@ -16,8 +16,6 @@ Maintainer: 'Francisco Javier Luna-Vazquez <frahik@gmail.com>'
 
 New submission
 
-Uses the superseded package: 'doSNOW'
-
 R CMD check succeeded
 
 ## Last round comments
