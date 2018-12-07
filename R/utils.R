@@ -34,10 +34,9 @@ summary.BMTMECV <- function(object, information = 'compact', digits = 4, ...) {
                 complete = presum,
                 extended = {
                   finalSum$Partition <- 'All'
-                  presum$Partition <- as.character(presum$Partition)
                   presum$SE_Pearson <- NA
                   presum$SE_MAAPE <- NA
-                  rbind(presum, finalSum)
+                  rbind(finalSum, presum)
                 }
   )
   return(out)
@@ -80,10 +79,10 @@ summary.BMECV <- function(object, information = 'compact', digits = 4, ...) {
                 complete = presum,
                 extended = {
                   finalSum$Partition <- 'All'
-                  presum$Partition <- as.character(presum$Partition)
+                  # presum$Partition <- as.character(presum$Partition)
                   presum$SE_Pearson <- NA
                   presum$SE_MAAPE <- NA
-                  rbind(presum, finalSum)
+                  rbind(finalSum, presum)
                 }
   )
   return(out)
@@ -125,10 +124,10 @@ summary.BMORSCV <- function(object, information = 'compact', digits = 4, ...){
                 complete = presum,
                 extended = {
                   finalSum$Partition <- 'All'
-                  presum$Partition <- as.character(presum$Partition)
+                  # presum$Partition <- as.character(presum$Partition)
                   presum$SE_Pearson <- NA
                   presum$SE_MAAPE <- NA
-                  rbind(presum, finalSum)
+                  rbind(finalSum, presum)
                 }
   )
   return(out)
@@ -366,7 +365,7 @@ plot.BMORSCV <- function(x, select = 'Pearson', ...){
     ylab <- "Pearson's Correlation"
   } else if (select == "MAAPE") {
 
-    results$SE <- 1.96 * results$SE_MAAPE[which(results$Fold == 'Average_all')]
+    results$SE <- 1.96 * results$SE_MAAPE
     ylab <- select
   }
   x.labels <- paste0(results$Trait, '_', results$Env)
