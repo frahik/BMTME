@@ -56,8 +56,14 @@ News of this version (1.0.2)
 
 </h2>
 
-  - \[Fixed\] Makevars.win to compile C++ code.
-  - \[refactoring code\] cholesky function.
+  - \[Update\] New tests was added.
+  - \[refactoring code\] Now the progress bar with parallel work it is
+    with pbapply package
+  - \[refactoring code\] Change snow and doSNOW packages to parallel
+    package
+  - \[refactoring code\] New function to crossvalidation, easier to
+    maintain.
+  - \[Update\] Add a good description.
 
 See the last updates in [NEWS](NEWS.md).
 
