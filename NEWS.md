@@ -1,4 +1,16 @@
-BMTME v1.0.1  [First CRAN release]
+BMTME v1.0.2  [First CRAN release]
+==============
+
+Changes:
+
+ * [Update] New tests was added.
+ * [refactoring code] Now the progress bar with parallel work it is with pbapply package
+ * [refactoring code] Change snow and doSNOW packages to parallel package
+ * [refactoring code] New function to crossvalidation, easier to maintain.
+ * [Update] Add a good description.
+ 
+
+BMTME v1.0.1
 ==============
 
 Changes:
