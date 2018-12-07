@@ -122,6 +122,7 @@ test_that('BME function with Mada data', {
   expect_is(pm$results, 'data.frame')
   expect_is(pm$executionTime, 'numeric')
   expect_output(print(pm), 'Fitted Bayesian Multi Environment model with:')
+  expect_identical(head(summary(pm), 4), head(summary(pm, 'extended'), 4)[,-7])
   expect_silent(boxplot(pm))
   expect_silent(boxplot(pm, select = 'MAAPE'))
 
@@ -231,6 +232,7 @@ test_that('BMTME function with Iranian data', {
   expect_is(pm$results, 'data.frame')
   expect_is(pm$executionTime, 'numeric')
   expect_output(print(pm), 'Fitted Bayesian Multi-Trait Multi-Environment Model with:')
+  expect_identical(head(summary(pm)), head(summary(pm, 'extended'), 4)[,-7])
   expect_silent(boxplot(pm))
   expect_silent(boxplot(pm, select = 'MAAPE'))
 
@@ -297,9 +299,11 @@ test_that('BMORS function with Wheat full data', {
   expect_is(pm$results, 'data.frame')
   expect_is(pm$executionTime, 'numeric')
   expect_output(print(pm), 'Fitted Bayesian Multi-Output Regression Stacking model with:')
+  expect_identical(head(summary(pm), 4), head(summary(pm, 'extended'), 4)[,-7])
   expect_silent(boxplot(pm))
   expect_silent(boxplot(pm, select = 'MAAPE'))
   expect_silent(plot(pm))
+  expect_silent(plot(pm, 'MAAPE'))
   # Check the work in parallel
   pm_parallel <- BMORS(Y, ETA = ETA, nIter = 10, burnIn = 5, thin = 2, progressBar = FALSE,
                        testingSet = CrossValidation,  digits = 4, parallelCores = 2)
