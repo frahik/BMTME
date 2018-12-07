@@ -20,3 +20,12 @@ Uses the superseded package: 'doSNOW'
 
 R CMD check succeeded
 
+## Last round comments
+
+Come on ... please provide a Description.  [Done (Sorry for this mistake)]
+
+We also see:
+
+   Uses the superseded package: 'doSNOW'
+
+Can't you use parallel and doParallel, if you really need it. [Done]
