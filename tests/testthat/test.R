@@ -108,7 +108,7 @@ test_that('BME function with Mada data', {
 
   # Check predictive capacities of the model in only one testingSet
   pm_basic <- BME(Y = Y, Z1 = Z.G, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV$CrossValidation_list[[1]])
-  expect_output(str(pm_basic), 'List of 5')
+  expect_output(str(pm_basic), 'List of 6')
   expect_is(pm_basic, 'BMECV')
   expect_is(pm_basic$results, 'data.frame')
   expect_is(pm_basic$executionTime, 'numeric')
