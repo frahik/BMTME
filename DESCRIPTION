@@ -1,7 +1,7 @@
 Package: BMTME
 Title: Bayesian Multi-Trait Multi-Environment for Genomic Selection Analysis
 Version: 1.0.2
-Date: 2018-12-6
+Date: 2018-12-7
 Language: en-US
 Authors@R: c(person("Francisco Javier", "Luna-Vazquez", email = "frahik@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-5370-7152")),
              person("Osval Antonio", "Montesinos-Lopez", email= "oamontes1@ucol.mx", role = "aut", comment = c(ORCID = "0000-0002-3973-6547")),
