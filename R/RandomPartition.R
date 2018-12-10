@@ -165,21 +165,24 @@ CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
 #'
 #' @examples
 #' \dontrun{
-#'   library(GFR)
-#'   data('Maize_GFR')
+#'   library(BMTME)
+#'   data("WheatIranianToy")
+#'   phenoIranianToy <- phenoIranianToy[order(phenoIranianToy$Env, phenoIranianToy$GID), ]
+#'   pheno <- data.frame(GID = phenoIranianToy[, 1], Env = phenoIranianToy$Env,
+#'                       Trait = rep(colnames(phenoIranianToy)[3:4], each = dim(phenoIranianToy)[1]),
+#'                       Response = c(phenoIranianToy[, 3], phenoIranianToy[, 4]))
 #'
-#'   CV.RandomPart(Wheat_GFR)
-#'   CV.RandomPart(Wheat_GFR, NPartitions = 10)
-#'   CV.RandomPart(Wheat_GFR, Traits.testing = 'PH')
-#'   CV.RandomPart(Wheat_GFR, NPartitions = 10, PTesting = .35)
-#'   CV.RandomPart(Wheat_GFR, NPartitions = 10, Traits.testing = 'PH')
-#'   CV.RandomPart(Wheat_GFR, NPartitions = 10, PTesting = .35, set_seed = 5)
-#'   CV.RandomPart(Wheat_GFR, NPartitions = 10, PTesting = .35, Traits.testing = 'PH')
-#'   CV.RandomPart(Wheat_GFR, NPartitions = 10, PTesting = .35, Traits.testing = 'PH', set_seed = 5 )
+#'   CV.RandomPart(pheno)
+#'   CV.RandomPart(pheno, NPartitions = 10)
+#'   CV.RandomPart(pheno, Traits.testing = 'DTM')
+#'   CV.RandomPart(pheno, NPartitions = 10, PTesting = .35)
+#'   CV.RandomPart(pheno, NPartitions = 10, Traits.testing = 'DTH')
+#'   CV.RandomPart(pheno, NPartitions = 10, PTesting = .35, set_seed = 5)
+#'   CV.RandomPart(pheno, NPartitions = 10, PTesting = .35, Traits.testing = 'DTH')
+#'   CV.RandomPart(pheno, NPartitions = 10, PTesting = .35, Traits.testing = 'DTM', set_seed = 5 )
 #' }
 #' @export
 CV.RandomPart <- function(DataSet, NPartitions = 10, PTesting = .35, Traits.testing = NULL, set_seed = NULL) {
-
   if (!is.null(set_seed)) {
     set.seed(set_seed)
   }
@@ -207,16 +210,13 @@ CV.RandomPart <- function(DataSet, NPartitions = 10, PTesting = .35, Traits.test
     NTraits <- length(unique(DataSet$Trait))
   }
 
-  # Trait <- unique(DataSet$Trait)
-  # Env <- unique(DataSet$Env)
-
   p_list <- vector('list', NPartitions)
-  names(p_list) <- paste0('partition', 1:NPartitions)
+  names(p_list) <- paste0('partition', seq_len(NPartitions))
   resp <- rep(1, NLine * NEnv)
   Y <- matrix(resp, ncol = NEnv, byrow = FALSE)
 
-  for (i in 1:NPartitions) {
-    y <- Y[,1:NEnv]
+  for (i in seq_len(NPartitions)) {
+    y <- Y[, seq_len(NEnv)]
     n <- nrow(Y)
     percTST <- PTesting
     nTST <- round(percTST*n)
@@ -253,12 +253,12 @@ CV.RandomPart <- function(DataSet, NPartitions = 10, PTesting = .35, Traits.test
     A <- matrix(rep(1, NTraits), ncol = NTraits)
     B1 <- kronecker(A, yNA)
 
-    Names_MFormat <- colnames(new_Data[, -1])  # FORMATO MATRIZ
+    Names_MFormat <- colnames(new_Data[, -1])  # Remove GIDS column
     colnames(B1) <- Names_MFormat
 
     if (!is.null(Traits.testing)) {
       Traits_Selec_F <- c()
-      for (r in seq_len(Traits.testing)) {
+      for (r in seq_len(length(Traits.testing))) {
         Traits_Selec <- which(grepl(Traits.testing[r], Names_MFormat) == TRUE)
         Traits_Selec_F <- c(Traits_Selec_F,Traits_Selec)
       }
