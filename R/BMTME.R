@@ -45,18 +45,25 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
     out <- list(results = results, n_cores = parallelCores, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMTMECV'
   } else if (parallelCores > 1 && inherits(testingSet, 'CrossValidation')) {
+    cl <- snow::makeCluster(parallelCores)
+    doSNOW::registerDoSNOW(cl)
     nCV <- length(testingSet$CrossValidation_list)
-    cl <- parallel::makeForkCluster(parallelCores)
-    pbapply::pboptions(type = ifelse(progressBar, 'timer', 'none'))
-    tmp <- pbapply::pblapply(seq_len(nCV),
-                             function(i) CVMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs,
-                                                digits, testingSet$CrossValidation_list[[i]], i,
-                                                testingSet$Environments[testingSet$CrossValidation_list[[i]]]),
-                             cl = cl)
+
+    progress <- NULL
+    if (progressBar) {
+      pb <- utils::txtProgressBar(max = nCV, style = 3)
+      progress <- function(n) utils::setTxtProgressBar(pb, n)
+    }
+    opts <- list(progress = progress)
+    results <- foreach::foreach(actual_CV = seq_len(nCV), .combine = rbind, .packages = 'BMTME', .options.snow = opts) %dopar% {
+      CVMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits,
+             testingSet$CrossValidation_list[[actual_CV]], actual_CV,
+             testingSet$Environments[testingSet$CrossValidation_list[[actual_CV]]])
+    }
+
     parallel::stopCluster(cl)
 
-    res <- do.call("rbind", tmp)
-    out <- list(results = res,
+    out <- list(results = results,
                 n_cores = parallelCores, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMTMECV'
   } else {

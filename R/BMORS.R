@@ -74,28 +74,30 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
     out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init, NAvalues = nNA)
     class(out) <- 'BMORS'
   } else if (parallelCores <= 1 && inherits(testingSet, 'CrossValidation')) {
-
     # Covariance
     for (actual_CV in seq_len(nCV)) {
-      results <- rbind(results, CVBMORS(Y, testingSet, ETA, nIter, burnIn, thin, predictor_Sec_complete, covModel, digits, actual_CV, progressBar, pb))
+      results <- rbind(results, CVBMORS(Y, testingSet, ETA, nIter, burnIn, thin, predictor_Sec_complete, covModel, digits, actual_CV, progressBar))
     }
     out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMORSCV'
   } else if (parallelCores > 1 && inherits(testingSet, 'CrossValidation')) {
+    cl <- snow::makeCluster(parallelCores)
+    doSNOW::registerDoSNOW(cl)
     nCV <- length(testingSet$CrossValidation_list)
-    cl <- parallel::makeForkCluster(parallelCores)
-    pbapply::pboptions(type = ifelse(progressBar, 'timer', 'none'))
-    tmp <- pbapply::pblapply(seq_len(nCV),
-                             function(i) CVBMORS(Y, testingSet, ETA, nIter, burnIn,
-                                                 thin, predictor_Sec_complete,
-                                                 covModel, digits, i,
-                                                 progressBar, pb),
-                             cl = cl)
+
+    progress <- NULL
+    if (progressBar) {
+      pb <- utils::txtProgressBar(max = nCV, style = 3)
+      progress <- function(n) utils::setTxtProgressBar(pb, n)
+    }
+    opts <- list(progress = progress)
+    results <- foreach::foreach(actual_CV = seq_len(nCV), .combine = rbind, .packages = 'BMTME', .options.snow = opts) %dopar% {
+      CVBMORS(Y, testingSet, ETA, nIter, burnIn, thin, predictor_Sec_complete,
+              covModel, digits, actual_CV, progressBar = FALSE)
+    }
+
     parallel::stopCluster(cl)
-
-    res <- do.call("rbind", tmp)
-
-    out <- list(results = res, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
+    out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMORSCV'
   }
 
@@ -103,7 +105,7 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
   return(out)
 }
 
-CVBMORS <- function(Y, testingSet,  ETA, nIter, burnIn, thin, predictor_Sec_complete, covModel, digits, iterationNumber, progressBar, pb){
+CVBMORS <- function(Y, testingSet,  ETA, nIter, burnIn, thin, predictor_Sec_complete, covModel, digits, iterationNumber, progressBar){
   nTraits <- dim(Y)[2L]
   YwithCov <- matrix(Y, ncol = 2 * nTraits, nrow = nrow(Y)) # to include covariance data
   results <- data.frame() # save cross-validation results

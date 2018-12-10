@@ -54,6 +54,23 @@ test_that('RandomPartition',{
   expect_equal(unique(RP_Test$Environments), unique(pheno$Env))
   expect_is(RP_Test$Traits, 'character')
   expect_length(RP_Test$Traits, length(pheno$Env))
+
+  data("WheatIranianToy")
+  phenoIranianToy <- phenoIranianToy[order(phenoIranianToy$Env, phenoIranianToy$GID), ]
+  pheno <- data.frame(GID = phenoIranianToy[, 1], Env = phenoIranianToy$Env,
+                      Trait = rep(colnames(phenoIranianToy)[3:4], each = dim(phenoIranianToy)[1]),
+                      Response = c(phenoIranianToy[, 3], phenoIranianToy[, 4]))
+  RP_Test2 <- CV.RandomPart(pheno, Traits.testing = 'DTH', set_seed = 123)
+
+  expect_output(str(RP_Test2), 'List of 6')
+  expect_is(RP_Test2, 'CrossValidation')
+  expect_is(RP_Test2$CrossValidation_list, 'list')
+  expect_output(str(RP_Test2$CrossValidation_list), 'List of 10')
+  expect_is(RP_Test2$Environments, 'factor')
+  expect_length(RP_Test2$Environments, length(pheno$Env))
+  expect_equal(unique(RP_Test2$Environments), unique(pheno$Env))
+  expect_is(RP_Test2$Traits, 'factor')
+  expect_length(RP_Test2$Traits, length(pheno$Env))
 })
 
 context('BME function')
