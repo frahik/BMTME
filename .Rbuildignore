@@ -11,4 +11,4 @@
 ^cran-comments.md$
 ^LICENSE$
 ^Logo.png$
-
+^.*\.dat$
