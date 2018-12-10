@@ -142,6 +142,7 @@ test_that('BME function with Mada data', {
   expect_identical(head(summary(pm), 4), head(summary(pm, 'extended'), 4)[,-7])
   expect_silent(boxplot(pm))
   expect_silent(boxplot(pm, select = 'MAAPE'))
+  expect_silent(boxplot(pm, select = 'MAAPE', ordered = FALSE))
 
   # Check the work in parallel
   pm_parallel <- BME(Y = Y, Z1 = Z.G, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV, parallelCores = 2, progressBar = FALSE)
@@ -279,13 +280,23 @@ test_that('BMORS function with Wheat data with NA values', {
   ETA <- list(Gen = list(X = Z.G, model = 'BRR'))
 
   Y_Error <- phenoWheatToy[, c(3,4)]
-  expect_error(BMORS(Y_Error, ETA = ETA, nIter = 10, burnIn = 5, thin = 2, progressBar = FALSE,
+  expect_error(BMORS(Y_Error, ETA = ETA, nIter = 10, burnIn = 5, thin = 2,
                      digits = 4))
 
 
   Y <- as.matrix(phenoWheatToy[, c(3,4)])
   # Check predictive capacities of the model
-  pm <- BMORS(Y, ETA = ETA, nIter = 10, burnIn = 5, thin = 2, progressBar = FALSE, digits = 4)
+  pm <- BMORS(Y, ETA = ETA, nIter = 10, burnIn = 5, thin = 2, digits = 4)
+  expect_output(str(pm), 'List of 6')
+  expect_is(pm, 'BMORS')
+  expect_is(pm$results, 'data.frame')
+  expect_true(all(is.na(pm$results$Observed)))
+  expect_gt(pm$NAvalues, 0)
+  expect_is(pm$executionTime, 'numeric')
+  expect_output(print(pm), 'Fitted Bayesian Multi-Output Regression Stacking model with:')
+
+  pm <- BMORS(Y, ETA = ETA, nIter = 10, burnIn = 5, thin = 2, progressBar = FALSE,
+              predictor_Sec_complete =  TRUE, digits = 4)
   expect_output(str(pm), 'List of 6')
   expect_is(pm, 'BMORS')
   expect_is(pm$results, 'data.frame')
@@ -308,7 +319,7 @@ test_that('BMORS function with Wheat full data', {
   CrossValidation <- CV.RandomPart(pheno, NPartitions = 10, PTesting = 0.2, set_seed = 123)
   Y <- as.matrix(phenoWheatToy[, c(3,4)])
   # Check predictive capacities of the model
-  pm <- BMORS(Y, ETA = ETA, nIter = 10, burnIn = 5, thin = 2, progressBar = FALSE,
+  pm <- BMORS(Y, ETA = ETA, nIter = 10, burnIn = 5, thin = 2,
               testingSet = CrossValidation,  digits = 4)
 
   expect_output(str(pm), 'List of 5')
@@ -357,4 +368,13 @@ test_that('BMORS_Env function with Maize data', {
   expect_output(print(pm), 'Fitted Bayesian Multi-Output Regression Stacking model for n environments with:')
   expect_silent(barplot(pm))
 
+  pm <- BMORS_Env(dataset, 'EBU', ETA, 'BRR', nIter = 10,
+                  burnIn = 4, thin = 2, digits = 3, predictor_Sec_complete = TRUE)
+
+  expect_output(str(pm), 'List of 5')
+  expect_is(pm, 'BMORSENV')
+  expect_is(pm$results, 'data.frame')
+  expect_is(pm$executionTime, 'numeric')
+  expect_output(print(pm), 'Fitted Bayesian Multi-Output Regression Stacking model for n environments with:')
+  expect_silent(barplot(pm))
 })
