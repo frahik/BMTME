@@ -1,4 +1,14 @@
-BMTME v1.0.2  [First CRAN release]
+BMTME v1.0.3  [First CRAN release]
+==============
+
+Changes:
+
+ * [Update] New tests was added.
+ * [refactoring code] Update validation of cores to use only the 50% of the available cores.
+ * [refactoring code] Change to snow and doSNOW packages to parallel work.
+ * [refactoring code] Bug fixed.
+
+BMTME v1.0.2
 ==============
 
 Changes:
