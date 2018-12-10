@@ -9,7 +9,7 @@
 NULL
 
 validate.parallelCores <-  function(parallelCores){
-  nCore <- detectCores() * .5
+  nCore <- detectCores()
   if (nCore < parallelCores) {message(paste0('[!] For safe analysis, we stablish only ', floor(nCore * .5), ' core(s) to do the analysis.'))}
   ifelse(nCore < parallelCores, return(floor(nCore * .5)), return(parallelCores))
 }
