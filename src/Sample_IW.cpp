@@ -33,13 +33,6 @@ arma::mat inv_wishart( unsigned int df, const arma::mat& S ) {
 };
 
 // [[Rcpp::export]]
-arma::mat MVnorm( unsigned int n, arma::vec mean, const arma::mat&  S ) {
-  int ncols = S.n_cols;
-  arma::mat Y = arma::randn(n, ncols);
-  return (arma::repmat(mean, 1, n).t() + Y * arma::chol(S));
-};
-
-// [[Rcpp::export]]
 arma::rowvec MVnormvv(arma::vec mean, const arma::mat& S ) {
   int ncols = S.n_cols;
   arma::mat LISigmab2(ncols, ncols);

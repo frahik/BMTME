@@ -9,10 +9,6 @@ inv_wishart <- function(df, S) {
     .Call('_BMTME_inv_wishart', PACKAGE = 'BMTME', df, S)
 }
 
-MVnorm <- function(n, mean, S) {
-    .Call('_BMTME_MVnorm', PACKAGE = 'BMTME', n, mean, S)
-}
-
 MVnormvv <- function(mean, S) {
     .Call('_BMTME_MVnormvv', PACKAGE = 'BMTME', mean, S)
 }
