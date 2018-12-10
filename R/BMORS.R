@@ -31,7 +31,8 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
 
   if (is.null(testingSet)) {
     nNA <- 0
-
+    naTraits <- colnames(Y)[colSums(is.na(Y)) > 0]
+    pb <- getProgressBar(':what  [:bar]:percent;  Time elapsed: :elapsed - time left: :eta', nTraits + length(naTraits))
     YwithCov <- matrix(Y, ncol = 2 * nTraits, nrow = nrow(Y)) # to include covariance data
 
     #########First stage analysis#################################
@@ -52,7 +53,6 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
       ETA1 <- list(Cov_PreVal = list(X = XPV, model = covModel))
     }
 
-    naTraits <- colnames(Y)[colSums(is.na(Y)) > 0]
     for (t in naTraits) {
       if (progressBar) {
         pb$tick(tokens = list(what = paste0('Fitting the model')))
@@ -76,7 +76,7 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
   } else if (parallelCores <= 1 && inherits(testingSet, 'CrossValidation')) {
     # Covariance
     for (actual_CV in seq_len(nCV)) {
-      results <- rbind(results, CVBMORS(Y, testingSet, ETA, nIter, burnIn, thin, predictor_Sec_complete, covModel, digits, actual_CV, progressBar))
+      results <- rbind(results, CVBMORS(Y, testingSet, ETA, nIter, burnIn, thin, predictor_Sec_complete, covModel, digits, actual_CV, progressBar, pb))
     }
     out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMORSCV'
@@ -93,7 +93,7 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
     opts <- list(progress = progress)
     results <- foreach::foreach(actual_CV = seq_len(nCV), .combine = rbind, .packages = 'BMTME', .options.snow = opts) %dopar% {
       CVBMORS(Y, testingSet, ETA, nIter, burnIn, thin, predictor_Sec_complete,
-              covModel, digits, actual_CV, progressBar = FALSE)
+              covModel, digits, actual_CV, progressBar = FALSE, NULL)
     }
 
     parallel::stopCluster(cl)
@@ -105,7 +105,7 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
   return(out)
 }
 
-CVBMORS <- function(Y, testingSet,  ETA, nIter, burnIn, thin, predictor_Sec_complete, covModel, digits, iterationNumber, progressBar){
+CVBMORS <- function(Y, testingSet,  ETA, nIter, burnIn, thin, predictor_Sec_complete, covModel, digits, iterationNumber, progressBar, pb){
   nTraits <- dim(Y)[2L]
   YwithCov <- matrix(Y, ncol = 2 * nTraits, nrow = nrow(Y)) # to include covariance data
   results <- data.frame() # save cross-validation results
