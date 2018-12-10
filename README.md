@@ -6,7 +6,7 @@
 
 <h3 align="center">
 
-Bayesian Multi-Trait Multi-Environment | Development version 1.0.2
+Bayesian Multi-Trait Multi-Environment | Development version 1.0.3
 
 </h4>
 
@@ -17,7 +17,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.2
 </a> <a href="https://travis-ci.org/frahik/BMTME">
 <img src="https://travis-ci.org/frahik/BMTME.svg?branch=master" alt="Travis build status">
 </a> <a href='https://coveralls.io/github/frahik/BMTME'>
-<img src='https://coveralls.io/repos/github/frahik/BMTME/badge.svg' alt='Coverage Status' />
+<img src='https://coveralls.io/repos/github/frahik/BMTME/badge.svg?branch=master' alt='Coverage Status'/>
 </a> <a href="https://www.gnu.org/licenses/lgpl-3.0">
 <img src="https://img.shields.io/badge/License-LGPL%20v3-blue.svg" alt="LGPL, Version 3.0">
 </a> <a href="http://www.repostatus.org/#active">
@@ -32,7 +32,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.2
 
 <h4 align="center">
 
-\[Last README update: 2018-12-07\]
+\[Last README update: 2018-12-10\]
 
 </h4>
 
@@ -52,18 +52,16 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.2
 
 <h2 id="news">
 
-News of this version (1.0.2)
+News of this version (1.0.3)
 
 </h2>
 
   - \[Update\] New tests was added.
-  - \[refactoring code\] Now the progress bar with parallel work it is
-    with pbapply package
-  - \[refactoring code\] Change snow and doSNOW packages to parallel
-    package
-  - \[refactoring code\] New function to crossvalidation, easier to
-    maintain.
-  - \[Update\] Add a good description.
+  - \[refactoring code\] Update validation of cores to use only the 50%
+    of the available cores.
+  - \[refactoring code\] Change to snow and doSNOW packages to parallel
+    work.
+  - \[refactoring code\] Bug fixed.
 
 See the last updates in [NEWS](NEWS.md).
 
