@@ -10,10 +10,6 @@ NULL
 
 validate.parallelCores <-  function(parallelCores){
   nCore <- detectCores()
-  if (nCore < parallelCores) {
-    message(paste0('[!] There not more than ',  nCore, ' core(s) availabe, for safe analysis, we stablish ', nCore - 1, ' core(s) to do the analysis'))
-    return(nCore - 1)
-  } else {
-    return(parallelCores)
-  }
+  if (nCore < parallelCores) {message(paste0('[!] There not more than ',  nCore, ' core(s) availabe, for safe analysis, we stablish ', floor(nCore * .5), ' core(s) to do the analysis'))}
+  ifelse(nCore < parallelCores, return(floor(nCore * .5)), return(parallelCores))
 }
