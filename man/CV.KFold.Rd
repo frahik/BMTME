@@ -24,3 +24,16 @@ Returns a nested list, with a positions to use as testing.
 \description{
 This method consists of randomly dividing the training data set and the test data set.
 }
+\examples{
+\dontrun{
+data("WheatMadaToy")
+phenoMada <- (phenoMada[order(phenoMada$GID),])
+pheno <- data.frame(GID = phenoMada[, 1], Response = phenoMada[, 3])
+
+CV.KFold(pheno)
+CV.KFold(pheno, set_seed = 123)
+CV.KFold(pheno, DataSetID = 'GID', set_seed = 123)
+CV.KFold(pheno, DataSetID = 'GID', K = 10, set_seed = 123)
+}
+
+}

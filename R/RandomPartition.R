@@ -13,6 +13,19 @@
 #' @importFrom stats na.omit
 #' @return
 #' Returns a nested list, with a positions to use as testing.
+#'
+#' @examples
+#' \dontrun{
+#' data("WheatMadaToy")
+#' phenoMada <- (phenoMada[order(phenoMada$GID),])
+#' pheno <- data.frame(GID = phenoMada[, 1], Response = phenoMada[, 3])
+#'
+#' CV.KFold(pheno)
+#' CV.KFold(pheno, set_seed = 123)
+#' CV.KFold(pheno, DataSetID = 'GID', set_seed = 123)
+#' CV.KFold(pheno, DataSetID = 'GID', K = 10, set_seed = 123)
+#' }
+#'
 #' @export
 CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
   if (!is.null(set_seed)) {

@@ -13,6 +13,24 @@
 #'
 #' @export
 #'
+#' @examples
+#' \donttest{
+#' data('MaizeToy')
+#' phenoMaizeToy <- phenoMaizeToy[order(phenoMaizeToy$Env, phenoMaizeToy$Line),]
+#'
+#' #Matrix design
+#' LG <- cholesky(genoMaizeToy)
+#' ZG <- model.matrix(~0 + as.factor(phenoMaizeToy$Line))
+#' Z.G <- ZG %*% LG
+#' #Linear Predictor
+#' ETA <- list(Gen = list(X = Z.G, model = 'BRR'))
+#'
+#' dataset <- phenoMaizeToy[, 2:5] #Must Include in the first column the environments
+#' #Check predictive capacities of the model
+#' pm <- BMORS_Env(dataset, testingEnv = 'EBU', ETA = ETA, covModel = 'BRR', nIter = 10000,
+#'                 burnIn = 5000, thin = 2, progressBar = FALSE, digits = 3)
+#' }
+#'
 #' @importFrom BGLR BGLR
 BMORS_Env <- function(data = NULL, testingEnv = '', ETA = NULL, covModel = 'BRR', predictor_Sec_complete = FALSE, nIter = 2500, burnIn = 500, thin = 5, progressBar = TRUE, digits = 4) {
   time.init <- proc.time()[3]

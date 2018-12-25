@@ -38,3 +38,36 @@ BMTME(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L,
 \description{
 The Bayesian Multi-Trait Multi-Environment models (BMTME) package was developed to implement...
 }
+\examples{
+\donttest{
+  data("WheatIranianToy")
+
+  # Matrix Design
+  LG <- cholesky(genoIranianToy)
+  ZG <- model.matrix(~0 + as.factor(phenoIranianToy$GID))
+  Z.G <- ZG \%*\% LG
+  Z.E <- model.matrix(~0 + as.factor(phenoIranianToy$Env))
+  ZEG <- model.matrix(~0 + as.factor(phenoIranianToy$GID):as.factor(phenoIranianToy$Env))
+  G2 <- kronecker(diag(length(unique(phenoIranianToy$Env))), data.matrix(genoIranianToy))
+  LG2 <- cholesky(G2)
+  Z.EG <- ZEG \%*\% LG2
+
+  #Pheno
+  Y <- as.matrix(phenoIranianToy[, -c(1, 2)])
+
+  #Check fitting
+  fm <- BMTME(Y = Y, X = Z.E, Z1 = Z.G, Z2 = Z.EG, nIter = 10000, burnIn = 5000, thin = 2, bs = 50)
+  fm
+
+  # Check predictive capacities of the model
+  pheno <- data.frame(GID = phenoIranianToy[, 1], Env = phenoIranianToy[, 2], Response = phenoIranianToy[, 3])
+  CrossV <- CV.RandomPart(pheno, NPartitions = 4, PTesting = 0.2, set_seed = 123)
+  pm <- BMTME(Y = Y, X = Z.E, Z1 = Z.G, Z2 = Z.EG, nIter = 10000, burnIn = 5000, thin = 2, bs = 50, testingSet = CrossV)
+  pm
+}
+
+}
+\references{
+Montesinos-Lopez, O.A., Montesinos-Lopez, A., Crossa, J., Toledo, F.H., Perez-Hernandez, O., Eskridge, K.M., … Rutkoski, J. (2016).
+A Genomic Bayesian Multi-trait and Multi-environment Model. G3: Genes|Genomes|Genetics, 6(9), 2725–2744. \url{https://doi.org/10.1534/g3.116.032359}.
+}

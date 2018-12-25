@@ -33,7 +33,32 @@ BME(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L,
 If the testingSet is NULL, the function returns the predictions.
 
 Else, if the testingSet is not NULL, the function returns the correlation of the predictions of the cross-validation test.
+#' @examples
+\donttest{
+  data("WheatMadaToy")
+  phenoMada <- (phenoMada[order(phenoMada$GID),])
+
+  #Matrix design
+  LG <- cholesky(genoMada)
+  ZG <- model.matrix(~0 + as.factor(phenoMada$GID))
+  Z.G <- ZG %*% LG
+
+  #Pheno data
+  Y <- as.matrix(phenoMada[, -c(1)])
+  # Check fitting
+  fm <- BME(Y = Y, Z1 = Z.G, nIter = 10000, burnIn = 5000, thin = 2, bs = 50)
+
+  # Check predictive capacities of the model with CrossValidation object
+  pheno <- data.frame(GID = phenoMada[, 1], Env = '', Response = phenoMada[, 3])
+  CrossV <- CV.RandomPart(pheno, NPartitions = 4, PTesting = 0.2, set_seed = 123)
+
+  pm <- BME(Y = Y, Z1 = Z.G, nIter = 10000, burnIn = 5000, thin = 2, bs = 50, testingSet = CrossV)
+}
 }
 \description{
 Bayesian Multi-Environment Model (BME)
+}
+\references{
+Montesinos-Lopez, O.A., Montesinos-Lopez, A., Crossa, J., Toledo, F.H., Perez-Hernandez, O., Eskridge, K.M., … Rutkoski, J. (2016).
+A Genomic Bayesian Multi-trait and Multi-environment Model. G3: Genes|Genomes|Genetics, 6(9), 2725–2744. \url{https://doi.org/10.1534/g3.116.032359}.
 }
