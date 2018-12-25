@@ -1,7 +1,7 @@
 Package: BMTME
 Title: Bayesian Multi-Trait Multi-Environment for Genomic Selection Analysis
-Version: 1.0.3
-Date: 2018-12-7
+Version: 1.0.4
+Date: 2018-12-25
 Language: en-US
 Authors@R: c(person("Francisco Javier", "Luna-Vazquez", email = "frahik@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-5370-7152")),
              person("Fernando H.", "Toledo", role = "aut"),
@@ -9,7 +9,9 @@ Authors@R: c(person("Francisco Javier", "Luna-Vazquez", email = "frahik@gmail.co
              person("Abelardo", "Montesinos-Lopez", role = "aut"),
              person("Jose", "Crossa", role = "aut", comment = c(ORCID = "0000-0001-9429-5855")))
 Maintainer: Francisco Javier Luna-Vazquez <frahik@gmail.com>
-Description: Genomic selection and prediction models with the capacity to use multiple traits and environments, through ready-to-use Bayesian models.
+Description: Genomic selection and prediction models with the capacity to use multiple traits and environments, through ready-to-use Bayesian models. It consists a group of functions 
+             that help to create regression models for some genomic models proposed by Montesinos-López, et al. (2016) <doi:10.1534/g3.116.032359>
+             also in Montesinos-López et al. (2018) <doi:10.1534/g3.118.200728> and Montesinos-López et al. (2018) <doi:10.2134/agronj2018.06.0362>.
 Depends:
   R (>= 3.0.0)
 License: LGPL-3
