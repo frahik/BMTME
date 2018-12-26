@@ -21,13 +21,12 @@ R CMD check succeeded
 
 ## Last round comments
 
-Come on ... please provide a Description.  [Done (Sorry for this mistake)]
+Thanksk we see several Rd files do not contain examples. Plerase add 
+examples. [DONE]
 
-We also see:
-
-   Uses the superseded package: 'doSNOW'
-
-Can't you use parallel and doParallel, if you really need it. [See Special comments]
+Is there some reference about the method you can add in the Description 
+field in the form Authors (year) <doi:.....>?  [DONE]
+Also, please elaborate which kind of models can be estimated. [DONE]
 
 ## Special comments
 I am using the doSNOW package, to be able to show a progress bar in the advance of the calculations, since it is a very demanding algorithm in time (in large data sets usually takes at least 8 hours). I think it is convenient to show the progress bar when the work is done in parallel to take advantage of all the cores of the computer, as well as to be able to show the user the progress of cross validations.
