@@ -1,4 +1,12 @@
-BMTME v1.0.3  [First CRAN release]
+BMTME v1.0.4  [First CRAN release]
+==============
+
+Changes:
+
+ * [Update] Examples provided to BMORS, BME, BMTME and BMORS_Env functions.
+ * [Update] Description of the package.
+
+BMTME v1.0.3
 ==============
 
 Changes:
@@ -68,7 +76,7 @@ Changes:
  * Good practice with <-
  * complete F or T, logical arguments.
  * Bug fixed: changed 1:length to seq_len to avoid bugs.
- * Incude ORCID.
+ * Include ORCID.
 
 BMTME v0.0.23
 ==============
