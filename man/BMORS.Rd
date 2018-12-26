@@ -36,7 +36,7 @@ BMORS(Y = NULL, ETA = NULL, covModel = "BRR",
 Bayesian Multi-Output Regression Stacking (BMORS)
 }
 \examples{
-\dontrun{
+\donttest{
 data("WheatToy")
 phenoWheatToy <- phenoWheatToy[order(phenoWheatToy$Env, phenoWheatToy$Gid),]
 

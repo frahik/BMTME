@@ -31,7 +31,7 @@ For each division, the approximation function is adjusted from the training data
 The result corresponds to the arithmetic mean of the values obtained for the different divisions.
 }
 \examples{
-\dontrun{
+\donttest{
   library(BMTME)
   data("WheatIranianToy")
   phenoIranianToy <- phenoIranianToy[order(phenoIranianToy$Env, phenoIranianToy$GID), ]

@@ -14,7 +14,7 @@
 #' @return If the testingSet is NULL, the function returns the predictions.
 #'
 #' Else, if the testingSet is not NULL, the function returns the correlation of the predictions of the cross-validation test.
-#' #' @examples
+#' @examples
 #' \donttest{
 #'   data("WheatMadaToy")
 #'   phenoMada <- (phenoMada[order(phenoMada$GID),])

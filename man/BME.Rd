@@ -33,7 +33,11 @@ BME(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L,
 If the testingSet is NULL, the function returns the predictions.
 
 Else, if the testingSet is not NULL, the function returns the correlation of the predictions of the cross-validation test.
-#' @examples
+}
+\description{
+Bayesian Multi-Environment Model (BME)
+}
+\examples{
 \donttest{
   data("WheatMadaToy")
   phenoMada <- (phenoMada[order(phenoMada$GID),])
@@ -41,7 +45,7 @@ Else, if the testingSet is not NULL, the function returns the correlation of the
   #Matrix design
   LG <- cholesky(genoMada)
   ZG <- model.matrix(~0 + as.factor(phenoMada$GID))
-  Z.G <- ZG %*% LG
+  Z.G <- ZG \%*\% LG
 
   #Pheno data
   Y <- as.matrix(phenoMada[, -c(1)])
@@ -54,9 +58,7 @@ Else, if the testingSet is not NULL, the function returns the correlation of the
 
   pm <- BME(Y = Y, Z1 = Z.G, nIter = 10000, burnIn = 5000, thin = 2, bs = 50, testingSet = CrossV)
 }
-}
-\description{
-Bayesian Multi-Environment Model (BME)
+
 }
 \references{
 Montesinos-Lopez, O.A., Montesinos-Lopez, A., Crossa, J., Toledo, F.H., Perez-Hernandez, O., Eskridge, K.M., … Rutkoski, J. (2016).

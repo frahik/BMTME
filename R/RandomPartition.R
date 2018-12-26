@@ -15,7 +15,7 @@
 #' Returns a nested list, with a positions to use as testing.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' data("WheatMadaToy")
 #' phenoMada <- (phenoMada[order(phenoMada$GID),])
 #' pheno <- data.frame(GID = phenoMada[, 1], Response = phenoMada[, 3])
@@ -177,7 +177,7 @@ CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
 #' @return \code{List} A list object with length of \code{NPartitions}, every index has a the positions to use like testing.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   library(BMTME)
 #'   data("WheatIranianToy")
 #'   phenoIranianToy <- phenoIranianToy[order(phenoIranianToy$Env, phenoIranianToy$GID), ]

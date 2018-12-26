@@ -25,7 +25,7 @@ Returns a nested list, with a positions to use as testing.
 This method consists of randomly dividing the training data set and the test data set.
 }
 \examples{
-\dontrun{
+\donttest{
 data("WheatMadaToy")
 phenoMada <- (phenoMada[order(phenoMada$GID),])
 pheno <- data.frame(GID = phenoMada[, 1], Response = phenoMada[, 3])

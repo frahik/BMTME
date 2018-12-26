@@ -39,13 +39,19 @@
 #'   Y <- as.matrix(phenoIranianToy[, -c(1, 2)])
 #'
 #'   #Check fitting
-#'   fm <- BMTME(Y = Y, X = Z.E, Z1 = Z.G, Z2 = Z.EG, nIter = 10000, burnIn = 5000, thin = 2, bs = 50)
+#'   fm <- BMTME(Y = Y, X = Z.E, Z1 = Z.G, Z2 = Z.EG,
+#'               nIter = 10000, burnIn = 5000, thin = 2, bs = 50)
 #'   fm
 #'
 #'   # Check predictive capacities of the model
-#'   pheno <- data.frame(GID = phenoIranianToy[, 1], Env = phenoIranianToy[, 2], Response = phenoIranianToy[, 3])
+#'   pheno <- data.frame(GID = phenoIranianToy[, 1],
+#'                       Env = phenoIranianToy[, 2],
+#'                       Response = phenoIranianToy[, 3])
 #'   CrossV <- CV.RandomPart(pheno, NPartitions = 4, PTesting = 0.2, set_seed = 123)
-#'   pm <- BMTME(Y = Y, X = Z.E, Z1 = Z.G, Z2 = Z.EG, nIter = 10000, burnIn = 5000, thin = 2, bs = 50, testingSet = CrossV)
+#'
+#'   pm <- BMTME(Y = Y, X = Z.E, Z1 = Z.G, Z2 = Z.EG,
+#'               nIter = 10000, burnIn = 5000, thin = 2,
+#'               bs = 50, testingSet = CrossV)
 #'   pm
 #' }
 #'

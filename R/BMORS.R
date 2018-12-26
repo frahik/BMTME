@@ -16,7 +16,7 @@
 #'
 #' @importFrom BGLR BGLR
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' data("WheatToy")
 #' phenoWheatToy <- phenoWheatToy[order(phenoWheatToy$Env, phenoWheatToy$Gid),]
 #'
