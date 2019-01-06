@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 This example shows how to evaluate prediction performance with multiple environments and traits in one single environment, using a `BMORS_Env` function. To do this, the MaizeToy dataset is used which is also available in the BMTME package, and it is loaded with the `data()` function as shown below:
 
 ```{r}
+library(BMTME)
 data('MaizeToy')
 ```
 
