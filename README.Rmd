@@ -49,10 +49,8 @@ output: github_document
   News of this version (`r packageVersion('BMTME')`)
 </h2>
 
- * [Update] New tests was added.
- * [refactoring code] Update validation of cores to use only the 50% of the available cores.
- * [refactoring code] Change to snow and doSNOW packages to parallel work.
- * [refactoring code] Bug fixed.
+ * [Update] Fixed package to keep it compatible with new version of dplyr.
+ * [Update] New parameter `tolerance` in cholesky function.
  
 See the last updates in [NEWS](NEWS.md).
 

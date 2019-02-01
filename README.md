@@ -6,7 +6,7 @@
 
 <h3 align="center">
 
-Bayesian Multi-Trait Multi-Environment | Development version 1.0.4
+Bayesian Multi-Trait Multi-Environment | Development version 1.0.5
 
 </h4>
 
@@ -32,7 +32,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.4
 
 <h4 align="center">
 
-\[Last README update: 2018-12-26\]
+\[Last README update: 2019-02-01\]
 
 </h4>
 
@@ -52,16 +52,13 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.4
 
 <h2 id="news">
 
-News of this version (1.0.4)
+News of this version (1.0.5)
 
 </h2>
 
-  - \[Update\] New tests was added.
-  - \[refactoring code\] Update validation of cores to use only the 50%
-    of the available cores.
-  - \[refactoring code\] Change to snow and doSNOW packages to parallel
-    work.
-  - \[refactoring code\] Bug fixed.
+  - \[Update\] Fixed package to keep it compatible with new version of
+    dplyr.
+  - \[Update\] New parameter `tolerance` in cholesky function.
 
 See the last updates in [NEWS](NEWS.md).
 
