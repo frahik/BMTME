@@ -1,3 +1,12 @@
+BMTME v1.0.5
+==============
+
+Changes:
+
+ * [Update] Fixed package to keep it compatible with new version of dplyr.
+ * [Update] New parameter `tolerance` in cholesky function.
+
+
 BMTME v1.0.4  [First CRAN release]
 ==============
 
