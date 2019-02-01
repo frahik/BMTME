@@ -9,7 +9,7 @@ cholesky(G, tolerance = 1e-10)
 \arguments{
 \item{G}{(numeric - matrix) an object to apply this method, it could be non positive-definite matrices.}
 
-\item{tolerance}{(\code{double}) Tolerance level.}
+\item{tolerance}{(\code{double}) Tolerance level, by default is 1e-10.}
 }
 \description{
 Compute the Cholesky factorization of a non-real symmetric positive-definite square matrix.
