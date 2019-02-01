@@ -1,6 +1,5 @@
 ---
 title: "Fit the Bayesian Multi-Output Regression Stacking model using the maize dataset and apply a random partition cross-validation"
-author: "Francisco Javier Luna-Vázquez"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >

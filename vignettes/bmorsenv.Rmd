@@ -1,6 +1,5 @@
 ---
 title: "Fit the BMORS model for one environment of Maize dataset"
-author: "Francisco Javier Luna-Vázquez"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
