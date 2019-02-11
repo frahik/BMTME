@@ -162,7 +162,7 @@ coreMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar,
       EigenA <- eigen(A_ii)
       d_A    <- EigenA$values
       V_A    <- EigenA$vectors
-      pos_A1 <- which(d_A > 1e-10)
+      pos_A1 <- which(Re(d_A) > 1e-10)
       if (identical(pos_A1, integer(0))) {
         pos_A <- 1L
       } else {
