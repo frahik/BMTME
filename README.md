@@ -6,7 +6,7 @@
 
 <h3 align="center">
 
-Bayesian Multi-Trait Multi-Environment | Development version 1.0.5
+Bayesian Multi-Trait Multi-Environment | Development version 1.0.6
 
 </h4>
 
@@ -32,7 +32,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.5
 
 <h4 align="center">
 
-\[Last README update: 2019-02-01\]
+\[Last README update: 2019-02-11\]
 
 </h4>
 
@@ -52,13 +52,11 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.5
 
 <h2 id="news">
 
-News of this version (1.0.5)
+News of this version (1.0.6)
 
 </h2>
 
-  - \[Update\] Fixed package to keep it compatible with new version of
-    dplyr.
-  - \[Update\] New parameter `tolerance` in cholesky function.
+  - \[Fix bug\] Fixed eigen values in `BME` and `BMTME` functions.
 
 See the last updates in [NEWS](NEWS.md).
 

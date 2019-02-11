@@ -49,9 +49,8 @@ output: github_document
   News of this version (`r packageVersion('BMTME')`)
 </h2>
 
- * [Update] Fixed package to keep it compatible with new version of dplyr.
- * [Update] New parameter `tolerance` in cholesky function.
- 
+ * [Fix bug] Fixed eigen values in `BME` and `BMTME` functions.
+
 See the last updates in [NEWS](NEWS.md).
 
 <h2 id="instructions">
