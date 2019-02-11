@@ -1,3 +1,10 @@
+BMTME v1.0.6
+==============
+
+Changes:
+
+ * [Fix bug] Fixed eigen values in `BME` and `BMTME` functions.
+
 BMTME v1.0.5
 ==============
 
