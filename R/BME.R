@@ -129,6 +129,7 @@ coreME <- function(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingS
                                    total = nIter/20L, clear = FALSE, show_after = 0L)
   # ps: blocks size
   rmv_f <- function(ps, c, A, x) {
+    A    <- (A + t(A))/2
     p    <- dim(A)[1L]
     k    <- floor(p / ps)#Numbers of blocks
     r1   <- p - k * ps
@@ -145,7 +146,7 @@ coreME <- function(Y, Z1, nIter, burnIn, thin, bs, digits, progressBar, testingS
       EigenA <- eigen(A_ii)
       d_A   <- EigenA$values
       V_A   <- EigenA$vectors
-      pos_A1 <- which(Re(d_A) > 1e-10)
+      pos_A1 <- which(d_A > 1e-10)
       if (identical(pos_A1, integer(0))) {
         pos_A <- 1L
       } else {
