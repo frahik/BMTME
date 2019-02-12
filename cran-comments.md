@@ -1,7 +1,7 @@
 ## Test environments
 
-* Linux - Manjaro R-base [3.5.1]
-* Windows 10 R [3.5.1]
+* Linux - Manjaro R-base [3.5.2]
+* Windows 10 R [3.5.2]
 * win-builder (devel and release)
 * chech_rhub (devel)
 * TravisCI (devel and release)

@@ -8,6 +8,7 @@
 #' @export
 #'
 cholesky <- function(G, tolerance = 1e-10) {
+  G <- (G + t(G)) / 2
   EigenA <- eigen(G)
   d_A    <- EigenA$values
   V_A    <- EigenA$vectors
