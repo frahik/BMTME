@@ -14,8 +14,5 @@ A data set based on a portion of the data used in the study of (Montesinos-Lópe
 \references{
 Montesinos-López, O. A., Montesinos-López, A., Crossa, J., Montesinos-López, J. C., Luna-Vázquez, F. J., Salinas, J., … Buenrostro-Mariscal, R. (2017). A Variational Bayes Genomic-Enabled Prediction Model with Genotype × Environment Interaction. G3: Genes|Genomes|Genetics, 7(8), g3.117.041202. https://doi.org/10.1534/g3.117.041202
 }
-\author{
-Luna-Vázquez, Francisco Javier
-}
 \keyword{Maize}
 \keyword{dataset}

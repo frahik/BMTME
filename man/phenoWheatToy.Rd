@@ -16,8 +16,5 @@ A data set based on a portion of the data used in the study
 from a collection of 599 historical CIMMYT wheat lines.
 The wheat data set is from CIMMYT's Global Wheat Program.
 }
-\author{
-Luna-Vázquez, Francisco Javier
-}
 \keyword{Wheat}
 \keyword{dataset}

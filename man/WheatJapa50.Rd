@@ -14,6 +14,3 @@ This data set is also based on the data used in the study of (Ben Hassen et al.,
 \references{
 Ben Hassen, M., Bartholomé, J., Valè, G., Cao, T.-V., & Ahmadi, N. (2018). Genomic Prediction Accounting for Genotype by Environment Interaction Offers an Effective Framework for Breeding Simultaneously for Adaptation to an Abiotic Stress and Performance Under Normal Cropping Conditions in Rice. G3: Genes|Genomes|Genetics, 8(July), 2319–2332. https://doi.org/10.1534/g3.118.200098
 }
-\author{
-Luna-Vázquez, Francisco Javier
-}

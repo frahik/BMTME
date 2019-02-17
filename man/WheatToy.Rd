@@ -24,8 +24,5 @@ The variables that import the dataset are as follows:
 \references{
 McLaren, C. G., R. Bruskiewich, A.M. Portugal, and A.B. Cosico. 2005. The International Rice Information System. A platform for meta-analysis of rice crop data. \emph{Plant Physiology} \bold{139}: 637-642.
 }
-\author{
-Luna-Vázquez, Francisco Javier
-}
 \keyword{Wheat}
 \keyword{dataset}

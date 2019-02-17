@@ -12,7 +12,6 @@
 #' @source International Maize and Wheat Improvement Center (CIMMYT), Mexico.
 #' @usage data(WheatToy)
 #' @format 2 objects are loaded (phenoWheatToy and genoWheatToy)
-#' @author Luna-Vázquez, Francisco Javier
 #' @references McLaren, C. G., R. Bruskiewich, A.M. Portugal, and A.B. Cosico. 2005. The International Rice Information System. A platform for meta-analysis of rice crop data. \emph{Plant Physiology} \bold{139}: 637-642.
 #' @keywords Wheat dataset
 NULL
@@ -28,7 +27,6 @@ NULL
 #' @source International Maize and Wheat Improvement Center (CIMMYT), Mexico.
 #' @usage phenoWheatToy
 #' @format data.frame, 90 row per 4 columns.
-#' @author Luna-Vázquez, Francisco Javier
 #' @keywords Wheat dataset
 NULL
 
@@ -42,7 +40,6 @@ NULL
 #' @source International Maize and Wheat Improvement Center (CIMMYT), Mexico.
 #' @usage genoWheatToy
 #' @format 30 x 30 data.frame
-#' @author Luna-Vázquez, Francisco Javier
 #' @keywords Wheat dataset
 NULL
 
@@ -59,7 +56,6 @@ NULL
 #' @docType data
 #' @usage data(WheatIranianToy)
 #' @format 2 objects are loaded (phenoIranianToy and genoIranianToy)
-#' @author Luna-Vázquez, Francisco Javier
 #' @references Crossa, J., Jarquín, D., Franco, J., Pérez-Rodríguez, P., Burgueño, J., Saint-Pierre, C., Singh, S. (2016). Genomic Prediction of Gene Bank Wheat Landraces. G3: Genes|Genomes|Genetics, 6(7), 1819–1834. https://doi.org/10.1534/g3.116.029637
 NULL
 
@@ -71,7 +67,6 @@ NULL
 #' @source International Maize and Wheat Improvement Center (CIMMYT), Mexico.
 #' @usage phenoIranianToy
 #' @format data.frame, 60 row per 4 columns.
-#' @author Luna-Vázquez, Francisco Javier
 #' @keywords Wheat dataset
 #' @references Crossa, J., Jarquín, D., Franco, J., Pérez-Rodríguez, P., Burgueño, J., Saint-Pierre, C., Singh, S. (2016). Genomic Prediction of Gene Bank Wheat Landraces. G3: Genes|Genomes|Genetics, 6(7), 1819–1834. https://doi.org/10.1534/g3.116.029637
 NULL
@@ -84,7 +79,6 @@ NULL
 #' @source International Maize and Wheat Improvement Center (CIMMYT), Mexico.
 #' @usage genoIranianToy
 #' @format 30 x 30 matrix
-#' @author Luna-Vázquez, Francisco Javier
 #' @keywords Wheat dataset
 #' @references Crossa, J., Jarquín, D., Franco, J., Pérez-Rodríguez, P., Burgueño, J., Saint-Pierre, C., Singh, S. (2016). Genomic Prediction of Gene Bank Wheat Landraces. G3: Genes|Genomes|Genetics, 6(7), 1819–1834. https://doi.org/10.1534/g3.116.029637
 NULL
@@ -99,7 +93,6 @@ NULL
 #' @docType data
 #' @usage data(WheatJapa50)
 #' @format 2 objects are loaded (phenoJapa50 and genoJapa50)
-#' @author Luna-Vázquez, Francisco Javier
 #' @references Ben Hassen, M., Bartholomé, J., Valè, G., Cao, T.-V., & Ahmadi, N. (2018). Genomic Prediction Accounting for Genotype by Environment Interaction Offers an Effective Framework for Breeding Simultaneously for Adaptation to an Abiotic Stress and Performance Under Normal Cropping Conditions in Rice. G3: Genes|Genomes|Genetics, 8(July), 2319–2332. https://doi.org/10.1534/g3.118.200098
 NULL
 
@@ -110,7 +103,6 @@ NULL
 #
 #' @usage phenoJapa50
 #' @format data.frame, 50 row per 4 columns.
-#' @author Luna-Vázquez, Francisco Javier
 #' @keywords Japa dataset
 #' @references Ben Hassen, M., Bartholomé, J., Valè, G., Cao, T.-V., & Ahmadi, N. (2018). Genomic Prediction Accounting for Genotype by Environment Interaction Offers an Effective Framework for Breeding Simultaneously for Adaptation to an Abiotic Stress and Performance Under Normal Cropping Conditions in Rice. G3: Genes|Genomes|Genetics, 8(July), 2319–2332. https://doi.org/10.1534/g3.118.200098
 NULL
@@ -122,7 +114,6 @@ NULL
 #'
 #' @usage genoJapa50
 #' @format 50 x 50 matrix
-#' @author Luna-Vázquez, Francisco Javier
 #' @keywords Japa dataset
 #' @references Ben Hassen, M., Bartholomé, J., Valè, G., Cao, T.-V., & Ahmadi, N. (2018). Genomic Prediction Accounting for Genotype by Environment Interaction Offers an Effective Framework for Breeding Simultaneously for Adaptation to an Abiotic Stress and Performance Under Normal Cropping Conditions in Rice. G3: Genes|Genomes|Genetics, 8(July), 2319–2332. https://doi.org/10.1534/g3.118.200098
 NULL
@@ -135,7 +126,6 @@ NULL
 #' @docType data
 #' @usage data(WheatJapa30)
 #' @format 2 objects are loaded (phenoJapa30 and genoJapa30)
-#' @author Luna-Vázquez, Francisco Javier
 #' @references Ben Hassen, M., Bartholomé, J., Valè, G., Cao, T.-V., & Ahmadi, N. (2018). Genomic Prediction Accounting for Genotype by Environment Interaction Offers an Effective Framework for Breeding Simultaneously for Adaptation to an Abiotic Stress and Performance Under Normal Cropping Conditions in Rice. G3: Genes|Genomes|Genetics, 8(July), 2319–2332. https://doi.org/10.1534/g3.118.200098
 NULL
 
@@ -146,7 +136,6 @@ NULL
 #
 #' @usage phenoJapa30
 #' @format data.frame, 30 row per 7 columns.
-#' @author Luna-Vázquez, Francisco Javier
 #' @keywords Japa dataset
 #' @references Ben Hassen, M., Bartholomé, J., Valè, G., Cao, T.-V., & Ahmadi, N. (2018). Genomic Prediction Accounting for Genotype by Environment Interaction Offers an Effective Framework for Breeding Simultaneously for Adaptation to an Abiotic Stress and Performance Under Normal Cropping Conditions in Rice. G3: Genes|Genomes|Genetics, 8(July), 2319–2332. https://doi.org/10.1534/g3.118.200098
 NULL
@@ -158,7 +147,6 @@ NULL
 #'
 #' @usage genoJapa30
 #' @format 30 x 30 matrix
-#' @author Luna-Vázquez, Francisco Javier
 #' @keywords Japa dataset
 #' @references Ben Hassen, M., Bartholomé, J., Valè, G., Cao, T.-V., & Ahmadi, N. (2018). Genomic Prediction Accounting for Genotype by Environment Interaction Offers an Effective Framework for Breeding Simultaneously for Adaptation to an Abiotic Stress and Performance Under Normal Cropping Conditions in Rice. G3: Genes|Genomes|Genetics, 8(July), 2319–2332. https://doi.org/10.1534/g3.118.200098
 NULL
@@ -172,7 +160,6 @@ NULL
 #' @docType data
 #' @usage data(WheatMadaToy)
 #' @format 2 objects are loaded (phenoMada and genoMada)
-#' @author Luna-Vázquez, Francisco Javier
 #' @references Ben Hassen, M., Bartholomé, J., Valè, G., Cao, T.-V., & Ahmadi, N. (2018). Genomic Prediction Accounting for Genotype by Environment Interaction Offers an Effective Framework for Breeding Simultaneously for Adaptation to an Abiotic Stress and Performance Under Normal Cropping Conditions in Rice. G3: Genes|Genomes|Genetics, 8(July), 2319–2332. https://doi.org/10.1534/g3.118.200098
 NULL
 
@@ -183,7 +170,6 @@ NULL
 #
 #' @usage phenoMada
 #' @format data.frame, 50 row per 7 columns.
-#' @author Luna-Vázquez, Francisco Javier
 #' @keywords Mada dataset
 #' @references Ben Hassen, M., Bartholomé, J., Valè, G., Cao, T.-V., & Ahmadi, N. (2018). Genomic Prediction Accounting for Genotype by Environment Interaction Offers an Effective Framework for Breeding Simultaneously for Adaptation to an Abiotic Stress and Performance Under Normal Cropping Conditions in Rice. G3: Genes|Genomes|Genetics, 8(July), 2319–2332. https://doi.org/10.1534/g3.118.200098
 NULL
@@ -195,7 +181,6 @@ NULL
 #'
 #' @usage genoMada
 #' @format 50 x 50 matrix
-#' @author Luna-Vázquez, Francisco Javier
 #' @keywords Mada dataset
 #' @references Ben Hassen, M., Bartholomé, J., Valè, G., Cao, T.-V., & Ahmadi, N. (2018). Genomic Prediction Accounting for Genotype by Environment Interaction Offers an Effective Framework for Breeding Simultaneously for Adaptation to an Abiotic Stress and Performance Under Normal Cropping Conditions in Rice. G3: Genes|Genomes|Genetics, 8(July), 2319–2332. https://doi.org/10.1534/g3.118.200098
 NULL
@@ -208,7 +193,6 @@ NULL
 #' @docType data
 #' @usage data(MaizeToy)
 #' @format 2 objects are loaded (phenoMaizeToy and genoMaizeToy)
-#' @author Luna-Vázquez, Francisco Javier
 #' @references Montesinos-López, O. A., Montesinos-López, A., Crossa, J., Montesinos-López, J. C., Luna-Vázquez, F. J., Salinas, J., … Buenrostro-Mariscal, R. (2017). A Variational Bayes Genomic-Enabled Prediction Model with Genotype × Environment Interaction. G3: Genes|Genomes|Genetics, 7(8), g3.117.041202. https://doi.org/10.1534/g3.117.041202
 NULL
 
@@ -219,7 +203,6 @@ NULL
 #
 #' @usage phenoMaizeToy
 #' @format data.frame, 90 row per 5 columns.
-#' @author Luna-Vázquez, Francisco Javier
 #' @keywords Maize dataset
 #' @references Montesinos-López, O. A., Montesinos-López, A., Crossa, J., Montesinos-López, J. C., Luna-Vázquez, F. J., Salinas, J., … Buenrostro-Mariscal, R. (2017). A Variational Bayes Genomic-Enabled Prediction Model with Genotype × Environment Interaction. G3: Genes|Genomes|Genetics, 7(8), g3.117.041202. https://doi.org/10.1534/g3.117.041202
 NULL
@@ -231,7 +214,6 @@ NULL
 #'
 #' @usage genoMaizeToy
 #' @format 30 x 30 matrix
-#' @author Luna-Vázquez, Francisco Javier
 #' @keywords Maize dataset
 #' @references Montesinos-López, O. A., Montesinos-López, A., Crossa, J., Montesinos-López, J. C., Luna-Vázquez, F. J., Salinas, J., … Buenrostro-Mariscal, R. (2017). A Variational Bayes Genomic-Enabled Prediction Model with Genotype × Environment Interaction. G3: Genes|Genomes|Genetics, 7(8), g3.117.041202. https://doi.org/10.1534/g3.117.041202
 NULL

@@ -17,8 +17,5 @@ A data set based on a portion of the data used in the study of (Crossa et al., 2
 \references{
 Crossa, J., Jarquín, D., Franco, J., Pérez-Rodríguez, P., Burgueño, J., Saint-Pierre, C., Singh, S. (2016). Genomic Prediction of Gene Bank Wheat Landraces. G3: Genes|Genomes|Genetics, 6(7), 1819–1834. https://doi.org/10.1534/g3.116.029637
 }
-\author{
-Luna-Vázquez, Francisco Javier
-}
 \keyword{Wheat}
 \keyword{dataset}
