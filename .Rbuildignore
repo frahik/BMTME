@@ -2,6 +2,7 @@
 ^Meta$
 ^doc$
 ^codecov\.yml$
+^appveyor\.yml$
 ^\.travis\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
