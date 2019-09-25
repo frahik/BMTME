@@ -1,9 +1,8 @@
+// [[Rcpp::interfaces(r, cpp)]]
 // [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::plugins("cpp11")]]
 
 #include <RcppArmadillo.h>
-#include <algorithm>
-#include <iterator>
 
 // [[Rcpp::export]]
 arma::mat wishart(unsigned int df, const arma::mat& S ){
