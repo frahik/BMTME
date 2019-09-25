@@ -6,7 +6,7 @@
 
 <h3 align="center">
 
-Bayesian Multi-Trait Multi-Environment | Development version 1.0.6
+Bayesian Multi-Trait Multi-Environment | Development version 1.0.10
 
 </h4>
 
@@ -16,9 +16,10 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.6
 <img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Maturing">
 </a> <a href="https://travis-ci.org/frahik/BMTME">
 <img src="https://travis-ci.org/frahik/BMTME.svg?branch=master" alt="Travis build status">
-</a> <a href="https://ci.appveyor.com/project/frahik/bmtme">
-<img src="https://ci.appveyor.com/api/projects/status/r2vog9sa30yutl5n?svg=true" alt="Appveyor build status">
 </a> <a href='https://coveralls.io/github/frahik/BMTME'>
+<a href="https://ci.appveyor.com/project/frahik/bmtme">
+<img src="https://ci.appveyor.com/api/projects/status/r2vog9sa30yutl5n?svg=true" alt="Appveyor build status">
+</a>
 <img src='https://coveralls.io/repos/github/frahik/BMTME/badge.svg?branch=master' alt='Coverage Status'/>
 </a> <a href="https://www.gnu.org/licenses/lgpl-3.0">
 <img src="https://img.shields.io/badge/License-LGPL%20v3-blue.svg" alt="LGPL, Version 3.0">
@@ -34,7 +35,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.6
 
 <h4 align="center">
 
-\[Last README update: 2019-02-11\]
+\[Last README update: 2019-09-25\]
 
 </h4>
 
@@ -54,11 +55,11 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.6
 
 <h2 id="news">
 
-News of this version (1.0.6)
+News of this version (1.0.10)
 
 </h2>
 
-  - \[Fix bug\] Fixed eigen values in `BME` and `BMTME` functions.
+  - \[FIX\] clang: warnings
 
 See the last updates in [NEWS](NEWS.md).
 

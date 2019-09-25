@@ -1,7 +1,6 @@
 ## Test environments
 
-* Linux - Manjaro R-base [3.5.2]
-* Windows 10 R [3.5.2]
+* MacOS 10.15 - R 3.5.3
 * win-builder (devel and release)
 * chech_rhub (devel)
 * TravisCI (devel and release)
@@ -18,8 +17,8 @@ R CMD check succeeded
 
 ## Special comments
 
-### Update
-This version fix a bug with complex numbers.
+### Update 1.0.10
+This version fix clang warnings and deprecated `funs` function from dplyr
 
 ### First submission
 I am using the doSNOW package, to be able to show a progress bar in the advance of the calculations, since it is a very demanding algorithm in time (in large data sets usually takes at least 8 hours). I think it is convenient to show the progress bar when the work is done in parallel to take advantage of all the cores of the computer, as well as to be able to show the user the progress of cross validations.

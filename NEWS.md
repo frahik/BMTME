@@ -1,3 +1,11 @@
+BMTME v1.0.10
+==============
+
+Changes:
+
+ * [FIX] clang: warnings
+ * [FIX] Deprecated `funs` from dplyr
+
 BMTME v1.0.6
 ==============
 

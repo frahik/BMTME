@@ -51,7 +51,7 @@ output: github_document
   News of this version (`r packageVersion('BMTME')`)
 </h2>
 
- * [Fix bug] Fixed eigen values in `BME` and `BMTME` functions.
+ * [FIX] clang: warnings
 
 See the last updates in [NEWS](NEWS.md).
 
