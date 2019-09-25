@@ -22,3 +22,7 @@ if (getRversion() >= "2.15.1")
     )
 
   )
+
+.onUnload <- function (libpath) {
+  library.dynam.unload("BMTME", libpath)
+}

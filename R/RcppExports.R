@@ -21,3 +21,7 @@ Krone <- function(A, B) {
     .Call('_BMTME_Krone', PACKAGE = 'BMTME', A, B)
 }
 
+# Register entry points for exported C++ functions
+methods::setLoadAction(function(ns) {
+    .Call('_BMTME_RcppExport_registerCCallable', PACKAGE = 'BMTME')
+})
