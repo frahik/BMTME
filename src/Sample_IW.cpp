@@ -24,12 +24,12 @@ arma::mat wishart(unsigned int df, const arma::mat& S ){
   W = C.t() * C;
 
   return W;
-};
+}
 
 // [[Rcpp::export]]
 arma::mat inv_wishart( unsigned int df, const arma::mat& S ) {
   return wishart(df, S.i()).i(); // inverse wishart drawn
-};
+}
 
 // [[Rcpp::export]]
 arma::rowvec MVnormvv(arma::vec mean, const arma::mat& S ) {
@@ -37,7 +37,6 @@ arma::rowvec MVnormvv(arma::vec mean, const arma::mat& S ) {
   arma::mat LISigmab2(ncols, ncols);
   arma::vec b2std(ncols);
   arma::vec b2Til(ncols);
-  //arma::vec b2ps(ncols, arma::fill::zeros);
   arma::mat ISigmab2(ncols, ncols);
   ISigmab2 = S;
   LISigmab2 = arma::chol(ISigmab2);
@@ -50,15 +49,15 @@ arma::rowvec MVnormvv(arma::vec mean, const arma::mat& S ) {
 
   arma::colvec b2ps = (b2Til + arma::solve(arma::trimatu(LISigmab2), b2std));
   return(b2ps.t());
-};
+}
 
 // [[Rcpp::export]]
 arma::mat  MatMul(arma::mat &X, arma::mat &Y ) {
   arma::mat ans = X * Y;
   return(ans);
-};
+}
 
 // [[Rcpp::export]]
 arma::mat Krone(const arma::mat & A, const arma::mat & B) {
   return(arma::kron(A, B));
-};
+}
