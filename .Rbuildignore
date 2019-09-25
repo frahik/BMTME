@@ -13,3 +13,6 @@
 ^LICENSE$
 ^Logo.png$
 ^.*\.dat$
+(.Rout)$
+^examples(_)[[:alnum:]]*$
+^tests(_)[[:alnum:]]*$
