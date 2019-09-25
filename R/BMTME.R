@@ -114,8 +114,12 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
 
 CVMTME <- function(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, testingSet, iterationNumber, Env){
   fm <- coreMTME(Y, X, Z1, Z2, nIter, burnIn, thin, bs, digits, progressBar = FALSE, testingSet)
-  observed <- tidyr::gather(as.data.frame(Y[testingSet, 1]), 'Trait', 'Observed')
-  predicted <- tidyr::gather(as.data.frame(fm$yHat[testingSet, 1]), 'Trait', 'Predicted')
+  #observed <- tidyr::gather(as.data.frame(Y[testingSet, ]), 'Trait', 'Observed')
+  observed <- as.data.frame(Y[testingSet,1])
+  colnames(observed)[1] <- "Observed"
+  #predicted <- tidyr::gather(as.data.frame(fm$yHat[testingSet, ]), 'Trait', 'Predicted')
+  predicted <- as.data.frame(fm$yHat[testingSet, 1])
+  colnames(predicted)[1] <- "Predicted"
   return(data.frame(Position = testingSet,
                         Environment = Env,
                         Trait = rep(colnames(Y), each = length(testingSet)),
