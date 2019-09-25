@@ -10,8 +10,7 @@
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom stats cor sd
-#' @importFrom dplyr summarise group_by select '%>%' mutate_if funs n ungroup
-#'
+#' @importFrom dplyr summarise group_by select '%>%' mutate_if n ungroup
 #' @export
 summary.BMTMECV <- function(object, information = 'compact', digits = 4, ...) {
   object$results %>%
@@ -20,7 +19,7 @@ summary.BMTMECV <- function(object, information = 'compact', digits = 4, ...) {
               MAAPE = mean(atan(abs(Observed - Predicted)/abs(Observed)))) %>%
     select(Environment, Trait, Partition, Pearson, MAAPE) %>%
     ungroup() %>%
-    mutate_if(is.numeric, funs(round(., digits))) %>%
+    mutate_if(is.numeric, list(~round(., digits))) %>%
     as.data.frame() -> presum
 
   presum %>%  group_by(Environment, Trait) %>%
@@ -28,7 +27,7 @@ summary.BMTMECV <- function(object, information = 'compact', digits = 4, ...) {
               SE_Pearson = sd(Pearson, na.rm = TRUE)/sqrt(n()), Pearson = mean(Pearson, na.rm = TRUE))  %>%
     select(Environment, Trait, Pearson, SE_Pearson, MAAPE, SE_MAAPE) %>%
     ungroup() %>%
-    mutate_if(is.numeric, funs(round(., digits))) %>%
+    mutate_if(is.numeric, list(~round(., digits))) %>%
     as.data.frame() -> finalSum
 
   out <- switch(information,
@@ -57,7 +56,7 @@ summary.BMTMECV <- function(object, information = 'compact', digits = 4, ...) {
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom stats cor sd
-#' @importFrom dplyr summarise group_by select '%>%' mutate_if funs n ungroup
+#' @importFrom dplyr summarise group_by select '%>%' mutate_if n ungroup
 #'
 #' @export
 summary.BMECV <- function(object, information = 'compact', digits = 4, ...) {
@@ -67,7 +66,7 @@ summary.BMECV <- function(object, information = 'compact', digits = 4, ...) {
               MAAPE = mean(atan(abs(Observed - Predicted)/abs(Observed)))) %>%
     select(Environment, Trait, Partition, Pearson, MAAPE) %>%
     ungroup() %>%
-    mutate_if(is.numeric, funs(round(., digits))) %>%
+    mutate_if(is.numeric, list(~round(., digits))) %>%
     as.data.frame() -> presum
 
   presum %>%  group_by(Environment, Trait) %>%
@@ -75,7 +74,7 @@ summary.BMECV <- function(object, information = 'compact', digits = 4, ...) {
               SE_Pearson = sd(Pearson, na.rm = TRUE)/sqrt(n()), Pearson = mean(Pearson, na.rm = TRUE))  %>%
     select(Environment, Trait, Pearson, SE_Pearson, MAAPE, SE_MAAPE) %>%
     ungroup() %>%
-    mutate_if(is.numeric, funs(round(., digits))) %>%
+    mutate_if(is.numeric, list(~round(., digits))) %>%
     as.data.frame() -> finalSum
 
   out <- switch(information,
@@ -104,7 +103,7 @@ summary.BMECV <- function(object, information = 'compact', digits = 4, ...) {
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom stats cor sd
-#' @importFrom dplyr summarise group_by select '%>%' mutate_if funs n ungroup
+#' @importFrom dplyr summarise group_by select '%>%' mutate_if n ungroup
 #'
 #' @export
 summary.BMORSCV <- function(object, information = 'compact', digits = 4, ...){
@@ -114,7 +113,7 @@ summary.BMORSCV <- function(object, information = 'compact', digits = 4, ...){
               MAAPE = mean(atan(abs(Observed - Predicted)/abs(Observed)))) %>%
     select(Environment, Trait, Partition, Pearson, MAAPE) %>%
     ungroup() %>%
-    mutate_if(is.numeric, funs(round(., digits))) %>%
+    mutate_if(is.numeric, list(~round(., digits))) %>%
     as.data.frame() -> presum
 
   presum %>%  group_by(Environment, Trait) %>%
@@ -122,7 +121,7 @@ summary.BMORSCV <- function(object, information = 'compact', digits = 4, ...){
               SE_Pearson = sd(Pearson, na.rm = TRUE)/sqrt(n()), Pearson = mean(Pearson, na.rm = TRUE))  %>%
     select(Environment, Trait, Pearson, SE_Pearson, MAAPE, SE_MAAPE) %>%
     ungroup() %>%
-    mutate_if(is.numeric, funs(round(., digits))) %>%
+    mutate_if(is.numeric, list(~round(., digits))) %>%
     as.data.frame() -> finalSum
 
   out <- switch(information,
@@ -151,7 +150,7 @@ summary.BMORSCV <- function(object, information = 'compact', digits = 4, ...){
 #' @param ... Further arguments passed to or from other methods.
 #'
 #' @importFrom stats cor
-#' @importFrom dplyr summarise group_by select '%>%' mutate_if funs ungroup
+#' @importFrom dplyr summarise group_by select '%>%' mutate_if ungroup
 #'
 #' @export
 summary.BMORSENV <- function(object, digits = 4, ...){
@@ -161,7 +160,7 @@ summary.BMORSENV <- function(object, digits = 4, ...){
               MAAPE = mean(atan(abs(Observed - Predicted)/abs(Observed)))) %>%
     select(Environment, Trait, Pearson, MAAPE) %>%
     ungroup() %>%
-    mutate_if(is.numeric, funs(round(., digits))) %>%
+    mutate_if(is.numeric, list(~round(., digits))) %>%
     as.data.frame() -> out
 
   return(out)

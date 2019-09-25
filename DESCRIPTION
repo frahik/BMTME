@@ -1,7 +1,7 @@
 Package: BMTME
 Title: Bayesian Multi-Trait Multi-Environment for Genomic Selection Analysis
-Version: 1.0.9
-Date: 2019-9-23
+Version: 1.0.10
+Date: 2019-9-24
 Language: en-US
 Authors@R: c(person("Francisco Javier", "Luna-Vazquez", email = "frahik@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-5370-7152")),
              person("Fernando H.", "Toledo", role = "aut"),
@@ -47,7 +47,9 @@ Imports:
 LinkingTo: 
     Rcpp,
     RcppArmadillo
-SystemRequirements: C++11
+SystemRequirements:
+    C++11,
+    GNU
 Suggests: 
     covr,
     testthat,
