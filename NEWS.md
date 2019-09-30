@@ -1,3 +1,10 @@
+BMTME v1.0.11
+==============
+
+Changes:
+
+ * [FIX] Users can overwrite the package compiler.
+
 BMTME v1.0.10
 ==============
 

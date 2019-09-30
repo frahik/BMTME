@@ -1,7 +1,1 @@
-CXX_STD = CXX11
-
 PKG_LIBS = -lstdc++ $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
-
-CC=ccache clang -Qunused-arguments
-CXX=ccache clang++ -Qunused-arguments
-CCACHE_CPP2=yes

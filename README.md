@@ -35,7 +35,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.10
 
 <h4 align="center">
 
-\[Last README update: 2019-09-25\]
+\[Last README update: 2019-09-30\]
 
 </h4>
 
@@ -59,7 +59,7 @@ News of this version (1.0.10)
 
 </h2>
 
-  - \[FIX\] clang: warnings
+  - \[FIX\] Users can overwrite the package compiler.
 
 See the last updates in [NEWS](NEWS.md).
 
@@ -113,11 +113,44 @@ How to cite this package
 
 First option, by the article paper
 
-(Coming soon)
+    @article {Montesinos-L{\'o}pez1355,
+        author = {Montesinos-L{\'o}pez, Osval A. and Montesinos-L{\'o}pez, Abelardo and Luna-V{\'a}zquez, Francisco Javier and Toledo, Fernando H. and P{\'e}rez-Rodr{\'\i}guez, Paulino and Lillemo, Morten and Crossa, Jos{\'e}},
+        title = {An R Package for Bayesian Analysis of Multi-environment and Multi-trait Multi-environment Data for Genome-Based Prediction},
+        volume = {9},
+        number = {5},
+        pages = {1355--1369},
+        year = {2019},
+        doi = {10.1534/g3.119.400126},
+        publisher = {G3: Genes, Genomes, Genetics},
+        URL = {https://www.g3journal.org/content/9/5/1355},
+        eprint = {https://www.g3journal.org/content/9/5/1355.full.pdf},
+        journal = {G3: Genes, Genomes, Genetics}
+    }
 
 Second option, by the manual package
 
-(Coming soon)
+``` r
+citation('BMTME')
+```
+
+    ## 
+    ## To cite package 'BMTME' in publications use:
+    ## 
+    ##   Francisco Javier Luna-Vazquez, Fernando H. Toledo, Osval Antonio
+    ##   Montesinos-Lopez, Abelardo Montesinos-Lopez and Jose Crossa
+    ##   (2019). BMTME: Bayesian Multi-Trait Multi-Environment for
+    ##   Genomic Selection Analysis. R package version 1.0.10.
+    ##   https://github.com/frahik/BMTME
+    ## 
+    ## A BibTeX entry for LaTeX users is
+    ## 
+    ##   @Manual{,
+    ##     title = {BMTME: Bayesian Multi-Trait Multi-Environment for Genomic Selection Analysis},
+    ##     author = {Francisco Javier Luna-Vazquez and Fernando H. Toledo and Osval Antonio Montesinos-Lopez and Abelardo Montesinos-Lopez and Jose Crossa},
+    ##     year = {2019},
+    ##     note = {R package version 1.0.10},
+    ##     url = {https://github.com/frahik/BMTME},
+    ##   }
 
 <h2 id="contributions">
 

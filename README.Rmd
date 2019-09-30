@@ -51,7 +51,7 @@ output: github_document
   News of this version (`r packageVersion('BMTME')`)
 </h2>
 
- * [FIX] clang: warnings
+ * [FIX] Users can overwrite the package compiler.
 
 See the last updates in [NEWS](NEWS.md).
 
@@ -94,13 +94,27 @@ To load one dataset, use the function `data(datasetName)`
 
 First option, by the article paper
 
-(Coming soon)
+```
+@article {Montesinos-L{\'o}pez1355,
+	author = {Montesinos-L{\'o}pez, Osval A. and Montesinos-L{\'o}pez, Abelardo and Luna-V{\'a}zquez, Francisco Javier and Toledo, Fernando H. and P{\'e}rez-Rodr{\'\i}guez, Paulino and Lillemo, Morten and Crossa, Jos{\'e}},
+	title = {An R Package for Bayesian Analysis of Multi-environment and Multi-trait Multi-environment Data for Genome-Based Prediction},
+	volume = {9},
+	number = {5},
+	pages = {1355--1369},
+	year = {2019},
+	doi = {10.1534/g3.119.400126},
+	publisher = {G3: Genes, Genomes, Genetics},
+	URL = {https://www.g3journal.org/content/9/5/1355},
+	eprint = {https://www.g3journal.org/content/9/5/1355.full.pdf},
+	journal = {G3: Genes, Genomes, Genetics}
+}
+```
 
 Second option, by the manual package
 
-(Coming soon)
-
-
+```{r}
+citation('BMTME')
+```
 
 <h2 id="contributions">
   Contributions
@@ -119,3 +133,4 @@ If you have any suggestions or feedback, I would love to hear about it. Feel fre
  - Abelardo Montesinos-López (Author)
  - José Crossa (Author)
  - Fernando Tolero (Author)
+
