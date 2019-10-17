@@ -20,20 +20,8 @@ This does
 
 clang++ -std=gnu++11 -shared -L/usr/local/clang/lib64 -L/usr/local/lib64
 -o BMTME.so RcppExports.o Sample_IW.o -lstdc++
--L/data/gannet/ripley/R/R-clang/lib -lRlapack
--L/data/gannet/ripley/R/R-clang/lib -lRblas -lgfortran -lm -lquadmath
 
 The hard-coded inclusion of g++'s C++ library is wrong and harmful.
-
-I don't know what you think
-
-CC=ccache clang -Qunused-arguments
-CXX=ccache clang++ -Qunused-arguments
-
-does, but users cannot override these in src/Makevars so this should be
-cleaned up.
-
-Please correct ASAP and before Oct 12 to retain the package on CRAN.
 
 ## Special comments
 

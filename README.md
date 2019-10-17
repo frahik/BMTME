@@ -6,7 +6,7 @@
 
 <h3 align="center">
 
-Bayesian Multi-Trait Multi-Environment | Development version 1.0.10
+Bayesian Multi-Trait Multi-Environment | Development version 1.0.12
 
 </h4>
 
@@ -14,28 +14,34 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.10
 
 <a href="https://www.tidyverse.org/lifecycle/#maturing">
 <img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Maturing">
-</a> <a href="https://travis-ci.org/frahik/BMTME">
-<img src="https://travis-ci.org/frahik/BMTME.svg?branch=master" alt="Travis build status">
-</a> <a href='https://coveralls.io/github/frahik/BMTME'>
-<a href="https://ci.appveyor.com/project/frahik/bmtme">
-<img src="https://ci.appveyor.com/api/projects/status/r2vog9sa30yutl5n?svg=true" alt="Appveyor build status">
-</a>
-<img src='https://coveralls.io/repos/github/frahik/BMTME/badge.svg?branch=master' alt='Coverage Status'/>
 </a> <a href="https://www.gnu.org/licenses/lgpl-3.0">
 <img src="https://img.shields.io/badge/License-LGPL%20v3-blue.svg" alt="LGPL, Version 3.0">
 </a> <a href="http://www.repostatus.org/#active">
 <img src="https://www.repostatus.org/badges/latest/active.svg" alt="The project has reached a stable, usable state and is being actively developed.">
-</a> <a href="">
+</a> <a href="https://cran.r-project.org/package=BMTME">
 <img src="http://cranlogs.r-pkg.org/badges/BMTME" alt="Dowloads from the CRAN">
+</a>
+
+</p>
+
+<p align="center">
+
+<a href="https://travis-ci.org/frahik/BMTME">
+<img src="https://travis-ci.org/frahik/BMTME.svg?branch=master" alt="Travis build status">
+</a> <a href="https://ci.appveyor.com/project/frahik/bmtme">
+<img src="https://ci.appveyor.com/api/projects/status/r2vog9sa30yutl5n?svg=true" alt="Appveyor build status">
+</a> <a href='https://coveralls.io/github/frahik/BMTME'>
+<img src='https://coveralls.io/repos/github/frahik/BMTME/badge.svg?branch=master' alt='Coverage Status'/>
 </a> <a href="https://cran.r-project.org/package=BMTME">
 <img src="http://www.r-pkg.org/badges/version-ago/BMTME" alt="CRAN">
-</a>
+</a> <a href="https://cran.r-project.org/package=BMTME">
+<img src="https://cranchecks.info/badges/summary/BMTME" alt="CRAN"> </a>
 
 </p>
 
 <h4 align="center">
 
-\[Last README update: 2019-09-30\]
+\[Last README update: 2019-10-17\]
 
 </h4>
 
@@ -55,7 +61,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.10
 
 <h2 id="news">
 
-News of this version (1.0.10)
+News of this version (1.0.12)
 
 </h2>
 
@@ -139,7 +145,7 @@ citation('BMTME')
     ##   Francisco Javier Luna-Vazquez, Fernando H. Toledo, Osval Antonio
     ##   Montesinos-Lopez, Abelardo Montesinos-Lopez and Jose Crossa
     ##   (2019). BMTME: Bayesian Multi-Trait Multi-Environment for
-    ##   Genomic Selection Analysis. R package version 1.0.10.
+    ##   Genomic Selection Analysis. R package version 1.0.12.
     ##   https://github.com/frahik/BMTME
     ## 
     ## A BibTeX entry for LaTeX users is
@@ -148,7 +154,7 @@ citation('BMTME')
     ##     title = {BMTME: Bayesian Multi-Trait Multi-Environment for Genomic Selection Analysis},
     ##     author = {Francisco Javier Luna-Vazquez and Fernando H. Toledo and Osval Antonio Montesinos-Lopez and Abelardo Montesinos-Lopez and Jose Crossa},
     ##     year = {2019},
-    ##     note = {R package version 1.0.10},
+    ##     note = {R package version 1.0.12},
     ##     url = {https://github.com/frahik/BMTME},
     ##   }
 
