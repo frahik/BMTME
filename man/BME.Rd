@@ -4,9 +4,18 @@
 \alias{BME}
 \title{Bayesian Multi-Environment Model (BME)}
 \usage{
-BME(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L,
-  bs = ceiling(dim(Z1)[2]/6), parallelCores = 1, digits = 4,
-  progressBar = TRUE, testingSet = NULL)
+BME(
+  Y,
+  Z1,
+  nIter = 1000L,
+  burnIn = 300L,
+  thin = 2L,
+  bs = ceiling(dim(Z1)[2]/6),
+  parallelCores = 1,
+  digits = 4,
+  progressBar = TRUE,
+  testingSet = NULL
+)
 }
 \arguments{
 \item{Y}{\code{(matrix)} Phenotypic response where each column is a different environment.}

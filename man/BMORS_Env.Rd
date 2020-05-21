@@ -4,9 +4,18 @@
 \alias{BMORS_Env}
 \title{Bayesian Multi-Output regression stacking for specific environment estimations}
 \usage{
-BMORS_Env(data = NULL, testingEnv = "", ETA = NULL,
-  covModel = "BRR", predictor_Sec_complete = FALSE, nIter = 2500,
-  burnIn = 500, thin = 5, progressBar = TRUE, digits = 4)
+BMORS_Env(
+  data = NULL,
+  testingEnv = "",
+  ETA = NULL,
+  covModel = "BRR",
+  predictor_Sec_complete = FALSE,
+  nIter = 2500,
+  burnIn = 500,
+  thin = 5,
+  progressBar = TRUE,
+  digits = 4
+)
 }
 \arguments{
 \item{data}{\code{(data.frame)} Phenotypic response where each column is a different trait and the first column are the name of the environment where it was evaluated.}

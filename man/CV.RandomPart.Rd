@@ -4,8 +4,13 @@
 \alias{CV.RandomPart}
 \title{Cross-Validation with Random Partitions}
 \usage{
-CV.RandomPart(DataSet, NPartitions = 10, PTesting = 0.35,
-  Traits.testing = NULL, set_seed = NULL)
+CV.RandomPart(
+  DataSet,
+  NPartitions = 10,
+  PTesting = 0.35,
+  Traits.testing = NULL,
+  set_seed = NULL
+)
 }
 \arguments{
 \item{DataSet}{\code{data.frame} The data set object is a data.frame object that contains 4 columns in the Tidy data format:

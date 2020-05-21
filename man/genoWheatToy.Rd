@@ -4,7 +4,9 @@
 \name{genoWheatToy}
 \alias{genoWheatToy}
 \title{Genomic values of Wheat toy dataset.}
-\format{30 x 30 data.frame}
+\format{
+30 x 30 data.frame
+}
 \source{
 International Maize and Wheat Improvement Center (CIMMYT), Mexico.
 }

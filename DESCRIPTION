@@ -1,7 +1,7 @@
 Package: BMTME
 Title: Bayesian Multi-Trait Multi-Environment for Genomic Selection Analysis
-Version: 1.0.12
-Date: 2019-9-30
+Version: 1.0.16
+Date: 2020-8-25
 Language: en-US
 Authors@R: c(person("Francisco Javier", "Luna-Vazquez", email = "frahik@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-5370-7152")),
              person("Fernando H.", "Toledo", role = "aut"),
@@ -18,7 +18,7 @@ License: LGPL-3
 Encoding: UTF-8
 LazyData: true
 Type: Package
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 URL: https://github.com/frahik/BMTME
 BugReports: https://github.com/frahik/BMTME/issues/new
 NeedsCompilation: yes
@@ -43,7 +43,8 @@ Imports:
     mvtnorm,
     progress,
     snow,
-    tidyr
+    tidyr,
+    Rcpp
 LinkingTo: 
     Rcpp,
     RcppArmadillo
@@ -52,4 +53,4 @@ SystemRequirements:
     GNU
 Suggests: 
     covr,
-    testthat,
+    testthat

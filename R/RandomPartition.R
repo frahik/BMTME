@@ -52,8 +52,8 @@ CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
     }
     out <- list(CrossValidation_list = g_list,
                 ng = ng, #Lenght in every partition
-                Environments = DataSet$Env,
-                Traits = DataSet$Trait
+                Environments = as.character(DataSet$Env),
+                Traits = as.character(DataSet$Trait)
     )
     class(out) <- 'CrossValidation'
     return(out)
@@ -149,8 +149,8 @@ CV.KFold <- function(DataSet, DataSetID = 'Line', K = 5, set_seed = NULL) {
   out <- list(CrossValidation_list = g_list,
               ng = ng + n_CL, #Lenght in every partition
               n_CL =  n_CL,   # Number of common lines
-              Environments = DataSet$Env,
-              Traits = DataSet$Trait
+              Environments = as.character(DataSet$Env),
+              Traits = as.character(DataSet$Trait)
   )
   class(out) <- 'CrossValidation'
   return(out)
@@ -285,9 +285,9 @@ CV.RandomPart <- function(DataSet, NPartitions = 10, PTesting = .35, Traits.test
 
   out <- list(
     CrossValidation_list = p_list,
-    Environments = DataSet$Env,
+    Environments = as.character(DataSet$Env),
     Traits.testing = Traits.testing,
-    Traits = DataSet$Trait,
+    Traits = as.character(DataSet$Trait),
     Response = DataSet$Response,
     Observations = NLine
   )

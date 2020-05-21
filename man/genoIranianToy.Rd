@@ -4,7 +4,9 @@
 \name{genoIranianToy}
 \alias{genoIranianToy}
 \title{Genomic values of Iranian toy dataset.}
-\format{30 x 30 matrix}
+\format{
+30 x 30 matrix
+}
 \source{
 International Maize and Wheat Improvement Center (CIMMYT), Mexico.
 }

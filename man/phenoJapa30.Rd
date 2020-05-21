@@ -4,7 +4,9 @@
 \name{phenoJapa30}
 \alias{phenoJapa30}
 \title{Phenotypic values of Japa  dataset.}
-\format{data.frame, 30 row per 7 columns.}
+\format{
+data.frame, 30 row per 7 columns.
+}
 \usage{
 phenoJapa30
 }

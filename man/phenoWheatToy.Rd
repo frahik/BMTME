@@ -4,7 +4,9 @@
 \name{phenoWheatToy}
 \alias{phenoWheatToy}
 \title{Phenotypic values of Wheat toy dataset.}
-\format{data.frame, 90 row per 4 columns.}
+\format{
+data.frame, 90 row per 4 columns.
+}
 \source{
 International Maize and Wheat Improvement Center (CIMMYT), Mexico.
 }

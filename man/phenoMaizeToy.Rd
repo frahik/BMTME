@@ -4,7 +4,9 @@
 \name{phenoMaizeToy}
 \alias{phenoMaizeToy}
 \title{Phenotypic values of Maize dataset.}
-\format{data.frame, 90 row per 5 columns.}
+\format{
+data.frame, 90 row per 5 columns.
+}
 \usage{
 phenoMaizeToy
 }

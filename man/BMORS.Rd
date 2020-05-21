@@ -4,10 +4,19 @@
 \alias{BMORS}
 \title{Bayesian Multi-Output Regression Stacking (BMORS)}
 \usage{
-BMORS(Y = NULL, ETA = NULL, covModel = "BRR",
-  predictor_Sec_complete = FALSE, nIter = 2500, burnIn = 500,
-  thin = 5, progressBar = TRUE, testingSet = NULL,
-  parallelCores = 1, digits = 4)
+BMORS(
+  Y = NULL,
+  ETA = NULL,
+  covModel = "BRR",
+  predictor_Sec_complete = FALSE,
+  nIter = 2500,
+  burnIn = 500,
+  thin = 5,
+  progressBar = TRUE,
+  testingSet = NULL,
+  parallelCores = 1,
+  digits = 4
+)
 }
 \arguments{
 \item{Y}{\code{(matrix)} Phenotypic response where each column is a different trait}

@@ -4,7 +4,9 @@
 \name{MaizeToy}
 \alias{MaizeToy}
 \title{Maize Data}
-\format{2 objects are loaded (phenoMaizeToy and genoMaizeToy)}
+\format{
+2 objects are loaded (phenoMaizeToy and genoMaizeToy)
+}
 \usage{
 data(MaizeToy)
 }

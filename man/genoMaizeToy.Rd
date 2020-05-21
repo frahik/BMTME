@@ -4,7 +4,9 @@
 \name{genoMaizeToy}
 \alias{genoMaizeToy}
 \title{Genomic values of Maize dataset.}
-\format{30 x 30 matrix}
+\format{
+30 x 30 matrix
+}
 \usage{
 genoMaizeToy
 }
