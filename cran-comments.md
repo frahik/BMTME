@@ -1,6 +1,6 @@
 ## Test environments
 
-* MacOS 10.15 - R 3.6.1
+* MacOS [R 4.0]
 * win-builder (devel and release)
 * chech_rhub (devel)
 * TravisCI (devel and release)
@@ -16,12 +16,11 @@ Uses the superseded package: 'doSNOW'
 R CMD check succeeded
 
 ## Last round comments
-This does
 
-clang++ -std=gnu++11 -shared -L/usr/local/clang/lib64 -L/usr/local/lib64
--o BMTME.so RcppExports.o Sample_IW.o -lstdc++
 
-The hard-coded inclusion of g++'s C++ library is wrong and harmful.
+### V 1.0.15
+
+This version fix a test errors with the change of factor=False by default of R.
 
 ## Special comments
 

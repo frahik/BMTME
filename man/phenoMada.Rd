@@ -4,7 +4,9 @@
 \name{phenoMada}
 \alias{phenoMada}
 \title{Phenotypic values of Mada dataset.}
-\format{data.frame, 50 row per 7 columns.}
+\format{
+data.frame, 50 row per 7 columns.
+}
 \usage{
 phenoMada
 }

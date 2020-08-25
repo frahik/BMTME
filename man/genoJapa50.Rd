@@ -4,7 +4,9 @@
 \name{genoJapa50}
 \alias{genoJapa50}
 \title{Genomic values of Japa dataset.}
-\format{50 x 50 matrix}
+\format{
+50 x 50 matrix
+}
 \usage{
 genoJapa50
 }

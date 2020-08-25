@@ -4,8 +4,7 @@
 \alias{summary.BMECV}
 \title{summary.BMECV}
 \usage{
-\method{summary}{BMECV}(object, information = "compact", digits = 4,
-  ...)
+\method{summary}{BMECV}(object, information = "compact", digits = 4, ...)
 }
 \arguments{
 \item{object}{\code{BMECV object} an BMECV object for which a summary is desired.}

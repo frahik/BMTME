@@ -4,7 +4,9 @@
 \name{genoMada}
 \alias{genoMada}
 \title{Genomic values of Mada dataset.}
-\format{50 x 50 matrix}
+\format{
+50 x 50 matrix
+}
 \usage{
 genoMada
 }

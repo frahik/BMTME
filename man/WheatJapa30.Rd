@@ -4,7 +4,9 @@
 \name{WheatJapa30}
 \alias{WheatJapa30}
 \title{Wheat Japa 30 Data}
-\format{2 objects are loaded (phenoJapa30 and genoJapa30)}
+\format{
+2 objects are loaded (phenoJapa30 and genoJapa30)
+}
 \usage{
 data(WheatJapa30)
 }

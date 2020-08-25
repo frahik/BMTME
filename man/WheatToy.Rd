@@ -4,7 +4,9 @@
 \name{WheatToy}
 \alias{WheatToy}
 \title{Phenotypic values and Genetic values of Wheat toy dataset.}
-\format{2 objects are loaded (phenoWheatToy and genoWheatToy)}
+\format{
+2 objects are loaded (phenoWheatToy and genoWheatToy)
+}
 \source{
 International Maize and Wheat Improvement Center (CIMMYT), Mexico.
 }

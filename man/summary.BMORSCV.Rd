@@ -4,8 +4,7 @@
 \alias{summary.BMORSCV}
 \title{summary.BMORSCV}
 \usage{
-\method{summary}{BMORSCV}(object, information = "compact", digits = 4,
-  ...)
+\method{summary}{BMORSCV}(object, information = "compact", digits = 4, ...)
 }
 \arguments{
 \item{object}{\code{BMORSCV object} an BMORSCV object for which a summary is desired.}

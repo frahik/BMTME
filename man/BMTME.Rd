@@ -3,12 +3,22 @@
 \docType{package}
 \name{BMTME}
 \alias{BMTME}
-\alias{BMTME-package}
 \title{Bayes Multi-Trait Milti-Environment Model (BMTME)}
 \usage{
-BMTME(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L,
-  bs = ceiling(dim(Z1)[2]/6), parallelCores = 1, digits = 4,
-  progressBar = TRUE, testingSet = NULL)
+BMTME(
+  Y,
+  X,
+  Z1,
+  Z2,
+  nIter = 1000L,
+  burnIn = 300L,
+  thin = 2L,
+  bs = ceiling(dim(Z1)[2]/6),
+  parallelCores = 1,
+  digits = 4,
+  progressBar = TRUE,
+  testingSet = NULL
+)
 }
 \arguments{
 \item{Y}{\code{(matrix)} Phenotypic response where each column is a different trait.}

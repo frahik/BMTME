@@ -4,7 +4,9 @@
 \name{phenoIranianToy}
 \alias{phenoIranianToy}
 \title{Phenotypic values of Iranian toy dataset.}
-\format{data.frame, 60 row per 4 columns.}
+\format{
+data.frame, 60 row per 4 columns.
+}
 \source{
 International Maize and Wheat Improvement Center (CIMMYT), Mexico.
 }
