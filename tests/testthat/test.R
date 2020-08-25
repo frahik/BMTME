@@ -51,9 +51,10 @@ test_that('RandomPartition',{
   expect_output(str(RP_Test$CrossValidation_list), 'List of 10')
   expect_is(RP_Test$Environments, 'character')
   expect_length(RP_Test$Environments, length(pheno$Env))
-  expect_equal(unique(as.character(RP_Test$Environments)), unique(pheno$Env))
+  # transform pheno$Env to character to make it compatible with old R versions
+  expect_equal(unique(RP_Test$Environments), unique(as.character(pheno$Env)))
   expect_is(RP_Test$Traits, 'character')
-  expect_length(RP_Test$Traits, length(pheno$Env))
+  expect_equal(unique(RP_Test$Traits), "")
 
   data("WheatIranianToy")
   phenoIranianToy <- phenoIranianToy[order(phenoIranianToy$Env, phenoIranianToy$GID), ]
@@ -68,9 +69,11 @@ test_that('RandomPartition',{
   expect_output(str(RP_Test2$CrossValidation_list), 'List of 10')
   expect_is(RP_Test2$Environments, 'character')
   expect_length(RP_Test2$Environments, length(pheno$Env))
+  # transform pheno$Env to character to make it compatible with old R versions
   expect_equal(unique(RP_Test2$Environments), unique(as.character(pheno$Env)))
   expect_is(RP_Test2$Traits, 'character')
-  expect_length(RP_Test2$Traits, length(pheno$Env))
+  expect_length(RP_Test2$Traits, length(pheno$Trait))
+  expect_equal(unique(RP_Test$Traits), "")
 })
 
 context('BME function')
@@ -130,7 +133,7 @@ test_that('BME function with Mada data', {
   expect_is(pm_basic$results, 'data.frame')
   expect_is(pm_basic$executionTime, 'numeric')
   expect_output(print(pm_basic), 'Fitted Bayesian Multi Environment model with:')
-  # expect_silent(boxplot(pm_basic))
+  expect_silent(boxplot(pm_basic))
 
   # Check predictive capacities of the model with CrossValidation object
   pm <- BME(Y = Y, Z1 = Z.G, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV)
@@ -242,7 +245,7 @@ test_that('BMTME function with Iranian data', {
   expect_is(pm_basic$results, 'data.frame')
   expect_is(pm_basic$executionTime, 'numeric')
   expect_output(print(pm_basic), 'Fitted Bayesian Multi-Trait Multi-Environment Model with:')
-  # expect_silent(boxplot(pm))
+  expect_silent(boxplot(pm_basic))
 
   # Check predictive capacities of the model
   pm <- BMTME(Y = Y, X = Z.E, Z1 = Z.G, Z2 = Z.EG, nIter = 10, burnIn = 5, thin = 2, bs = 50, testingSet = CrossV)
