@@ -51,7 +51,7 @@ test_that('RandomPartition',{
   expect_output(str(RP_Test$CrossValidation_list), 'List of 10')
   expect_is(RP_Test$Environments, 'character')
   expect_length(RP_Test$Environments, length(pheno$Env))
-  expect_equal(unique(RP_Test$Environments), unique(pheno$Env))
+  expect_equal(unique(as.character(RP_Test$Environments)), unique(pheno$Env))
   expect_is(RP_Test$Traits, 'character')
   expect_length(RP_Test$Traits, length(pheno$Env))
 
