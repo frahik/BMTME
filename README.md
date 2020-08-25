@@ -6,18 +6,18 @@
 
 <h3 align="center">
 
-Bayesian Multi-Trait Multi-Environment | Development version 1.0.12
+Bayesian Multi-Trait Multi-Environment | Development version 1.0.17
 
 </h4>
 
 <p align="center">
 
-<a href="https://www.tidyverse.org/lifecycle/#maturing">
-<img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Maturing">
+<a href="https://www.tidyverse.org/lifecycle/#stable">
+<img src="https://img.shields.io/badge/lifecycle-stable-green.svg" alt="Maturing">
 </a> <a href="https://www.gnu.org/licenses/lgpl-3.0">
 <img src="https://img.shields.io/badge/License-LGPL%20v3-blue.svg" alt="LGPL, Version 3.0">
-</a> <a href="http://www.repostatus.org/#active">
-<img src="https://www.repostatus.org/badges/latest/active.svg" alt="The project has reached a stable, usable state and is being actively developed.">
+</a> <a href="http://www.repostatus.org/#inactive">
+<img src="https://www.repostatus.org/badges/latest/inactive.svg" alt="The project has reached a stable, usable state and is being actively developed.">
 </a> <a href="https://cran.r-project.org/package=BMTME">
 <img src="http://cranlogs.r-pkg.org/badges/BMTME" alt="Dowloads from the CRAN">
 </a>
@@ -41,7 +41,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.12
 
 <h4 align="center">
 
-\[Last README update: 2019-10-17\]
+\[Last README update: 2020-08-25\]
 
 </h4>
 
@@ -61,13 +61,11 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.12
 
 <h2 id="news">
 
-News of this version (1.0.12)
+News of this version (1.0.17)
 
 </h2>
 
-  - \[FIX\] Users can overwrite the package compiler.
-
-See the last updates in [NEWS](NEWS.md).
+See the last updates on [NEWS](NEWS.md).
 
 <h2 id="instructions">
 
@@ -97,8 +95,7 @@ Datasets
 
 </h3>
 
-The package include 6 sample
-datasets
+The package include 6 sample datasets
 
 | Name         | Lines | Environment | Traits | Total of observations | ME models | MTME models |
 | ------------ | ----- | ----------- | ------ | --------------------- | --------- | ----------- |
@@ -143,18 +140,17 @@ citation('BMTME')
     ## To cite package 'BMTME' in publications use:
     ## 
     ##   Francisco Javier Luna-Vazquez, Fernando H. Toledo, Osval Antonio
-    ##   Montesinos-Lopez, Abelardo Montesinos-Lopez and Jose Crossa
-    ##   (2019). BMTME: Bayesian Multi-Trait Multi-Environment for
-    ##   Genomic Selection Analysis. R package version 1.0.12.
-    ##   https://github.com/frahik/BMTME
+    ##   Montesinos-Lopez, Abelardo Montesinos-Lopez and Jose Crossa (2020).
+    ##   BMTME: Bayesian Multi-Trait Multi-Environment for Genomic Selection
+    ##   Analysis. R package version 1.0.17. https://github.com/frahik/BMTME
     ## 
     ## A BibTeX entry for LaTeX users is
     ## 
     ##   @Manual{,
     ##     title = {BMTME: Bayesian Multi-Trait Multi-Environment for Genomic Selection Analysis},
     ##     author = {Francisco Javier Luna-Vazquez and Fernando H. Toledo and Osval Antonio Montesinos-Lopez and Abelardo Montesinos-Lopez and Jose Crossa},
-    ##     year = {2019},
-    ##     note = {R package version 1.0.12},
+    ##     year = {2020},
+    ##     note = {R package version 1.0.17},
     ##     url = {https://github.com/frahik/BMTME},
     ##   }
 
@@ -169,6 +165,18 @@ Feel free to report new issues in [this
 link](https://github.com/frahik/BMTME/issues/new), also if you want to
 request a feature/report a bug, or make a pull request if you can
 contribute.
+
+<h2 id="research">
+
+Research and implementations
+
+</h2>
+
+  - [An R Package for Bayesian Analysis of Multi-environment and
+    Multi-trait Multi-environment Data for Genome-Gased
+    Prediction](https://www.g3journal.org/content/9/5/1355)
+  - [A Bayesian Multiple-Trait and Multiple-Environment Model Using the
+    Matrix Normal Distribution](http://doi.org/10.5772/intechopen.71521)
 
 <h2 id="authors">
 

@@ -1,3 +1,12 @@
+BMTME v1.0.17
+==============
+
+Changes:
+
+ * [FIX] Rcpp bug to run test
+ * [FIX] test of the package
+ * [IMP] Random partition Environment and Traits now are exported as character, not as factor.
+ 
 BMTME v1.0.12
 ==============
 
