@@ -7,5 +7,8 @@ r:
 sudo: false
 cache: packages
 dist: trusty
+env:
+  global:
+    - _R_CHECK_DONTTEST_EXAMPLES_=FALSE
 after_success:
     - Rscript -e 'covr::coveralls(type = "all")'

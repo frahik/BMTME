@@ -17,6 +17,8 @@ cache:
 
 environment:
   USE_RTOOLS: true
+  global:
+    _R_CHECK_DONTTEST_EXAMPLES_: FALSE
 
 build_script:
   - travis-tool.sh install_github frahik/BMTME
