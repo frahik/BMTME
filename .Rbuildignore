@@ -16,3 +16,4 @@
 (.Rout)$
 ^examples(_)[[:alnum:]]*$
 ^tests(_)[[:alnum:]]*$
+^\.github$

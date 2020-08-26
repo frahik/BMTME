@@ -1,9 +1,19 @@
 ## Test environments
 
-* MacOS [R 4.0]
-* win-builder (devel and release)
-* chech_rhub (devel)
-* TravisCI (devel and release)
+* MacOS 
+  + R 4.0.2
+* TravisCI
+  + Linux R devel
+  + Linux R release
+* AppVeyor
+  + Windows R 4.0.2
+* Github Actions
+  + MacOS R devel
+  + MacOS R release
+  + Windows R 4.0
+  + Ubuntu R 4.0
+  + Ubuntu R 3.6
+  + Ubunty R 3.5
 
 ## R CMD check results
 
@@ -17,14 +27,17 @@ R CMD check succeeded
 
 ## Last round comments
 
+[SOLVED] package BMTME_1.0.17.tar.gz does not pass the incoming checks
 
-### V 1.0.15
-
-This version fix a test errors with the change of factor=False by default of R.
+[SOLVED] Prof Brian says:
+The Solaris result indicates what is wrong with the tests (skipped on
+most platforms).  Thanks to a recurrence of a bug in Rcpp, you need to add
+Imports: Rcpp
+to DESCRIPTION and
+importFrom(Rcpp, evalCpp)
+to NAMESPACE.
 
 ## Special comments
-
-This version implements the corrections mentioned in the last round of comments
 
 ### First submission
 I am using the doSNOW package, to be able to show a progress bar in the advance of the calculations, since it is a very demanding algorithm in time (in large data sets usually takes at least 8 hours). I think it is convenient to show the progress bar when the work is done in parallel to take advantage of all the cores of the computer, as well as to be able to show the user the progress of cross validations.

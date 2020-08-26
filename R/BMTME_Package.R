@@ -5,6 +5,7 @@
 #'
 #' @docType package
 #' @name BMTME
+#' @importFrom Rcpp compileAttributes
 NULL
 
 if (getRversion() >= "2.15.1")
