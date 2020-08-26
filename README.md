@@ -6,7 +6,7 @@
 
 <h3 align="center">
 
-Bayesian Multi-Trait Multi-Environment | Development version 1.0.17
+Bayesian Multi-Trait Multi-Environment | Development version 1.0.19
 
 </h4>
 
@@ -44,7 +44,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.17
 
 <h4 align="center">
 
-\[Last README update: 2020-08-25\]
+\[Last README update: 2020-08-26\]
 
 </h4>
 
@@ -64,7 +64,7 @@ Bayesian Multi-Trait Multi-Environment | Development version 1.0.17
 
 <h2 id="news">
 
-News of this version (1.0.17)
+News of this version (1.0.19)
 
 </h2>
 
@@ -145,7 +145,7 @@ citation('BMTME')
     ##   Francisco Javier Luna-Vazquez, Fernando H. Toledo, Osval Antonio
     ##   Montesinos-Lopez, Abelardo Montesinos-Lopez and Jose Crossa (2020).
     ##   BMTME: Bayesian Multi-Trait Multi-Environment for Genomic Selection
-    ##   Analysis. R package version 1.0.17. https://github.com/frahik/BMTME
+    ##   Analysis. R package version 1.0.19. https://github.com/frahik/BMTME
     ## 
     ## A BibTeX entry for LaTeX users is
     ## 
@@ -153,7 +153,7 @@ citation('BMTME')
     ##     title = {BMTME: Bayesian Multi-Trait Multi-Environment for Genomic Selection Analysis},
     ##     author = {Francisco Javier Luna-Vazquez and Fernando H. Toledo and Osval Antonio Montesinos-Lopez and Abelardo Montesinos-Lopez and Jose Crossa},
     ##     year = {2020},
-    ##     note = {R package version 1.0.17},
+    ##     note = {R package version 1.0.19},
     ##     url = {https://github.com/frahik/BMTME},
     ##   }
 

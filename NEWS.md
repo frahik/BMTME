@@ -1,3 +1,11 @@
+BMTME v1.0.19
+==============
+
+Changes:
+
+ * [FIX] Rcpp bug to run test
+
+
 BMTME v1.0.17
 ==============
 
