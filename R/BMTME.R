@@ -83,7 +83,7 @@ BMTME <- function(Y, X, Z1, Z2, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ce
     out <- list(results = results, n_cores = parallelCores, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMTMECV'
   } else if (parallelCores > 1 && inherits(testingSet, 'CrossValidation')) {
-    cl <- snow::makeCluster(parallelCores)
+    cl <- snow::makeCluster(parallelCores, type="SOCK")
     doSNOW::registerDoSNOW(cl)
     nCV <- length(testingSet$CrossValidation_list)
 
