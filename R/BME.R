@@ -73,7 +73,7 @@ BME <- function(Y, Z1, nIter = 1000L, burnIn = 300L, thin = 2L, bs = ceiling(dim
     class(out) <- 'BMECV'
 
   } else if (parallelCores > 1 && inherits(testingSet, 'CrossValidation')) {
-    cl <- snow::makeCluster(parallelCores)
+    cl <- snow::makeCluster(parallelCores, type="SOCK")
     doSNOW::registerDoSNOW(cl)
     nCV <- length(testingSet$CrossValidation_list)
 

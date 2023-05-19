@@ -99,7 +99,7 @@ BMORS <- function(Y = NULL, ETA = NULL, covModel = 'BRR', predictor_Sec_complete
     out <- list(results = results, nIter = nIter, burnIn = burnIn, thin = thin, executionTime = proc.time()[3] - time.init)
     class(out) <- 'BMORSCV'
   } else if (parallelCores > 1 && inherits(testingSet, 'CrossValidation')) {
-    cl <- snow::makeCluster(parallelCores)
+    cl <- snow::makeCluster(parallelCores, type="SOCK")
     doSNOW::registerDoSNOW(cl)
     nCV <- length(testingSet$CrossValidation_list)
 
