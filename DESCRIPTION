@@ -49,7 +49,6 @@ LinkingTo:
     Rcpp,
     RcppArmadillo
 SystemRequirements:
-    C++11,
     GNU
 Suggests: 
     covr,
